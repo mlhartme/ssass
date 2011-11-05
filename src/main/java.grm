@@ -82,7 +82,8 @@ LENGTH ::= num ("px" | "cm" | "mm" | "in" | "pt" | "pc");
 ANGLE ::= num ("deg" | "rad" | "grad");
 TIME ::= num ("ms" | "s");
 FREQ ::= num ("hz" | "khz");
-DIMENSION ::= num ident;
+# TODO: not used:
+# DIMENSION ::= num ident;
 PERCENTAGE ::= num "%";
 NUMBER ::= num;
 
@@ -95,7 +96,7 @@ nonascii ::= (160 .. 255);
 unicode ::= '\\' h h? h? h? h? h? ('\r' '\n' | ' ' | '\t' | '\r' | '\n' | '\f' )? ;
 escape ::= unicode | '\\' ('\r' | '\n' | '\f' | '0'..'9' | 'A'..'F' | 'a'..'f')! ;
 nmstart ::= ('_' | 'A' .. 'Z' | 'a'..'z' | nonascii | escape );
-nmchar ::= ('_' | 'A' .. 'Z' | 'a'..'z' | '0'..'9' | nonascii | escape );
+nmchar ::= ('_' | 'A' .. 'Z' | 'a'..'z' | '0'..'9' | '-' | nonascii | escape );
 string1 ::= '"' (('\n' | '\r' | '\f' | '"')! | '\\' nl | escape)* '"';
 string2	::= '\'' (('\n' | '\r' | '\f' | '\'')! | '\\' nl | escape)* '\'';
 comment ::= '/' '*' '*'!* '*'+ (('/' | '*')! '*'!* '*'+)* '/' ;

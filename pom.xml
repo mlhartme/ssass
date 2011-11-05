@@ -35,6 +35,13 @@
     </site>
   </distributionManagement>
 
+  <dependencies>
+    <dependency>
+      <groupId>de.mlhartme.mork</groupId>
+      <artifactId>mork</artifactId>
+      <version>0.6.4</version>
+    </dependency>
+  </dependencies>
   <build>
     <plugins>
       <plugin>
@@ -54,7 +61,7 @@
                 <java fork="true" dir="${basedir}" classname="de.mlhartme.mork.compiler.Main" failonerror="true">
                   <classpath>
                     <pathelement path="${basedir}/target/classes" />
-                    <path refid="maven.plugin.classpath" />
+                    <path refid="maven.compile.classpath" />
                   </classpath>
                   <arg value="-d" />
                   <arg path="${basedir}/target/classes" />
@@ -68,14 +75,25 @@
             </goals>
           </execution>
         </executions>
-        <dependencies>
-          <dependency>
-            <groupId>de.mlhartme.mork</groupId>
-            <artifactId>mork</artifactId>
-            <version>0.6.4</version>
-          </dependency>
-        </dependencies>
       </plugin>
+     <plugin>
+        <groupId>net.sf.beezle.maven.plugins</groupId>
+        <artifactId>application</artifactId>
+        <version>1.3.4</version>
+        <configuration>
+          <name>css</name>
+          <main>net.sf.beezle.jasmin.Main</main>
+        </configuration>
+        <executions>
+          <execution>
+            <id>application</id>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
     </plugins>
   </build>
 </project>
