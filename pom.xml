@@ -1,0 +1,37 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>net.sf.beezle.maven.poms</groupId>
+    <artifactId>parent</artifactId>
+    <version>1.0.5</version>
+  </parent>
+
+  <name>Jasmin</name>
+  <description>See ${project.url}.</description>
+  <url>https://sourceforge.net/apps/trac/beezle/wiki/Jasmin</url>
+  <inceptionYear>2008</inceptionYear>
+  <licenses>
+    <license>
+      <name>GNU Lesser General Public License, Version 2.1</name>
+      <url>http://www.gnu.org/licenses/lgpl-2.1.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <groupId>net.sf.beezle.jasmin</groupId>
+  <artifactId>jasmin</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <scm>
+    <connection>scm:svn:https://beezle.svn.sourceforge.net/svnroot/beezle/jasmin/trunk</connection>
+    <developerConnection>scm:svn:https://beezle.svn.sourceforge.net/svnroot/beezle/jasmin/trunk</developerConnection>
+    <url>http://beezle.svn.sourceforge.net/viewvc/beezle/jasmin/trunk</url>
+  </scm>
+
+  <distributionManagement>
+    <site>
+      <id>sourceforge</id>
+      <url>scp://shell.sourceforge.net/home/project-web/beezle/htdocs/jasmin/site</url>
+    </site>
+  </distributionManagement>
+</project>
