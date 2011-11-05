@@ -57,6 +57,37 @@ hexcolor ::= HASH S* ;
 [SCANNER]
     white = comment ;
 
+S ::= s;
+CDO ::= "<!--";
+CDC ::= "-->";
+INCLUDES ::= "~=";
+DASHMATCH ::= "|=";
+STRING ::= string;
+BAD_STRING ::= badstring;
+IDENT ::= ident;
+HASH ::= "#" name;
+
+// TODO: upper/lower case (except for charset!)
+IMPORT_SYM ::= "@import";
+PAGE_SYM :: = "@page";
+MEDIA_SYM ::= "@media";
+CHARSET_SYM ::= "@charset ";
+IMPORTANT_SYM ::= "!" (w | comment)* "important" ;
+EMS ::= num "em";
+EXS ::= num "ex";
+LENGHTH ::= num ("px" | "cm" | "mm" | "in" | "pt" | "pc");
+ANGLE ::= num ("deg" | "rad" | "grad");
+TIME ::= num ("ms" | "s");
+FREQ ::= num ("hz" | "khz");
+DIMENSION ::= num ident;
+PERDENTACE ::= num "%"
+NUMBER ::= num;
+
+URI ::= "url(" w string w ")";
+URI ::= "url(" w url w ")";
+BAD_URI ::= baduri;
+FUNCTION ::= ident "(";
+
 h  ::= 'A'..'Z' | 'a'..'z' | '0' .. '9' ;
 nonascii ::= (160 .. 255);
 unicode ::= '\\' h h? h? h? h? h? ('\r' '\n' | blank )? ;
@@ -88,57 +119,3 @@ url		([!#$%&*-~]|{nonascii}|{escape})*
 s ::= (' ' | '\t' | '\r' | '\n' | '\f')+ ;
 w ::= s? ;
 nl ::= '\n' | '\r\n' | '\r' | '\f' ;
-
-%%
-
-{s}			{return S;}
-
-\/\*[^*]*\*+([^/*][^*]*\*+)*\/		/* ignore comments */
-{badcomment}                         /* unclosed comment at EOF */
-
-"<!--"		{return CDO;}
-"-->"			{return CDC;}
-"~="			{return INCLUDES;}
-"|="			{return DASHMATCH;}
-
-{string}		{return STRING;}
-{badstring}             {return BAD_STRING;}
-
-{ident}			{return IDENT;}
-
-"#"{name}		{return HASH;}
-
-@{I}{M}{P}{O}{R}{T}	{return IMPORT_SYM;}
-@{P}{A}{G}{E}		{return PAGE_SYM;}
-@{M}{E}{D}{I}{A}	{return MEDIA_SYM;}
-"@charset "		{return CHARSET_SYM;}
-
-"!"({w}|{comment})*{I}{M}{P}{O}{R}{T}{A}{N}{T}	{return IMPORTANT_SYM;}
-
-{num}{E}{M}		{return EMS;}
-{num}{E}{X}		{return EXS;}
-{num}{P}{X}		{return LENGTH;}
-{num}{C}{M}		{return LENGTH;}
-{num}{M}{M}		{return LENGTH;}
-{num}{I}{N}		{return LENGTH;}
-{num}{P}{T}		{return LENGTH;}
-{num}{P}{C}		{return LENGTH;}
-{num}{D}{E}{G}		{return ANGLE;}
-{num}{R}{A}{D}		{return ANGLE;}
-{num}{G}{R}{A}{D}	{return ANGLE;}
-{num}{M}{S}		{return TIME;}
-{num}{S}		{return TIME;}
-{num}{H}{Z}		{return FREQ;}
-{num}{K}{H}{Z}		{return FREQ;}
-{num}{ident}		{return DIMENSION;}
-
-{num}%			{return PERCENTAGE;}
-{num}			{return NUMBER;}
-
-"url("{w}{string}{w}")" {return URI;}
-"url("{w}{url}{w}")"    {return URI;}
-{baduri}                {return BAD_URI;}
-
-{ident}"("		{return FUNCTION;}
-
-.			{return *yytext;}
