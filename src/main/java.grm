@@ -50,10 +50,6 @@ function ::= FUNCTION S* expr ")" S* ;
 hexcolor ::= HASH S* ;
 
 
-
-// ---
-
-
 [SCANNER]
     white = comment ;
 
@@ -67,9 +63,8 @@ BAD_STRING ::= badstring;
 IDENT ::= ident;
 HASH ::= "#" name;
 
-// TODO: upper/lower case (except for charset!)
 IMPORT_SYM ::= "@import";
-PAGE_SYM :: = "@page";
+PAGE_SYM ::= "@page";
 MEDIA_SYM ::= "@media";
 CHARSET_SYM ::= "@charset ";
 IMPORTANT_SYM ::= "!" (w | comment)* "important" ;
@@ -80,7 +75,7 @@ ANGLE ::= num ("deg" | "rad" | "grad");
 TIME ::= num ("ms" | "s");
 FREQ ::= num ("hz" | "khz");
 DIMENSION ::= num ident;
-PERDENTACE ::= num "%"
+PERDENTACE ::= num "%";
 NUMBER ::= num;
 
 URI ::= "url(" w string w ")";
@@ -91,10 +86,10 @@ FUNCTION ::= ident "(";
 h  ::= 'A'..'Z' | 'a'..'z' | '0' .. '9' ;
 nonascii ::= (160 .. 255);
 unicode ::= '\\' h h? h? h? h? h? ('\r' '\n' | blank )? ;
-blank ::= ' ' | '\t' | '\r' | '\n' | '\f' ;  // TODO
+blank ::= ' ' | '\t' | '\r' | '\n' | '\f' ;
 escape ::= unicode | '\\' ('\r' | '\n' | '\f' | '0'..'9' | 'A'..'F' | 'a'..'f')! ;
-nmstart ::= ('_' | 'A' .. 'Z' | 'a'..'z' | nonascii | escape ;
-nmchar ::= ('_' | 'A' .. 'Z' | 'a'..'z' | '0'..'9' | nonascii | escape ;
+nmstart ::= ('_' | 'A' .. 'Z' | 'a'..'z' | nonascii | escape );
+nmchar ::= ('_' | 'A' .. 'Z' | 'a'..'z' | '0'..'9' | nonascii | escape );
 string1 ::= '"' (('\n' | '\r' | '\f' | '"')! | '\\' nl | escape)* '"';
 string2	::= '\'' (('\n' | '\r' | '\f' | '\'')! | '\\' nl | escape)* '\'';
 badstring1 ::= '"' (('\n' | '\r' | '\f' | '"')! | '\\' nl | escape)* '\\'?;
@@ -104,7 +99,7 @@ badcomment2 ::= '/' '*' '*'!* ('*'+ ('/' | '*') '*'!*)* ;
 baduri1 ::= 'u' 'r' 'l' '(' w ('!' | '#' | '$' | '%' | '&' | '*' | '-' | '[' | ']' | '-' | '~' | nonascii | escape)* w ;
 baduri2 ::= 'u' 'r' 'l' '(' w string  w ;
 baduri3 ::= 'u' 'r' 'l' '(' w badstring ;
-comment		'/' '*' '*'!* '*'+ (('/' | '*')! '*'!* '*'+)* '/' ;
+comment ::= '/' '*' '*'!* '*'+ (('/' | '*')! '*'!* '*'+)* '/' ;
 ident ::= '-'? nmstart nmchar* ;
 name ::= nmchar+ ;
 num ::= ('0'..'9')+ | ('0'..'9')* '.' ('0'..'9')+;
@@ -113,9 +108,8 @@ badstring ::= badstring1 | badstring2 ;
 badcomment ::= badcomment1 | badcomment2 ;
 baduri ::= baduri1 | baduri2 | baduri3 ;
 
-# TODO
-url		([!#$%&*-~]|{nonascii}|{escape})*
+url	::=	("!" | "#" | "$" | "%" | "&" | "*" | "-" | "~" | nonascii | escape )*;
 
 s ::= (' ' | '\t' | '\r' | '\n' | '\f')+ ;
 w ::= s? ;
-nl ::= '\n' | '\r\n' | '\r' | '\f' ;
+nl ::= '\n' | '\r' '\n' | '\r' | '\f' ;
