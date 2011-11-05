@@ -34,4 +34,48 @@
       <url>scp://shell.sourceforge.net/home/project-web/beezle/htdocs/jasmin/site</url>
     </site>
   </distributionManagement>
+
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <version>1.6</version>
+        <executions>
+          <execution>
+            <id>mork</id>
+            <phase>process-classes</phase>
+            <configuration>
+              <target>
+                <fileset id="map" dir="${basedir}">
+                  <include name="src/main/*.map" />
+                </fileset>
+                <pathconvert property="map" refid="map" pathsep=" " />
+                <echo>hi</echo>
+                <java fork="true" dir="${basedir}" classname="de.mlhartme.mork.compiler.Main" failonerror="true">
+                  <classpath>
+                    <pathelement path="${basedir}/target/classes" />
+                    <path refid="maven.plugin.classpath" />
+                  </classpath>
+                  <arg value="-d" />
+                  <arg path="${basedir}/target/classes" />
+                  <arg value="-lst" />
+                  <arg line="${map}" />
+                </java>
+              </target>
+            </configuration>
+            <goals>
+              <goal>run</goal>
+            </goals>
+          </execution>
+        </executions>
+        <dependencies>
+          <dependency>
+            <groupId>de.mlhartme.mork</groupId>
+            <artifactId>mork</artifactId>
+            <version>0.6.5-SNAPSHOT</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+    </plugins>
+  </build>
 </project>

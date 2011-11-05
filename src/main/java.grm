@@ -1,0 +1,764 @@
+#
+# Copyright 1&1 Internet AG, http://www.1and1.org
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU Lesser General Public License as published by
+# the Free Software Foundation; either version 2 of the License,
+# or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+# See the GNU Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+
+/*
+
+Java 2 SE 1.3 grammar.
+
+Successfully parses Java 2 class library.
+
+Scanner and parser specification in this file are based on:
+o The Java Language Specification (first edition).
+  Note that the second edition is quite different.
+  TODO: switch to a 2ed-based grammar
+o JDK 1.1 and 1.2 changes as descibed in
+    http://java.sun.com/docs/books/jls/clarify.html
+o Java Identifiers are definied by Character.isJavaIdentifierStart
+  and Character.isJavaIdentifierPart.
+o Note: the Java 1.1 grammar comming with SableCC has helped to clearfy
+  issues with Java 1.1 changes.
+
+Scanner differences:
+o Identifiers are restricted to characters <= 0x00ff.
+o Ctrl-Z is not allowed
+o no unicode-preprocessing; cr/lf preprocessing is emulated my modified
+  grammar rules
+o Note: comments and documentation comments are not distinguished
+  semantically; however, there is no syntactic difference to Java 2.
+
+Parser differences:
+o addend the empty declaration (";") to ClassMemberDeclaration
+  and InterfaceMemberDeclaration. Jjikes includes the same grammar change.
+  Without it, e.g. java.text.Normalizer can not be parse.
+*/
+
+[PARSER]
+
+
+#
+# Chapter 2
+#
+
+Goal
+::= CompilationUnit ;
+
+
+#
+# Chapter 3: Lexical Structure
+#
+
+Literal
+::= IntegerLiteral
+  | FloatingPointLiteral
+  | BooleanLiteral
+  | CharacterLiteral
+  | StringLiteral
+  | NullLiteral
+  ;
+
+
+#
+# Chapter 4: Types, Values, and Variables
+#
+
+Type
+::= PrimitiveType
+  | ReferenceType
+  ;
+
+PrimitiveType
+::= NumericType
+  | "boolean"
+  ;
+
+NumericType
+::= IntegralType
+  | FloatingPointType
+  ;
+
+IntegralType
+::= "byte"
+  | "short"
+  | "int"
+  | "long"
+  | "char"
+  ;
+
+FloatingPointType
+::= "float"
+  | "double"
+  ;
+
+ReferenceType
+::= ClassOrInterfaceType
+  | ArrayType
+  ;
+
+ClassOrInterfaceType
+::= Name ;
+
+ClassType
+::= ClassOrInterfaceType ;
+
+InterfaceType
+::= ClassOrInterfaceType ;
+
+ArrayType
+::= PrimitiveType Dim+
+  | Name Dim+
+  ;
+
+
+#
+# Chapter 6: Names
+#
+
+Name
+::= SimpleName
+  | QualifiedName
+  ;
+
+SimpleName
+::= Identifier ;
+
+QualifiedName
+::= Name "." Identifier ;
+
+
+#
+# Chapter 7: Packages
+#
+
+CompilationUnit
+::= PackageDeclaration? ImportDeclaration* TypeDeclaration* ;
+
+PackageDeclaration
+::= "package" Name ";" ;
+
+ImportDeclaration
+::= SingleTypeImportDeclaration
+  | TypeImportOnDemandDeclaration
+  ;
+
+SingleTypeImportDeclaration
+::= "import" Name ";" ;
+
+TypeImportOnDemandDeclaration
+::= "import" Name "." "*" ";" ;
+
+TypeDeclaration
+::= ClassDeclaration
+  | InterfaceDeclaration
+  | ";"
+  ;
+
+# productions Used Only in the LALR(1) Grammar
+
+Modifier
+::= "public" | "protected" | "private"
+  | "static"
+  | "abstract" | "final" | "strictfp" | "native" | "synchronized"
+  | "transient" | "volatile"
+  ;
+
+
+#
+# Chapter 8: Classes
+#
+
+# 8.1: Class Declaration
+
+ClassDeclaration
+::= Modifier* "class" Identifier Super? Interfaces? ClassBody ;
+
+Super
+::= "extends" ClassType ;
+
+Interfaces
+::= "implements" InterfaceTypeList ;
+
+InterfaceTypeList
+::= InterfaceType
+  | InterfaceTypeList "," InterfaceType
+  ;
+
+ClassBody
+::= "{" ClassBodyDeclaration* "}" ;
+
+ClassBodyDeclaration
+::= ClassMemberDeclaration
+  | StaticInitializer
+  | ConstructorDeclaration
+  | Block
+  ;
+
+ClassMemberDeclaration
+::= FieldDeclaration
+  | MethodDeclaration
+  | ClassDeclaration
+  | InterfaceDeclaration
+  | ";"
+  ;
+
+# 8.3: Field Declarations
+
+FieldDeclaration
+::= Modifier* Type VariableDeclarators ";" ;
+
+VariableDeclarators
+::= VariableDeclarator
+  | VariableDeclarators "," VariableDeclarator
+  ;
+
+VariableDeclarator
+::= VariableDeclaratorId
+  | VariableDeclaratorId "=" VariableInitializer
+  ;
+
+VariableDeclaratorId
+::= Identifier
+  | VariableDeclaratorId "[" "]"
+  ;
+
+VariableInitializer
+::= Expression
+  | ArrayInitializer
+  ;
+
+# 8.4: Method Declarations
+
+MethodDeclaration
+::= MethodHeader MethodBody ;
+
+MethodHeader
+::= Modifier* Type MethodDeclarator Throws?
+  | Modifier* "void" MethodDeclarator Throws?
+  ;
+
+MethodDeclarator
+::= Identifier "(" FormalParameterList? ")"
+  | MethodDeclarator "[" "]"
+  ;
+
+FormalParameterList
+::= FormalParameter
+  | FormalParameterList "," FormalParameter
+  ;
+
+FormalParameter
+::= Modifier* Type VariableDeclaratorId ;
+
+Throws
+::= "throws" ClassTypeList ;
+
+ClassTypeList
+::= ClassType
+  | ClassTypeList "," ClassType
+  ;
+
+MethodBody
+::= Block
+  | ";"
+  ;
+
+# 8.5: Static Initializers
+
+StaticInitializer
+::= "static" Block ;
+
+
+# 8.6: Constructor Declarations
+
+ConstructorDeclaration
+::= Modifier* ConstructorDeclarator Throws? ConstructorBody ;
+
+ConstructorDeclarator
+::= SimpleName "(" FormalParameterList? ")" ;
+
+ConstructorBody
+::= "{" ExplicitConstructorInvocation? BlockStatement* "}" ;
+
+ExplicitConstructorInvocation
+::= "this" "(" ArgumentList? ")" ";"
+  | "super" "(" ArgumentList? ")" ";"
+  | Primary "." "super" "(" ArgumentList? ")" ";"
+  ;
+
+
+#
+# Chapter 9: Interfaces
+#
+
+# 9.1: Interface Declarations
+
+InterfaceDeclaration
+::= Modifier* "interface" Identifier ExtendsInterfaces? InterfaceBody ;
+
+ExtendsInterfaces
+::= "extends" InterfaceType
+  | ExtendsInterfaces "," InterfaceType
+  ;
+
+InterfaceBody
+::= "{" InterfaceMemberDeclaration* "}" ;
+
+InterfaceMemberDeclaration
+::= ConstantDeclaration
+  | AbstractMethodDeclaration
+  | ClassDeclaration
+  | InterfaceDeclaration
+  | ";"
+  ;
+
+ConstantDeclaration
+::= FieldDeclaration ;
+
+AbstractMethodDeclaration
+::= MethodHeader ";" ;
+
+
+#
+# Chapter 10: Arrays
+#
+
+ArrayInitializer
+::= "{" VariableInitializers? ","? "}" ;
+
+VariableInitializers
+::= VariableInitializer
+  | VariableInitializers "," VariableInitializer
+  ;
+
+
+#
+# Chapter 14: Blocks and Statements
+#
+
+Block
+::= "{" BlockStatement* "}" ;
+
+BlockStatement
+::= LocalVariableDeclarationStatement
+  | Statement
+  | ClassDeclaration
+  ;
+
+LocalVariableDeclarationStatement
+::= LocalVariableDeclaration ";" ;
+
+LocalVariableDeclaration
+::= Modifier* Type VariableDeclarators ;
+
+Statement
+::= StatementWithoutTrailingSubstatement
+  | LabeledStatement
+  | IfThenStatement
+  | IfThenElseStatement
+  | WhileStatement
+  | ForStatement
+  ;
+
+StatementNoShortIf
+::= StatementWithoutTrailingSubstatement
+  | LabeledStatementNoShortIf
+  | IfThenElseStatementNoShortIf
+  | WhileStatementNoShortIf
+  | ForStatementNoShortIf
+  ;
+
+StatementWithoutTrailingSubstatement
+::= Block
+  | EmptyStatement
+  | ExpressionStatement
+  | SwitchStatement
+  | DoStatement
+  | BreakStatement
+  | ContinueStatement
+  | ReturnStatement
+  | SynchronizedStatement
+  | ThrowStatement
+  | TryStatement
+  ;
+
+EmptyStatement
+::= ";" ;
+
+LabeledStatement
+::= Identifier ":" Statement ;
+
+LabeledStatementNoShortIf
+::= Identifier ":" StatementNoShortIf ;
+
+ExpressionStatement
+::= StatementExpression ";" ;
+
+StatementExpression
+::= Assignment
+  | PreIncrementExpression
+  | PreDecrementExpression
+  | PostIncrementExpression
+  | PostDecrementExpression
+  | MethodInvocation
+  | ClassInstanceCreationExpression
+  ;
+
+IfThenStatement
+::= "if" "(" Expression ")" Statement ;
+
+IfThenElseStatement
+::= "if" "(" Expression ")" StatementNoShortIf "else" Statement ;
+
+IfThenElseStatementNoShortIf
+::= "if" "(" Expression ")" StatementNoShortIf "else" StatementNoShortIf ;
+
+SwitchStatement
+::= "switch" "(" Expression ")" SwitchBlock ;
+
+SwitchBlock
+::= "{" SwitchBlockStatementGroup* SwitchLabel* "}" ;
+
+SwitchBlockStatementGroup
+::= SwitchLabel+ BlockStatement+ ;
+
+SwitchLabel
+::= "case" ConstantExpression ":"
+  | "default" ":"
+  ;
+
+WhileStatement
+::= "while" "(" Expression ")" Statement ;
+
+WhileStatementNoShortIf
+::= "while" "(" Expression ")" StatementNoShortIf ;
+
+DoStatement
+::= "do" Statement "while" "(" Expression ")" ";" ;
+
+ForStatement
+::= "for" "(" ForInit? ";" Expression? ";" ForUpdate? ")"
+        Statement ;
+
+ForStatementNoShortIf
+::= "for" "(" ForInit? ";" Expression? ";" ForUpdate? ")"
+        StatementNoShortIf ;
+
+ForInit
+::= StatementExpressionList
+  | LocalVariableDeclaration
+  ;
+
+ForUpdate
+::= StatementExpressionList ;
+
+StatementExpressionList
+::= StatementExpression
+  | StatementExpressionList "," StatementExpression
+  ;
+
+BreakStatement
+::= "break" Identifier? ";" ;
+
+ContinueStatement
+::= "continue" Identifier? ";" ;
+
+ReturnStatement
+::= "return" Expression? ";" ;
+
+ThrowStatement
+::= "throw" Expression ";" ;
+
+SynchronizedStatement
+::= "synchronized" "(" Expression ")" Block ;
+
+TryStatement
+::= "try" Block CatchClause+
+  | "try" Block CatchClause* Finally
+  ;
+
+CatchClause
+::= "catch" "(" FormalParameter ")" Block ;
+
+Finally
+::= "finally" Block ;
+
+
+#
+# Chapter 15: Expressions
+#
+
+Primary
+::= PrimaryNoNewArray
+  | ArrayCreationExpression
+  ;
+
+PrimaryNoNewArray
+::= Literal
+  | "this"
+  | "(" Expression ")"
+  | ClassInstanceCreationExpression
+  | FieldAccess
+  | MethodInvocation
+  | ArrayAccess
+  | Name "." "this"
+  | PrimitiveType Dim* "." "class"
+  | Name Dim* "." "class"
+  | "void" "." "class"
+  ;
+
+ClassInstanceCreationExpression
+::= "new" Name "(" ArgumentList? ")" ClassBody?
+  | Primary "." "new" Identifier "(" ArgumentList? ")" ClassBody?
+  ;
+
+ArgumentList
+::= Expression
+  | ArgumentList "," Expression
+  ;
+
+ArrayCreationExpression
+::= "new" PrimitiveType DimExpr+ Dim*
+  | "new" ClassOrInterfaceType DimExpr+ Dim*
+  | "new" PrimitiveType Dim+ ArrayInitializer
+  | "new" ClassOrInterfaceType Dim+ ArrayInitializer
+  ;
+
+DimExpr
+::= "[" Expression "]" ;
+
+Dim
+::= "[" "]" ;
+
+FieldAccess
+::= Primary "." Identifier
+  | "super" "." Identifier
+  ;
+
+MethodInvocation
+::= Name "(" ArgumentList? ")"
+  | Primary "." Identifier "(" ArgumentList? ")"
+  | "super" "." Identifier "(" ArgumentList? ")"
+  ;
+
+ArrayAccess
+::= Name "[" Expression "]"
+  | PrimaryNoNewArray "[" Expression "]"
+  ;
+
+PostfixExpression
+::= Primary
+  | Name
+  | PostIncrementExpression
+  | PostDecrementExpression
+  ;
+
+PostIncrementExpression
+::= PostfixExpression "++" ;
+
+PostDecrementExpression
+::= PostfixExpression "--" ;
+
+UnaryExpression
+::= PreIncrementExpression
+  | PreDecrementExpression
+  | "+" UnaryExpression
+  | "-" UnaryExpression
+  | UnaryExpressionNotPlusMinus
+  ;
+
+PreIncrementExpression
+::= "++" UnaryExpression ;
+
+PreDecrementExpression
+::= "--" UnaryExpression ;
+
+UnaryExpressionNotPlusMinus
+::= PostfixExpression
+  | "~" UnaryExpression
+  | "!" UnaryExpression
+  | CastExpression
+  ;
+
+CastExpression
+::= "(" PrimitiveType Dim* ")" UnaryExpression
+  | "(" Expression ")" UnaryExpressionNotPlusMinus
+  | "(" Name Dim+ ")" UnaryExpressionNotPlusMinus
+  ;
+
+MultiplicativeExpression
+::= UnaryExpression
+  | MultiplicativeExpression "*" UnaryExpression
+  | MultiplicativeExpression "/" UnaryExpression
+  | MultiplicativeExpression "%" UnaryExpression
+  ;
+
+AdditiveExpression
+::= MultiplicativeExpression
+  | AdditiveExpression "+" MultiplicativeExpression
+  | AdditiveExpression "-" MultiplicativeExpression
+  ;
+
+ShiftExpression
+::= AdditiveExpression
+  | ShiftExpression "<<" AdditiveExpression
+  | ShiftExpression ">>" AdditiveExpression
+  | ShiftExpression ">>>" AdditiveExpression
+  ;
+
+RelationalExpression
+::= ShiftExpression
+  | RelationalExpression "<" ShiftExpression
+  | RelationalExpression ">" ShiftExpression
+  | RelationalExpression "<=" ShiftExpression
+  | RelationalExpression ">=" ShiftExpression
+  | RelationalExpression "instanceof" ReferenceType
+  ;
+
+EqualityExpression
+::= RelationalExpression
+  | EqualityExpression "==" RelationalExpression
+  | EqualityExpression "!=" RelationalExpression
+  ;
+
+AndExpression
+::= EqualityExpression
+  | AndExpression "&" EqualityExpression
+  ;
+
+ExclusiveOrExpression
+::= AndExpression
+  | ExclusiveOrExpression "^" AndExpression
+  ;
+
+InclusiveOrExpression
+::= ExclusiveOrExpression
+  | InclusiveOrExpression "|" ExclusiveOrExpression
+  ;
+
+ConditionalAndExpression
+::= InclusiveOrExpression
+  | ConditionalAndExpression "&&" InclusiveOrExpression
+  ;
+
+ConditionalOrExpression
+::= ConditionalAndExpression
+  | ConditionalOrExpression "||" ConditionalAndExpression
+  ;
+
+ConditionalExpression
+::= ConditionalOrExpression
+  | ConditionalOrExpression "?" Expression ":" ConditionalExpression
+  ;
+
+AssignmentExpression
+::= ConditionalExpression
+  | Assignment
+  ;
+
+Assignment
+::= LeftHandSide AssignmentOperator AssignmentExpression ;
+
+LeftHandSide
+::= Name
+  | FieldAccess
+  | ArrayAccess
+  ;
+
+AssignmentOperator
+::= "="
+  | "*="
+  | "/="
+  | "%="
+  | "+="
+  | "-="
+  | "<<="
+  | ">>="
+  | ">>>="
+  | "&="
+  | "^="
+  | "|="
+  ;
+
+Expression
+::= AssignmentExpression ;
+
+ConstantExpression
+::= Expression ;
+
+
+[SCANNER]
+    white = WhiteSpace, TraditionalComment, EndOfLineComment;
+
+EndOfLineComment
+::= '/' '/' ('\n' | '\r')!* ('\n' | '\r') ;
+
+TraditionalComment
+::= "/*" any* - (any* "*/" any*) "*/" ;
+
+any ::= (0 .. 65535);
+
+
+WhiteSpace
+::= ( ' ' | '\t' | '\n' | '\f' | '\r' )+ ;
+
+IntegerLiteral
+::= ( '0'
+    | '1'..'9' '0'..'9'*                                 # dec
+    | '0' '0'..'7'+                                      # oct
+    | '0' ('x' | 'X') ('0'..'9' | 'a'..'f' | 'A'..'F')+  # hex
+    ) ('l' | 'L')?
+  ;
+
+FloatingPointLiteral
+::= '0'..'9'+ '.' '0'..'9'*
+       (('e' | 'E') ('+' | '-')? '0'..'9'+ )?  # ExponentPart
+       ('f' | 'F' | 'd' | 'D')?                # FloatTypeSuffix
+  | '.' '0'..'9'+
+       (('e' | 'E') ('+' | '-')? '0'..'9'+ )?  # ExponentPart
+       ('f' | 'F' | 'd' | 'D')?                # FloatTypeSuffix
+  | '0'..'9'+
+       ('e' | 'E') ('+' | '-')? '0'..'9'+      # ExponentPart
+       ('f' | 'F' | 'd' | 'D')?                # FloatTypeSuffix
+  | '0'..'9'+
+       (('e' | 'E') ('+' | '-')? '0'..'9'+ )?  # ExponentPart
+       ('f' | 'F' | 'd' | 'D')                 # FloatTypeSuffix
+  ;
+
+BooleanLiteral
+::= 't' 'r' 'u' 'e'
+  | 'f' 'a' 'l' 's' 'e';
+
+CharacterLiteral
+::= '\'' (('\\' 0..65535) | ('\\' |'\'' |'\n' | '\r')!)+ '\'' ;
+
+StringLiteral
+::= '"' (('\\' 0..65535) | ('\\' | '"' | '\n' | '\r')!)* '"' ;
+
+NullLiteral
+::= 'n' 'u' 'l' 'l' ;
+
+Identifier  /* ranges generated with jd.Identifier */
+::= (
+      0x0024..0x0024 | 0x0041..0x005a | 0x005f..0x005f | 0x0061..0x007a |
+      0x00a2..0x00a5 | 0x00aa..0x00aa | 0x00b5..0x00b5 | 0x00ba..0x00ba |
+      0x00c0..0x00d6 | 0x00d8..0x00f6 | 0x00f8..0x00ff
+    )
+    (
+      0x0000..0x0008 | 0x000e..0x001b | 0x0024..0x0024 | 0x0030..0x0039 |
+      0x0041..0x005a | 0x005f..0x005f | 0x0061..0x007a | 0x007f..0x009f |
+      0x00a2..0x00a5 | 0x00aa..0x00aa | 0x00b5..0x00b5 | 0x00ba..0x00ba |
+      0x00c0..0x00d6 | 0x00d8..0x00f6 | 0x00f8..0x00ff
+    )* ;
