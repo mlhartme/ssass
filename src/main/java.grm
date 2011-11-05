@@ -16,7 +16,12 @@
 #
 
 
-/** css 2.1 grammar from http://www.w3.org/TR/CSS2/grammar.html */
+/** css 2.1 grammar from http://www.w3.org/TR/CSS2/grammar.html.
+
+ Manual fixes:
+ * in "media_list" rule: changed "COMMA" to ","
+
+*/
 
 [PARSER]
 
@@ -24,7 +29,7 @@ stylesheet ::= ( CHARSET_SYM STRING ";" )? (S|CDO|CDC)* ( import ( CDO S* | CDC 
                ( ( ruleset | media | page ) ( CDO S* | CDC S* )* )* ;
 import ::= IMPORT_SYM S* (STRING|URI) S* media_list? ";" S* ;
 media ::= MEDIA_SYM S* media_list "{" S* ruleset* "}" S* ;
-media_list ::= medium ( COMMA S* medium)* ;
+media_list ::= medium ( "," S* medium)* ;
 medium ::= IDENT S* ;
 page ::= PAGE_SYM S* pseudo_page? "{" S* declaration? ( ";" S* declaration? )* "}" S* ;
 pseudo_page ::= ":" IDENT S* ;
