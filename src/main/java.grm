@@ -16,10 +16,14 @@
 #
 
 
-/** css 2.1 grammar from http://www.w3.org/TR/CSS2/grammar.html.
+/*
+
+ CCS 2.1 grammar from http://www.w3.org/TR/CSS2/grammar.html.
 
  Manual fixes:
  * in "media_list" rule: changed "COMMA" to ","
+ * removed BAD_STRING and BAD_URI rules (with sub-rules) because Mork has no feature to report them as errors
+ * removed BAD_COMMENT because Mork has no feature to accept it at EOF
 
 */
 
@@ -64,7 +68,6 @@ CDC ::= "-->";
 INCLUDES ::= "~=";
 DASHMATCH ::= "|=";
 STRING ::= string;
-BAD_STRING ::= badstring;
 IDENT ::= ident;
 HASH ::= "#" name;
 
@@ -85,7 +88,6 @@ NUMBER ::= num;
 
 URI ::= "url(" w string w ")";
 URI ::= "url(" w url w ")";
-BAD_URI ::= baduri;
 FUNCTION ::= ident "(";
 
 h  ::= 'A'..'Z' | 'a'..'z' | '0' .. '9' ;
@@ -97,21 +99,11 @@ nmstart ::= ('_' | 'A' .. 'Z' | 'a'..'z' | nonascii | escape );
 nmchar ::= ('_' | 'A' .. 'Z' | 'a'..'z' | '0'..'9' | nonascii | escape );
 string1 ::= '"' (('\n' | '\r' | '\f' | '"')! | '\\' nl | escape)* '"';
 string2	::= '\'' (('\n' | '\r' | '\f' | '\'')! | '\\' nl | escape)* '\'';
-badstring1 ::= '"' (('\n' | '\r' | '\f' | '"')! | '\\' nl | escape)* '\\'?;
-badstring2 ::= '\'' (('\n' | '\r' | '\f' | '\'')! | '\\' nl | escape)* '\\'?;
-badcomment1 ::= '/' '*' '*'!* '*'+ (('/' | '*')! '*'!* '*'+)* ;
-badcomment2 ::= '/' '*' '*'!* ('*'+ ('/' | '*') '*'!*)* ;
-baduri1 ::= 'u' 'r' 'l' '(' w ('!' | '#' | '$' | '%' | '&' | '*' | '-' | '[' | ']' | '-' | '~' | nonascii | escape)* w ;
-baduri2 ::= 'u' 'r' 'l' '(' w string  w ;
-baduri3 ::= 'u' 'r' 'l' '(' w badstring ;
 comment ::= '/' '*' '*'!* '*'+ (('/' | '*')! '*'!* '*'+)* '/' ;
 ident ::= '-'? nmstart nmchar* ;
 name ::= nmchar+ ;
 num ::= ('0'..'9')+ | ('0'..'9')* '.' ('0'..'9')+;
 string ::= string1 | string2 ;
-badstring ::= badstring1 | badstring2 ;
-badcomment ::= badcomment1 | badcomment2 ;
-baduri ::= baduri1 | baduri2 | baduri3 ;
 
 url	::=	("!" | "#" | "$" | "%" | "&" | "*" | "-" | "~" | nonascii | escape )*;
 
