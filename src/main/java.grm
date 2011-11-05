@@ -92,8 +92,7 @@ FUNCTION ::= ident "(";
 
 h  ::= 'A'..'Z' | 'a'..'z' | '0' .. '9' ;
 nonascii ::= (160 .. 255);
-unicode ::= '\\' h h? h? h? h? h? ('\r' '\n' | blank )? ;
-blank ::= ' ' | '\t' | '\r' | '\n' | '\f' ;
+unicode ::= '\\' h h? h? h? h? h? ('\r' '\n' | ' ' | '\t' | '\r' | '\n' | '\f' )? ;
 escape ::= unicode | '\\' ('\r' | '\n' | '\f' | '0'..'9' | 'A'..'F' | 'a'..'f')! ;
 nmstart ::= ('_' | 'A' .. 'Z' | 'a'..'z' | nonascii | escape );
 nmchar ::= ('_' | 'A' .. 'Z' | 'a'..'z' | '0'..'9' | nonascii | escape );
