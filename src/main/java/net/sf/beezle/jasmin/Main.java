@@ -7,6 +7,7 @@ public class Main {
         Mapper mapper;
         int ok;
         long tmp;
+        Object[] results;
 
         if (args.length == 0) {
             System.out.println("usage: scss <filename>+");
@@ -16,7 +17,8 @@ public class Main {
             ok = 0;
             for (String name : args) {
                 System.out.println(name + ":");
-                if (mapper.run(name) != null) {
+                results = mapper.run(name);
+                if (results != null) {
                     ok++;
                 }
             }

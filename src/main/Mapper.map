@@ -19,4 +19,7 @@ mapper jasmin.Mapper;
 
 grm = "scss.grm";
 
-# empty
+import net.sf.beezle.jasmin.scss:
+    Stylesheet;
+
+stylesheet => Stylesheet ;
