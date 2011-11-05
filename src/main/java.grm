@@ -48,7 +48,7 @@ simple_selector ::= element_name ( HASH | class | attrib | pseudo )*
   ;
 class ::= "." IDENT ;
 element_name ::= IDENT | "*" ;
-attrib ::= "(" S* IDENT S* ( ( "=" | INCLUDES | DASHMATCH ) S* ( IDENT | STRING ) S* )? ")" ;
+attrib ::= "[" S* IDENT S* ( ( "=" | INCLUDES | DASHMATCH ) S* ( IDENT | STRING ) S* )? "]" ;
 pseudo ::= ":" ( IDENT | FUNCTION S* (IDENT S*)? ")" ) ;
 declaration ::= property ":" S* expr prio? ;
 prio        ::= IMPORTANT_SYM S* ;
