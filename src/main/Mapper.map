@@ -17,6 +17,6 @@
 
 mapper jasmin.Mapper;
 
-grm = "java.grm";
+grm = "scss.grm";
 
 # empty

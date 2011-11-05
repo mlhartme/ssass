@@ -9,8 +9,7 @@ public class Main {
         long tmp;
 
         if (args.length == 0) {
-            System.out.println("CSS Parser");
-            System.out.println("usage: Main <filename>+");
+            System.out.println("usage: scss <filename>+");
         } else {
             mapper = load();
             tmp = System.currentTimeMillis();
