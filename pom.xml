@@ -53,11 +53,7 @@
             <phase>process-classes</phase>
             <configuration>
               <target>
-                <fileset id="map" dir="${basedir}">
-                  <include name="src/main/*.map" />
-                </fileset>
-                <pathconvert property="map" refid="map" pathsep=" " />
-                <echo>hi</echo>
+                <property name="map" value="src/main/Mapper.map" />
                 <java fork="true" dir="${basedir}" classname="de.mlhartme.mork.compiler.Main" failonerror="true">
                   <classpath>
                     <pathelement path="${basedir}/target/classes" />
