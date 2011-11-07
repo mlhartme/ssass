@@ -72,3 +72,5 @@ TIME => [text];
 FREQ => [text];
 PERCENTAGE => [text];
 NUMBER => [text];
+STRING => [text];
+URI => [text];
