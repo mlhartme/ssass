@@ -38,7 +38,9 @@
          medium ::= IDENT S* ;
            page ::= PAGE_SYM S* pseudo_page? "{" S* declaration? ( ";" S* declaration? )* "}" S* ;
     pseudo_page ::= ":" IDENT S* ;
-       operator ::= "/" S* | "," S* ;
+       operator ::= _slash | _comma ;
+         _slash ::= "/" S* ;
+         _comma ::= "," S* ;
      combinator ::= _plus | _gt ;
           _plus ::= "+" S* ;
             _gt ::= ">" S* ;
