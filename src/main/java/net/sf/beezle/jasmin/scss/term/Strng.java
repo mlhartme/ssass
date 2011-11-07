@@ -1,4 +1,4 @@
 package net.sf.beezle.jasmin.scss.term;
 
-public class Strng {
+public class Strng extends BaseTerm {
 }
