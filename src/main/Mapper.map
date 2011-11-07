@@ -74,3 +74,4 @@ PERCENTAGE => [text];
 NUMBER => [text];
 STRING => [text];
 URI => [text];
+HASH => [text];

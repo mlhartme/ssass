@@ -1,6 +1,9 @@
 package net.sf.beezle.jasmin.scss;
 
 public class Hash extends BaseSelector {
-    public Hash() {
+    private final String hash;
+
+    public Hash(String hash) {
+        this.hash = hash;
     }
 }
