@@ -1,8 +1,8 @@
 package net.sf.beezle.jasmin.scss;
 
 public class UnaryOperator {
-    public final UnaryOperator PLUS = new UnaryOperator('+');
-    public final UnaryOperator MINUS = new UnaryOperator('-');
+    public static final UnaryOperator PLUS = new UnaryOperator('+');
+    public static final UnaryOperator MINUS = new UnaryOperator('-');
 
     private final char code;
 
