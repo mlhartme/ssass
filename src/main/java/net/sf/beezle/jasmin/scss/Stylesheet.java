@@ -1,7 +1,10 @@
 package net.sf.beezle.jasmin.scss;
 
 public class Stylesheet {
-    public Stylesheet() {
+    private final Import[] imports;
+
+    public Stylesheet(Import[] imports) {
+        this.imports = imports;
     }
 
     public String toCss() {
