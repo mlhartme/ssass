@@ -64,3 +64,11 @@ function => Function;
 hexcolor => Hexcolor;
 
 IDENT => [text];
+EMS => [text];
+EXS => [text];
+LENGTH => [text];
+ANGLE => [text];
+TIME => [text];
+FREQ => [text];
+PERCENTAGE => [text];
+NUMBER => [text];
