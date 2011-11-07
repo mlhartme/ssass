@@ -20,8 +20,8 @@ mapper jasmin.Mapper;
 grm = "scss.grm";
 
 import net.sf.beezle.jasmin.scss:
-    Attrib, Class, Combinator, Declaration, ElementName, Expr, Hash, Import,
-    Media, Operator, Page, Pseudo, Term, Stylesheet;
+    Attrib, Class, Combinator, Declaration, ElementName, Expr, Hash, Import, Media,
+    Operator, Page, Pseudo, Term, Ruleset, Selector, SimpleSelector, Stylesheet, UnaryOperator;
 
 import net.sf.beezle.jasmin.scss.term:
     Angle, Ems, Exs, Freq, Function, Hexcolor, Ident, Length, Number, Percentage, Strng, Time, Uri;
@@ -30,33 +30,33 @@ stylesheet => Stylesheet;
 imprt => Import;
 media => Media;
 page => Page;
-
-_plus => Combinator.PLUS;
-_gt => Combinator.GT;
-
 _slash => Operator.SLASH;
 _comma => Operator.COMMA;
-
+_plus => Combinator.PLUS;
+_gt => Combinator.GT;
+_unary_plus => UnaryOperator.PLUS;
+_unary_minus => UnaryOperator.MINUS;
+ruleset => Ruleset;
+selector => Selector;
+simple_selector => SimpleSelector;
 _hash => Hash;
 class => Class;
 element_name => ElementName;
 attrib => Attrib;
 pseudo => Pseudo;
 declaration => Declaration;
-
 expr => Expr;
 term => Term;
-
-_angle => Angle;
-_ems => Ems;
-_exs => Exs;
-_freq => Freq;
-function => Function;
-hexcolor => Hexcolor;
-_ident => Ident;
-_length => Length;
 _number => Number;
 _percentage => Percentage;
-_string => Strng;
+_length => Length;
+_ems => Ems;
+_exs => Exs;
+_angle => Angle;
 _time => Time;
+_freq => Freq;
+_string => Strng;
+_ident => Ident;
 _uri => Uri;
+function => Function;
+hexcolor => Hexcolor;
