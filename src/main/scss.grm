@@ -60,8 +60,19 @@ simple_selector ::= element_name ( _hash | class | attrib | pseudo )*
     declaration ::= property ":" S* expr prio? ;
            prio ::= IMPORTANT_SYM S* ;
            expr ::= term ( operator? term )* ;
-           term ::= unary_operator? ( NUMBER S* | PERCENTAGE S* | LENGTH S* | EMS S* | EXS S* | ANGLE S* | TIME S* | FREQ S* )
-                  | STRING S* | IDENT S* | URI S* | hexcolor | function ;
+           term ::= unary_operator? ( _number S* | _percentage S* | _length S* | _ems S* | _exs S* | _angle S* | _time S* | _freq S* )
+                  | _string S* | _ident S* | _uri S* | hexcolor | function ;
+        _number ::= NUMBER ;
+    _percentage ::= PERCENTAGE ;
+        _length ::= LENGTH ;
+           _ems ::= EMS ;
+           _exs ::= EXS ;
+         _angle ::= ANGLE ;
+          _time ::= TIME ;
+          _freq ::= FREQ ;
+        _string ::= STRING ;
+         _ident ::= IDENT ;
+           _uri ::= URI;
        function ::= FUNCTION S* expr ")" S* ;
        hexcolor ::= HASH S* ;
 
