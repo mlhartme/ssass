@@ -1,6 +1,9 @@
 package net.sf.beezle.jasmin.scss;
 
 public class Media extends Statement {
-    public Media() {
+    private final Ruleset[] rulesets;
+
+    public Media(Ruleset[] rulesets) {
+        this.rulesets = rulesets;
     }
 }
