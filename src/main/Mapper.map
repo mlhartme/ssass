@@ -60,3 +60,5 @@ _ident => Ident;
 _uri => Uri;
 function => Function;
 hexcolor => Hexcolor;
+
+IDENT => [text];

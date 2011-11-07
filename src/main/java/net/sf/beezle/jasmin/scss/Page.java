@@ -1,9 +1,13 @@
 package net.sf.beezle.jasmin.scss;
 
 public class Page extends Statement {
-    private Declaration[] declarations;
+    // may be null
+    private final String pseudoPage;
 
-    public Page(Declaration[] declarations) {
+    private final Declaration[] declarations;
+
+    public Page(String pseudoPage, Declaration[] declarations) {
+        this.pseudoPage = pseudoPage;
         this.declarations = declarations;
     }
 }
