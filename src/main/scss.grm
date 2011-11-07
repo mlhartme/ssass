@@ -46,7 +46,7 @@
        property ::= IDENT S* ;
         ruleset ::= selector ( "," S* selector )* "{" S* declaration? ( ";" S* declaration? )* "}" S* ;
        selector ::= simple_selector ( combinator selector | S+ ( combinator? selector )? )? ;
-simple_selector ::= element_name ( HASH | class | attrib | pseudo )*
+simple_selector ::= element_name ( _hash | class | attrib | pseudo )*
                   | ( _hash | class | attrib | pseudo )+ ;
           _hash ::= HASH ;
           class ::= "." IDENT ;
