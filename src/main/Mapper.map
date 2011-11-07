@@ -21,7 +21,7 @@ grm = "scss.grm";
 
 import net.sf.beezle.jasmin.scss:
     Attrib, Class, Combinator, Declaration, ElementName, Expr, Hash, Import, Media,
-    Operator, Page, Pseudo, Term, Ruleset, Selector, SimpleSelector, Stylesheet, UnaryOperator;
+    Operator, Page, Pseudo, Term, Prio, Ruleset, Selector, SimpleSelector, Stylesheet, UnaryOperator;
 
 import net.sf.beezle.jasmin.scss.term:
     Angle, Ems, Exs, Freq, Function, Hexcolor, Ident, Length, Number, Percentage, Strng, Time, Uri;
@@ -45,6 +45,7 @@ element_name => ElementName;
 attrib => Attrib;
 pseudo => Pseudo;
 declaration => Declaration;
+prio => Prio;
 expr => Expr;
 _term1 => Term;
 _term2 => Term;
