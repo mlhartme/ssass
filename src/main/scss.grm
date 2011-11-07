@@ -47,7 +47,8 @@
         ruleset ::= selector ( "," S* selector )* "{" S* declaration? ( ";" S* declaration? )* "}" S* ;
        selector ::= simple_selector ( combinator selector | S+ ( combinator? selector )? )? ;
 simple_selector ::= element_name ( HASH | class | attrib | pseudo )*
-                  | ( HASH | class | attrib | pseudo )+ ;
+                  | ( _hash | class | attrib | pseudo )+ ;
+          _hash ::= HASH ;
           class ::= "." IDENT ;
    element_name ::= IDENT | "*" ;
          attrib ::= "[" S* IDENT S* ( ( "=" | INCLUDES | DASHMATCH ) S* ( IDENT | STRING ) S* )? "]" ;
