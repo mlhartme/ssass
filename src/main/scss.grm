@@ -24,7 +24,7 @@
  * in "media_list" rule: changed "COMMA" to ","
  * removed BAD_STRING and BAD_URI rules (with sub-rules) because Mork has no feature to report them as errors
  * removed BAD_COMMENT because Mork has no feature to accept it at EOF
-
+ * various helper symbols (starting with) added to add semantics
 */
 
 [PARSER]
@@ -39,7 +39,9 @@
            page ::= PAGE_SYM S* pseudo_page? "{" S* declaration? ( ";" S* declaration? )* "}" S* ;
     pseudo_page ::= ":" IDENT S* ;
        operator ::= "/" S* | "," S* ;
-     combinator ::= "+" S* | ">" S* ;
+     combinator ::= _plus | _gt ;
+          _plus ::= "+" S* ;
+            _gt ::= ">" S* ;
  unary_operator ::= "-" | "+" ;
        property ::= IDENT S* ;
         ruleset ::= selector ( "," S* selector )* "{" S* declaration? ( ";" S* declaration? )* "}" S* ;
