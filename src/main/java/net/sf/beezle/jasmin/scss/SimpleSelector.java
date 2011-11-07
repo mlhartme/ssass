@@ -1,4 +1,9 @@
 package net.sf.beezle.jasmin.scss;
 
-public abstract class SimpleSelector {
+public class SimpleSelector {
+    private BaseSelector[] bases;
+
+    public SimpleSelector(BaseSelector[] bases) {
+        this.bases = bases;
+    }
 }

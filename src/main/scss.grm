@@ -30,9 +30,9 @@
 [PARSER]
 
      stylesheet ::= ( CHARSET_SYM STRING ";" )? (S|CDO|CDC)*
-                    ( import ( CDO S* | CDC S* )* )*
+                    ( imprt ( CDO S* | CDC S* )* )*
                     ( (ruleset | media | page) (CDO S* | CDC S*)* )* ;
-         import ::= IMPORT_SYM S* (STRING|URI) S* media_list? ";" S* ;
+          imprt ::= IMPORT_SYM S* (STRING|URI) S* media_list? ";" S* ;
           media ::= MEDIA_SYM S* media_list "{" S* ruleset* "}" S* ;
      media_list ::= medium ( "," S* medium)* ;
          medium ::= IDENT S* ;
@@ -42,7 +42,9 @@
      combinator ::= _plus | _gt ;
           _plus ::= "+" S* ;
             _gt ::= ">" S* ;
- unary_operator ::= "-" | "+" ;
+ unary_operator ::= _unary_minus | _unary_plus ;
+    _unary_plus ::= "+" ;
+   _unary_minus ::= "-" ;
        property ::= IDENT S* ;
         ruleset ::= selector ( "," S* selector )* "{" S* declaration? ( ";" S* declaration? )* "}" S* ;
        selector ::= simple_selector ( combinator selector | S+ ( combinator? selector )? )? ;
