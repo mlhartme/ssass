@@ -6,10 +6,10 @@
     <version>1.0.5</version>
   </parent>
 
-  <name>Jasmin</name>
+  <name>Some SASS</name>
   <description>See ${project.url}.</description>
-  <url>https://sourceforge.net/apps/trac/beezle/wiki/Jasmin</url>
-  <inceptionYear>2008</inceptionYear>
+  <url>https://sourceforge.net/apps/trac/beezle/wiki/ssass</url>
+  <inceptionYear>2011</inceptionYear>
   <licenses>
     <license>
       <name>GNU Lesser General Public License, Version 2.1</name>
@@ -17,21 +17,21 @@
       <distribution>repo</distribution>
     </license>
   </licenses>
-  <groupId>net.sf.beezle.jasmin</groupId>
-  <artifactId>jasmin</artifactId>
+  <groupId>net.sf.beezle.ssass</groupId>
+  <artifactId>ssass</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <scm>
-    <connection>scm:svn:https://beezle.svn.sourceforge.net/svnroot/beezle/jasmin/trunk</connection>
-    <developerConnection>scm:svn:https://beezle.svn.sourceforge.net/svnroot/beezle/jasmin/trunk</developerConnection>
-    <url>http://beezle.svn.sourceforge.net/viewvc/beezle/jasmin/trunk</url>
+    <connection>scm:svn:https://beezle.svn.sourceforge.net/svnroot/beezle/ssass/trunk</connection>
+    <developerConnection>scm:svn:https://beezle.svn.sourceforge.net/svnroot/beezle/ssass/trunk</developerConnection>
+    <url>http://beezle.svn.sourceforge.net/viewvc/beezle/ssass/trunk</url>
   </scm>
 
   <distributionManagement>
     <site>
       <id>sourceforge</id>
-      <url>scp://shell.sourceforge.net/home/project-web/beezle/htdocs/jasmin/site</url>
+      <url>scp://shell.sourceforge.net/home/project-web/beezle/htdocs/ssass/site</url>
     </site>
   </distributionManagement>
 
@@ -78,7 +78,7 @@
         <version>1.3.4</version>
         <configuration>
           <name>scss</name>
-          <main>net.sf.beezle.jasmin.Main</main>
+          <main>net.sf.beezle.ssass.Main</main>
         </configuration>
         <executions>
           <execution>
