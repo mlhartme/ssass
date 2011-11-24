@@ -1,6 +1,8 @@
 package net.sf.beezle.ssass;
 
 import de.mlhartme.mork.mapping.Mapper;
+import net.sf.beezle.ssass.scss.Output;
+import net.sf.beezle.ssass.scss.Stylesheet;
 
 public class Main {
     public static void main(String[] args) {
@@ -10,7 +12,7 @@ public class Main {
         Object[] results;
 
         if (args.length == 0) {
-            System.out.println("usage: scss <filename>+");
+            System.out.println("usage: ssass <filename>+");
         } else {
             mapper = load();
             tmp = System.currentTimeMillis();
@@ -19,6 +21,8 @@ public class Main {
                 System.out.println(name + ":");
                 results = mapper.run(name);
                 if (results != null) {
+                    Stylesheet s = (Stylesheet) results[0];
+                    s.toCss(new Output());
                     ok++;
                 }
             }
@@ -34,7 +38,7 @@ public class Main {
 
         System.out.print("loading mapper ... ");
         tmp = System.currentTimeMillis();
-        mapper = new Mapper("ssass.Mapper");
+        mapper = new Mapper("net.sf.beezle.ssass.Mapper");
         System.out.println("done (" + (System.currentTimeMillis() - tmp) + " ms)");
         return mapper;
     }

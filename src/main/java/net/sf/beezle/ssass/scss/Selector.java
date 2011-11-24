@@ -1,6 +1,6 @@
 package net.sf.beezle.ssass.scss;
 
-public class Selector {
+public class Selector extends Base {
     private final SimpleSelector left;
 
     /* may be null */
@@ -11,5 +11,10 @@ public class Selector {
         this.left = left;
         this.combinator = combinator;
         this.right = right;
+    }
+
+    @Override
+    public void toCss(Output output) {
+        // TODO
     }
 }

@@ -6,4 +6,9 @@ public class Class extends BaseSelector {
     public Class(String name) {
         this.name = name;
     }
+
+    @Override
+    public void toCss(Output output) {
+        // TODO
+    }
 }

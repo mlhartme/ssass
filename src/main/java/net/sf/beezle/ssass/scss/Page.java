@@ -10,4 +10,9 @@ public class Page extends Statement {
         this.pseudoPage = pseudoPage;
         this.declarations = declarations;
     }
+
+    @Override
+    public void toCss(Output output) {
+        // TODO
+    }
 }

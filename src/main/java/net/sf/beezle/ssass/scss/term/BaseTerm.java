@@ -1,4 +1,6 @@
 package net.sf.beezle.ssass.scss.term;
 
-public abstract class BaseTerm {
+import net.sf.beezle.ssass.scss.Base;
+
+public abstract class BaseTerm extends Base {
 }

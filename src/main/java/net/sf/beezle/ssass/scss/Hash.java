@@ -6,4 +6,9 @@ public class Hash extends BaseSelector {
     public Hash(String hash) {
         this.hash = hash;
     }
+
+    @Override
+    public void toCss(Output output) {
+        // TODO
+    }
 }

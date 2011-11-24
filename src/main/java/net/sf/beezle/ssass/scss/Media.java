@@ -8,4 +8,9 @@ public class Media extends Statement {
         this.mediaList = mediaList;
         this.rulesets = rulesets;
     }
+
+    @Override
+    public void toCss(Output output) {
+        // TODO
+    }
 }

@@ -12,4 +12,9 @@ public class Pseudo extends BaseSelector {
         this.function = function;
         this.name = name;
     }
+
+    @Override
+    public void toCss(Output output) {
+        // TODO
+    }
 }

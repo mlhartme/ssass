@@ -1,6 +1,6 @@
 package net.sf.beezle.ssass.scss;
 
-public class Declaration {
+public class Declaration extends Base {
     private final String property;
     private final Expr expr;
     private final Prio prio;
@@ -9,5 +9,10 @@ public class Declaration {
         this.property = property;
         this.expr = expr;
         this.prio = prio;
+    }
+
+    @Override
+    public void toCss(Output output) {
+        // TODO
     }
 }

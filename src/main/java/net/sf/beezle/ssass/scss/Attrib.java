@@ -8,4 +8,9 @@ public class Attrib extends BaseSelector {
         this.name = name;
         this.value = value;
     }
+
+    @Override
+    public void toCss(Output output) {
+        // TODO
+    }
 }

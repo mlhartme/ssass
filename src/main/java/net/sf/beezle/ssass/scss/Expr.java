@@ -3,7 +3,7 @@ package net.sf.beezle.ssass.scss;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Expr {
+public class Expr extends Base {
     private final List<Operator> ops;
     private final List<Term> terms;
 
@@ -25,5 +25,10 @@ public class Expr {
                 throw new IllegalStateException(obj.getClass().getName());
             }
         }
+    }
+
+    @Override
+    public void toCss(Output output) {
+        // TODO
     }
 }

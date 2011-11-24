@@ -15,9 +15,9 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-mapper jasmin.Mapper;
+mapper net.sf.beezle.ssass.Mapper;
 
-grm = "scss.grm";
+grm = "ssass.grm";
 
 import net.sf.beezle.ssass.scss:
     Attrib, Class, Combinator, Declaration, ElementName, Expr, Hash, Import, Media,

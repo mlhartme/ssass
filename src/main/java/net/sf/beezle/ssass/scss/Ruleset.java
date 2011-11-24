@@ -8,4 +8,9 @@ public class Ruleset extends Statement {
         this.selectors = selectors;
         this.declarations = declarations;
     }
+
+    @Override
+    public void toCss(Output output) {
+        // TODO
+    }
 }
