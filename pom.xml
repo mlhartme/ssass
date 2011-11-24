@@ -39,7 +39,7 @@
     <dependency>
       <groupId>de.mlhartme.mork</groupId>
       <artifactId>mork</artifactId>
-      <version>0.6.4</version>
+      <version>0.6.5-SNAPSHOT</version>
     </dependency>
   </dependencies>
   <build>
