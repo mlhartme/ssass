@@ -19,11 +19,11 @@ mapper jasmin.Mapper;
 
 grm = "scss.grm";
 
-import net.sf.beezle.jasmin.scss:
+import net.sf.beezle.ssass.scss:
     Attrib, Class, Combinator, Declaration, ElementName, Expr, Hash, Import, Media,
     Operator, Page, Pseudo, Term, Prio, Ruleset, Selector, SimpleSelector, Stylesheet, UnaryOperator;
 
-import net.sf.beezle.jasmin.scss.term:
+import net.sf.beezle.ssass.scss.term:
     Angle, Ems, Exs, Freq, Function, Hexcolor, Ident, Length, Number, Percentage, Strng, Time, Uri;
 
 stylesheet => Stylesheet;
