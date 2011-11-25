@@ -10,6 +10,7 @@ public class Main {
         int ok;
         long tmp;
         Stylesheet s;
+        Output output;
 
         if (args.length == 0) {
             System.out.println("usage: ssass <filename>+");
@@ -21,7 +22,9 @@ public class Main {
                 System.out.println(name + ":");
                 s = parse(mapper, name);
                 if (s != null) {
-                    s.toCss(new Output());
+                    output = new Output();
+                    s.toCss(output);
+                    System.out.println(output.toString());
                     ok++;
                 }
             }
