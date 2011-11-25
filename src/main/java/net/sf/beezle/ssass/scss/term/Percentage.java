@@ -11,6 +11,6 @@ public class Percentage extends BaseTerm {
 
     @Override
     public void toCss(Output output) {
-        // TODO
+        output.string(percentage);
     }
 }

@@ -83,6 +83,15 @@ public class SsassTest {
     }
 
     @Test
+    public void function() throws IOException {
+        check(
+                "p:before {",
+                "counter-increment: paras 1;",
+                "content: \"New Paragraph: \" counter(paras,decimal) \": \"",
+                "}");
+    }
+
+    @Test
     public void todo() throws IOException {
         check();
     }

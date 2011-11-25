@@ -11,6 +11,6 @@ public class Angle extends BaseTerm {
 
     @Override
     public void toCss(Output output) {
-        // TODO
+        output.string(angle);
     }
 }

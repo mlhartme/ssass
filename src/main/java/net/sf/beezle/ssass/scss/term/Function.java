@@ -14,6 +14,6 @@ public class Function extends BaseTerm {
 
     @Override
     public void toCss(Output output) {
-        // TODO
+        output.object(name, expr, ")");
     }
 }

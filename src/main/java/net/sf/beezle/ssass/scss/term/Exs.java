@@ -11,6 +11,6 @@ public class Exs extends BaseTerm {
 
     @Override
     public void toCss(Output output) {
-        // TODO
+        output.string(emx);
     }
 }

@@ -15,6 +15,11 @@ public class Pseudo extends BaseSelector {
 
     @Override
     public void toCss(Output output) {
-        // TODO
+        output.string(":");
+        if (function == null) {
+            output.string(name);
+        } else {
+            output.string(function, name, ")");
+        }
     }
 }
