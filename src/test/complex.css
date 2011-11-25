@@ -1,0 +1,54 @@
+#frame {
+float: right;
+width: 625px;
+margin: 35px 0 0 0;
+padding: 5px 0 0 0;
+text-align: left
+}
+#container {
+width: 900px
+}
+#content {
+position: relative
+}
+body.orderprocess #frame {
+padding-left: 0
+}
+#content .container_box {
+padding-left: 0;
+padding-right: 20px
+}
+#content .container_box .submit {
+margin-top: 2px;
+text-align: right
+}
+#content .errorbox {
+margin-top: 0 !important
+}
+#content .container_box .container_form div.info div#info\.desiredDate\.now-true {
+background-position: 23px 65px !important
+}
+#content .standardcart {
+width: 600px
+}
+.bottomspace {
+padding-bottom: 40px
+}
+body.orderprocess #content, body.cancelconfirm #content, body.enterpasswordandmediacode #content, body.enterpassword #content, body.costs #content, body.entermediacode #content {
+background: 0 none;
+background-color: #ffffff
+}
+h2 {
+font-weight: bold
+}
+@media print {
+#menu {
+display: none !important
+}
+#content .container_box {
+padding: 0 !important
+}
+#frame {
+float: none
+}
+}

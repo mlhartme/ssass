@@ -113,8 +113,16 @@ public class SsassTest {
     }
 
     @Test
-    public void todo() throws IOException {
-        check();
+    public void complex() throws IOException {
+        FileNode src;
+        Stylesheet s;
+        Output output;
+
+        src = world.guessProjectHome(getClass()).join("src/test/complex.css");
+        s = Main.parse(mapper, src.getAbsolute());
+        output = new Output();
+        s.toCss(output);
+        assertEquals(src.readString(), output.toString());
     }
 
     private void check(String ... lines) throws IOException {
