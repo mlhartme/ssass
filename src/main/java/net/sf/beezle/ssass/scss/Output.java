@@ -33,6 +33,13 @@ public class Output {
         }
     }
 
+    public void open() {
+        builder.append(" {\n");
+    }
+    public void close() {
+        builder.append("}\n");
+    }
+
     @Override
     public String toString() {
         return builder.toString();

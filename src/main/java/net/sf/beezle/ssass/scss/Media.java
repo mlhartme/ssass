@@ -24,8 +24,8 @@ public class Media extends Statement {
             }
             output.string(medium);
         }
-        output.string(" {\n");
+        output.open();
         output.base(rulesets);
-        output.string("}\n");
+        output.close();
     }
 }

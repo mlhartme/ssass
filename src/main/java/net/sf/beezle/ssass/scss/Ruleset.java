@@ -22,7 +22,7 @@ public class Ruleset extends Statement {
             }
             selector.toCss(output);
         }
-        output.string(" {\n");
+        output.open();
         first = true;
         for (Declaration declaration : declarations) {
             if (first) {
@@ -32,6 +32,7 @@ public class Ruleset extends Statement {
             }
             declaration.toCss(output);
         }
-        output.string("\n}\n");
+        output.string("\n");
+        output.close();
     }
 }

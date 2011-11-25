@@ -19,7 +19,7 @@ public class Page extends Statement {
         if (pseudoPage != null) {
             output.string(" :", pseudoPage);
         }
-        output.string(" {\n");
+        output.open();
         first = true;
         for (Declaration declaration : declarations) {
             if (first) {
@@ -29,6 +29,7 @@ public class Page extends Statement {
             }
             declaration.toCss(output);
         }
-        output.string("\n}\n");
+        output.string("\n");
+        output.close();
     }
 }
