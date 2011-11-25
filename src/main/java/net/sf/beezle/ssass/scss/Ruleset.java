@@ -18,7 +18,8 @@ public class Ruleset extends Statement {
             if (first) {
                 first = false;
             } else {
-                output.string(", ");
+                output.string(",");
+                output.spaceOpt();
             }
             selector.toCss(output);
         }

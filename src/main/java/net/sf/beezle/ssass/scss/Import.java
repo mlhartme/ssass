@@ -20,7 +20,8 @@ public class Import extends Base {
                 output.string(" ");
                 first = false;
             } else {
-                output.string(", ");
+                output.string(",");
+                output.spaceOpt();
             }
             output.string(medium);
         }

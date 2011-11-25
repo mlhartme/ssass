@@ -13,7 +13,13 @@ public class Declaration extends Base {
 
     @Override
     public void toCss(Output output) {
-        output.object(property, ": ", expr, prio);
+        output.object(property, ":");
+        output.spaceOpt();
+        output.object(expr);
+        if (prio != null) {
+            output.spaceOpt();
+            output.base(prio);
+        }
     }
 
     public static void toCss(Declaration[] declarations, Output output) {

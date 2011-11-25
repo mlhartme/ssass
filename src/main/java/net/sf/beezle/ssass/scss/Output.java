@@ -1,14 +1,33 @@
 package net.sf.beezle.ssass.scss;
 
 public class Output {
+    public static String compress(Stylesheet s) {
+        return toCss(s, true);
+    }
+    public static String prettyprint(Stylesheet s) {
+        return toCss(s, false);
+    }
+
+    public static String toCss(Stylesheet s, boolean compress) {
+        Output output;
+
+        output = new Output(compress);
+        s.toCss(output);
+        return output.toString();
+    }
+
+    //--
+
+    private final boolean compress;
     private final StringBuilder builder;
     private boolean first;
     private int indent;
 
-    public Output() {
-        builder = new StringBuilder();
-        first = true;
-        indent = 0;
+    public Output(boolean compress) {
+        this.compress = compress;
+        this.builder = new StringBuilder();
+        this.first = true;
+        this.indent = 0;
     }
 
     public void object(Object ... objs) {
@@ -44,7 +63,7 @@ public class Output {
     }
 
     public void open() {
-        builder.append(" {\n");
+        builder.append(compress ? "{" : " {\n");
         indent++;
         first = true;
     }
@@ -52,21 +71,34 @@ public class Output {
     public void close() {
         indent--;
         indent();
-        builder.append("}\n");
+        builder.append(compress ? "}" : "}\n");
         first = true;
     }
 
     public void semicolon() {
-        builder.append(";\n");
+        builder.append(compress ? ";" : ";\n");
         first = true;
     }
 
     public void semicolonOpt() {
-        builder.append("\n");
+        if (!compress) {
+            builder.append("\n");
+        } else {
+            builder.append(';'); // TODO: why?
+        }
         first = true;
     }
 
+    public void spaceOpt() {
+        if (!compress) {
+            builder.append(' ');
+        }
+    }
+
     private void indent() {
+        if (compress) {
+            return;
+        }
         for (int i = 0; i < indent; i++) {
             builder.append("  ");
         }

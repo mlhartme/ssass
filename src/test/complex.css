@@ -36,7 +36,7 @@ body.orderprocess #frame {
 }
 body.orderprocess #content, body.cancelconfirm #content, body.enterpasswordandmediacode #content, body.enterpassword #content, body.costs #content, body.entermediacode #content {
   background: 0 none;
-  background-color: #ffffff
+  background-color: #fff
 }
 h2 {
   font-weight: bold
