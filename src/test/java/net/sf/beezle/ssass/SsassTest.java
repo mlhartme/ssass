@@ -65,6 +65,24 @@ public class SsassTest {
     }
 
     @Test
+    public void page() throws IOException {
+        check(
+                "@page {",
+                "size: 21.0cm 14.85cm;",
+                "margin-top: 1.5cm;",
+                "margin-bottom: 2cm",
+                "}",
+                "@page :left {",
+                "margin-left: 1.5cm;",
+                "margin-right: 2cm",
+                "}",
+                "@page :right {",
+                "margin-left: 2cm;",
+                "margin-right: 1.5cm",
+                "}");
+    }
+
+    @Test
     public void todo() throws IOException {
         check();
     }

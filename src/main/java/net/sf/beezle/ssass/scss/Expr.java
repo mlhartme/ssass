@@ -31,14 +31,21 @@ public class Expr extends Base {
 
     @Override
     public void toCss(Output output) {
+        Object last;
+
+        last = null;
         for (Object obj : opsOrTerms) {
             if (obj instanceof Term) {
+                if (last != null && !(last instanceof Operator)) {
+                    output.string(" ");
+                }
                 output.base((Term) obj);
             } else if (obj instanceof Operator) {
                 output.string(obj.toString());
             } else {
                 throw new IllegalArgumentException("" + obj);
             }
+            last = obj;
         }
     }
 }
