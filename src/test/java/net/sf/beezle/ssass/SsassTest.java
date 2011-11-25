@@ -83,6 +83,13 @@ public class SsassTest {
     }
 
     @Test
+    public void pseudoFunctionSelector() throws IOException {
+        check(
+                "tr:nth-child(odd) td {",
+                "background: #C1B49A",
+                "}");
+    }
+    @Test
     public void function() throws IOException {
         check(
                 "p:before {",
