@@ -55,7 +55,10 @@ simple_selector ::= element_name ( _hash | class | attrib | pseudo )*
           _hash ::= HASH ;
           class ::= "." IDENT ;
    element_name ::= IDENT | "*" ;
-         attrib ::= "[" S* IDENT S* ( ( "=" | INCLUDES | DASHMATCH ) S* ( IDENT | STRING ) S* )? "]" ;
+         attrib ::= "[" S* IDENT S* ( ( _eq | _includes | _dashmatch ) S* ( IDENT | STRING ) S* )? "]" ;
+            _eq ::= "=" ;
+      _includes ::= INCLUDES ;
+     _dashmatch ::= DASHMATCH ;
          pseudo ::= ":" ( _pseudo1 | _pseudo2 ) ;
        _pseudo1 ::= IDENT ;
        _pseudo2 ::= FUNCTION S* (IDENT S*)? ")" ;

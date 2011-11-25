@@ -20,7 +20,7 @@ mapper net.sf.beezle.ssass.Mapper;
 grm = "ssass.grm";
 
 import net.sf.beezle.ssass.scss:
-    Attrib, Class, Combinator, Declaration, ElementName, Expr, Hash, Import, Media,
+    Attrib, AttribOp, Class, Combinator, Declaration, ElementName, Expr, Hash, Import, Media,
     Operator, Page, Pseudo, Term, Prio, Ruleset, Selector, SimpleSelector, Stylesheet, UnaryOperator;
 
 import net.sf.beezle.ssass.scss.term:
@@ -43,6 +43,9 @@ _hash => Hash;
 class => Class;
 element_name => ElementName;
 attrib => Attrib;
+_eq => AttribOp.EQ;
+_includes => AttribOp.INCLUDES;
+_dashmatch => AttribOp.DASHMATCH;
 _pseudo1 => Pseudo;
 _pseudo2 => Pseudo;
 declaration => Declaration;

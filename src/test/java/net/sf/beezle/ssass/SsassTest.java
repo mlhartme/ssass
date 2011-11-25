@@ -99,6 +99,20 @@ public class SsassTest {
     }
 
     @Test
+    public void attrib() throws IOException {
+        check(
+                "foo[bar=\"x\"] {",
+                "background-color: yellow",
+                "}",
+                "a[title~=Web] {",
+                "background-color: yellow",
+                "}",
+                "[lang|=fr] {",
+                "background-color: grey",
+                "}");
+    }
+
+    @Test
     public void todo() throws IOException {
         check();
     }
