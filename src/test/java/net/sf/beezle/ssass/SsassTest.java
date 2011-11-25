@@ -13,12 +13,17 @@ import java.io.IOException;
 import static org.junit.Assert.assertEquals;
 
 public class SsassTest {
-    private World world = new World();
-    private Mapper mapper = Main.load();
+    private static final World world = new World();
+    private static final Mapper mapper = Main.load();
 
     @Test
     public void empty() throws IOException {
         check();
+    }
+
+    @Test
+    public void charset() throws IOException {
+        check("@charset \"ISO-8859-1\";");
     }
 
     @Test
