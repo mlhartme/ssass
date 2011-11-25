@@ -32,6 +32,6 @@ public class Ruleset extends Statement {
             }
             declaration.toCss(output);
         }
-        output.string("\n}");
+        output.string("\n}\n");
     }
 }

@@ -11,6 +11,21 @@ public class Media extends Statement {
 
     @Override
     public void toCss(Output output) {
-        // TODO
+        boolean first;
+
+        output.string("@media");
+        first = true;
+        for (String medium : mediaList) {
+            if (first) {
+                output.string(" ");
+                first = false;
+            } else {
+                output.string(", ");
+            }
+            output.string(medium);
+        }
+        output.string(" {\n");
+        output.base(rulesets);
+        output.string("}\n");
     }
 }

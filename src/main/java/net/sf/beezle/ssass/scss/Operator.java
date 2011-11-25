@@ -9,4 +9,9 @@ public class Operator {
     private Operator(char code) {
         this.code = code;
     }
+
+    @Override
+    public String toString() {
+        return String.valueOf(code);
+    }
 }

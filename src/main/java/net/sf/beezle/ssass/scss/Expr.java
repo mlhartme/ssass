@@ -31,6 +31,14 @@ public class Expr extends Base {
 
     @Override
     public void toCss(Output output) {
-        output.object(opsOrTerms);
+        for (Object obj : opsOrTerms) {
+            if (obj instanceof Term) {
+                output.base((Term) obj);
+            } else if (obj instanceof Operator) {
+                output.string(obj.toString());
+            } else {
+                throw new IllegalArgumentException("" + obj);
+            }
+        }
     }
 }

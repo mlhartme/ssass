@@ -9,6 +9,6 @@ public class Class extends BaseSelector {
 
     @Override
     public void toCss(Output output) {
-        // TODO
+        output.string(".", name);
     }
 }

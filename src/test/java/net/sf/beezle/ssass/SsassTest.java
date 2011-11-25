@@ -36,10 +36,32 @@ public class SsassTest {
 
     @Test
     public void ruleset() throws IOException {
-        check("p {\n" +
-              "margin-top: abc;\n" +
-              "margin-right: xyz !important\n" +
+        check("p {",
+              "margin-top: abc;",
+              "margin-right: xyz !important",
               "}");
+    }
+
+    @Test
+    public void media() throws IOException {
+        check(
+                "@media print {",
+                "p {",
+                "font-family: Arial,Helvetica,sans-serif;",
+                "font-size: 11px;",
+                "font-weight: bold",
+                "}",
+                "}",
+                "@media screen {",
+                "p {",
+                "font-family: Arial,Helvetica,sans-serif;",
+                "font-size: 11px;",
+                "font-weight: bold",
+                "}",
+                "p.print {",
+                "display: none",
+                "}",
+                "}");
     }
 
     @Test
