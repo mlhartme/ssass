@@ -15,6 +15,6 @@ public class Selector extends Base {
 
     @Override
     public void toCss(Output output) {
-        // TODO
+        output.object(left, combinator, right);
     }
 }

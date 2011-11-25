@@ -35,7 +35,15 @@ public class SsassTest {
     }
 
     @Test
-    public void media() throws IOException {
+    public void ruleset() throws IOException {
+        check("p {\n" +
+              "margin-top: abc;\n" +
+              "margin-right: xyz !important\n" +
+              "}");
+    }
+
+    @Test
+    public void todo() throws IOException {
         check();
     }
 

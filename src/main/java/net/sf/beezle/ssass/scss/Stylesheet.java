@@ -14,15 +14,9 @@ public class Stylesheet extends Base {
     @Override
     public void toCss(Output output) {
         if (charset != null) {
-            output.write("@charset ");
-            output.write(charset);
-            output.write(";\n");
+            output.string("@charset ", charset, ";\n");
         }
-        for (Import imp : imports) {
-            imp.toCss(output);
-        }
-        for (Statement statement : statements) {
-            statement.toCss(output);
-        }
+        output.base(imports);
+        output.base(statements);
     }
 }

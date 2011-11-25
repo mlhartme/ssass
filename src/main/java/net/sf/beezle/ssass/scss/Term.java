@@ -3,6 +3,7 @@ package net.sf.beezle.ssass.scss;
 import net.sf.beezle.ssass.scss.term.BaseTerm;
 
 public class Term extends Base {
+    /** may be null */
     private final UnaryOperator unary;
     private final BaseTerm baseTerm;
 
@@ -17,6 +18,9 @@ public class Term extends Base {
 
     @Override
     public void toCss(Output output) {
-        // TODO
+        if (unary != null) {
+            output.string(unary.toString());
+        }
+        baseTerm.toCss(output);
     }
 }

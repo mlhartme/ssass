@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Expr extends Base {
+    private final Object[] opsOrTerms;  // TODO: redundant
     private final List<Operator> ops;
     private final List<Term> terms;
 
@@ -11,6 +12,7 @@ public class Expr extends Base {
     public Expr(Object[] opsOrTerms) {
         Object obj;
 
+        this.opsOrTerms = opsOrTerms;
         this.ops = new ArrayList<Operator>();
         this.terms = new ArrayList<Term>();
         for (int i = 0; i < opsOrTerms.length; i++) {
@@ -29,6 +31,6 @@ public class Expr extends Base {
 
     @Override
     public void toCss(Output output) {
-        // TODO
+        output.object(opsOrTerms);
     }
 }

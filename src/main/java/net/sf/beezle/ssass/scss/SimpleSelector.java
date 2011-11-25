@@ -11,6 +11,6 @@ public class SimpleSelector extends Base {
 
     @Override
     public void toCss(Output output) {
-        // TODO
+        output.base(bases);
     }
 }

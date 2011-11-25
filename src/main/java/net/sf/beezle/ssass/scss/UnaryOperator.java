@@ -9,4 +9,8 @@ public class UnaryOperator {
     private UnaryOperator(char code) {
         this.code = code;
     }
+
+    public String toString() {
+        return String.valueOf(code);
+    }
 }

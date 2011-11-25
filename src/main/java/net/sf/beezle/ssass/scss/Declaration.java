@@ -13,6 +13,6 @@ public class Declaration extends Base {
 
     @Override
     public void toCss(Output output) {
-        // TODO
+        output.object(property, ": ", expr, prio);
     }
 }

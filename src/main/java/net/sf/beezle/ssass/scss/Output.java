@@ -7,8 +7,30 @@ public class Output {
         builder = new StringBuilder();
     }
 
-    public void write(String str) {
-        builder.append(str);
+    public void object(Object ... objs) {
+        for (Object obj : objs) {
+            if (obj instanceof String) {
+                string((String) obj);
+            } else if (obj instanceof Base) {
+                base((Base) obj);
+            } else if (obj == null) {
+                //
+            } else {
+                throw new IllegalArgumentException(obj.getClass().toString());
+            }
+        }
+    }
+
+
+    public void string(String ... strs) {
+        for (String str : strs) {
+            builder.append(str);
+        }
+    }
+    public void base(Base ... bases) {
+        for (Base base : bases) {
+            base.toCss(this);
+        }
     }
 
     @Override

@@ -13,18 +13,17 @@ public class Import extends Base {
     public void toCss(Output output) {
         boolean first;
 
-        output.write("@import ");
-        output.write(src);
+        output.string("@import ", src);
         first = true;
         for (String medium : mediaList) {
             if (first) {
-                output.write(" ");
+                output.string(" ");
                 first = false;
             } else {
-                output.write(", ");
+                output.string(", ");
             }
-            output.write(medium);
+            output.string(medium);
         }
-        output.write(";\n");
+        output.string(";\n");
     }
 }
