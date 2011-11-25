@@ -9,7 +9,7 @@ public class Main {
         Mapper mapper;
         int ok;
         long tmp;
-        Object[] results;
+        Stylesheet s;
 
         if (args.length == 0) {
             System.out.println("usage: ssass <filename>+");
@@ -19,9 +19,8 @@ public class Main {
             ok = 0;
             for (String name : args) {
                 System.out.println(name + ":");
-                results = mapper.run(name);
-                if (results != null) {
-                    Stylesheet s = (Stylesheet) results[0];
+                s = parse(mapper, name);
+                if (s != null) {
                     s.toCss(new Output());
                     ok++;
                 }
@@ -32,7 +31,14 @@ public class Main {
         }
     }
 
-    private static Mapper load() {
+    public static Stylesheet parse(Mapper mapper, String file) {
+        Object[] results;
+
+        results = mapper.run(file);
+        return results == null ? null : (Stylesheet) results[0];
+    }
+
+    public static Mapper load() {
         Mapper mapper;
         long tmp;
 

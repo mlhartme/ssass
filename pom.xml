@@ -39,7 +39,13 @@
     <dependency>
       <groupId>de.mlhartme.mork</groupId>
       <artifactId>mork</artifactId>
-      <version>0.6.5-SNAPSHOT</version>
+      <version>0.6.4</version>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.10</version>
+      <scope>test</scope>
     </dependency>
   </dependencies>
   <build>
