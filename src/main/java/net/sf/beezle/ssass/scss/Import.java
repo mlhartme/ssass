@@ -24,6 +24,6 @@ public class Import extends Base {
             }
             output.string(medium);
         }
-        output.string(";\n");
+        output.semicolon();
     }
 }

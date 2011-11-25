@@ -14,7 +14,8 @@ public class Stylesheet extends Base {
     @Override
     public void toCss(Output output) {
         if (charset != null) {
-            output.string("@charset ", charset, ";\n");
+            output.string("@charset ", charset);
+            output.semicolon();
         }
         output.base(imports);
         output.base(statements);

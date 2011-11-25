@@ -39,6 +39,9 @@ public class Output {
     public void close() {
         builder.append("}\n");
     }
+    public void semicolon() {
+        builder.append(";\n");
+    }
 
     @Override
     public String toString() {

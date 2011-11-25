@@ -28,7 +28,7 @@ public class Ruleset extends Statement {
             if (first) {
                 first = false;
             } else {
-                output.string(";\n");
+                output.semicolon();
             }
             declaration.toCss(output);
         }
