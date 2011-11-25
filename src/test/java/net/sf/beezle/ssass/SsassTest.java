@@ -37,8 +37,8 @@ public class SsassTest {
     @Test
     public void ruleset() throws IOException {
         check("p {",
-              "margin-top: abc;",
-              "margin-right: xyz !important",
+              "  margin-top: abc;",
+              "  margin-right: xyz !important",
               "}");
     }
 
@@ -46,21 +46,21 @@ public class SsassTest {
     public void media() throws IOException {
         check(
                 "@media print {",
-                "p {",
-                "font-family: Arial,Helvetica,sans-serif;",
-                "font-size: 11px;",
-                "font-weight: bold",
-                "}",
+                "  p {",
+                "    font-family: Arial,Helvetica,sans-serif;",
+                "    font-size: 11px;",
+                "    font-weight: bold",
+                "  }",
                 "}",
                 "@media screen {",
-                "p {",
-                "font-family: Arial,Helvetica,sans-serif;",
-                "font-size: 11px;",
-                "font-weight: bold",
-                "}",
-                "p.print {",
-                "display: none",
-                "}",
+                "  p {",
+                "    font-family: Arial,Helvetica,sans-serif;",
+                "    font-size: 11px;",
+                "    font-weight: bold",
+                "  }",
+                "  p.print {",
+                "    display: none",
+                "  }",
                 "}");
     }
 
@@ -68,17 +68,17 @@ public class SsassTest {
     public void page() throws IOException {
         check(
                 "@page {",
-                "size: 21.0cm 14.85cm;",
-                "margin-top: 1.5cm;",
-                "margin-bottom: 2cm",
+                "  size: 21.0cm 14.85cm;",
+                "  margin-top: 1.5cm;",
+                "  margin-bottom: 2cm",
                 "}",
                 "@page :left {",
-                "margin-left: 1.5cm;",
-                "margin-right: 2cm",
+                "  margin-left: 1.5cm;",
+                "  margin-right: 2cm",
                 "}",
                 "@page :right {",
-                "margin-left: 2cm;",
-                "margin-right: 1.5cm",
+                "  margin-left: 2cm;",
+                "  margin-right: 1.5cm",
                 "}");
     }
 
@@ -86,15 +86,15 @@ public class SsassTest {
     public void pseudoFunctionSelector() throws IOException {
         check(
                 "tr:nth-child(odd) td {",
-                "background: #C1B49A",
+                "  background: #C1B49A",
                 "}");
     }
     @Test
     public void function() throws IOException {
         check(
                 "p:before {",
-                "counter-increment: paras 1;",
-                "content: \"New Paragraph: \" counter(paras,decimal) \": \"",
+                "  counter-increment: paras 1;",
+                "  content: \"New Paragraph: \" counter(paras,decimal) \": \"",
                 "}");
     }
 
@@ -102,13 +102,13 @@ public class SsassTest {
     public void attrib() throws IOException {
         check(
                 "foo[bar=\"x\"] {",
-                "background-color: yellow",
+                "  background-color: yellow",
                 "}",
                 "a[title~=Web] {",
-                "background-color: yellow",
+                "  background-color: yellow",
                 "}",
                 "[lang|=fr] {",
-                "background-color: grey",
+                "  background-color: grey",
                 "}");
     }
 
