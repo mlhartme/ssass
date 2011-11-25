@@ -33,15 +33,25 @@ public class Output {
         }
     }
 
+    //--
+
     public void open() {
         builder.append(" {\n");
     }
+
     public void close() {
         builder.append("}\n");
     }
+
     public void semicolon() {
         builder.append(";\n");
     }
+
+    public void semicolonOpt() {
+        builder.append("\n");
+    }
+
+    //--
 
     @Override
     public String toString() {

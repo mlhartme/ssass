@@ -15,4 +15,21 @@ public class Declaration extends Base {
     public void toCss(Output output) {
         output.object(property, ": ", expr, prio);
     }
+
+    public static void toCss(Declaration[] declarations, Output output) {
+        boolean first;
+
+        output.open();
+        first = true;
+        for (Declaration declaration : declarations) {
+            if (first) {
+                first = false;
+            } else {
+                output.semicolon();
+            }
+            declaration.toCss(output);
+        }
+        output.semicolonOpt();
+        output.close();
+    }
 }

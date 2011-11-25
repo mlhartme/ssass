@@ -13,23 +13,10 @@ public class Page extends Statement {
 
     @Override
     public void toCss(Output output) {
-        boolean first;
-
         output.string("@page");
         if (pseudoPage != null) {
             output.string(" :", pseudoPage);
         }
-        output.open();
-        first = true;
-        for (Declaration declaration : declarations) {
-            if (first) {
-                first = false;
-            } else {
-                output.semicolon();
-            }
-            declaration.toCss(output);
-        }
-        output.string("\n");
-        output.close();
+        Declaration.toCss(declarations, output);
     }
 }
