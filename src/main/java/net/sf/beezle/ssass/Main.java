@@ -1,6 +1,6 @@
 package net.sf.beezle.ssass;
 
-import de.mlhartme.mork.mapping.Mapper;
+import net.sf.beezle.mork.mapping.Mapper;
 import net.sf.beezle.ssass.scss.Output;
 import net.sf.beezle.ssass.scss.Stylesheet;
 

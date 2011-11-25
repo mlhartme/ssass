@@ -1,11 +1,13 @@
 package net.sf.beezle.ssass;
 
 import com.yahoo.platform.yui.compressor.CssCompressor;
-import de.mlhartme.mork.mapping.Mapper;
+import net.sf.beezle.mork.mapping.Mapper;
 import net.sf.beezle.ssass.scss.Output;
 import net.sf.beezle.ssass.scss.Stylesheet;
 import net.sf.beezle.sushi.fs.World;
 import net.sf.beezle.sushi.fs.file.FileNode;
+import net.sf.beezle.sushi.io.OS;
+import net.sf.beezle.sushi.util.Separator;
 import net.sf.beezle.sushi.util.Strings;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -154,7 +156,7 @@ public class SsassTest {
         FileNode tmp;
         Stylesheet s;
 
-        orig = Strings.join("\n", lines);
+        orig = OS.CURRENT.lineSeparator.join(lines);
         tmp = (FileNode) world.getTemp().createTempFile().writeLines(lines);
         s = Main.parse(mapper, tmp.getAbsolute());
         tmp.delete();
