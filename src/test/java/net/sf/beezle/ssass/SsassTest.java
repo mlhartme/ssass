@@ -30,8 +30,13 @@ public class SsassTest {
     public void imports() throws IOException {
         check(
                 "@import url('/css/typography.css');",
-                "@import url('/css/layout.css');",
-                "@import url('/css/color.css');");
+                "@import url('/css/layout.css') print;",
+                "@import url('/css/color.css') foo, bar;");
+    }
+
+    @Test
+    public void media() throws IOException {
+        check();
     }
 
     private void check(String ... lines) throws IOException {

@@ -11,10 +11,18 @@ public class Import extends Base {
 
     @Override
     public void toCss(Output output) {
+        boolean first;
+
         output.write("@import ");
         output.write(src);
+        first = true;
         for (String medium : mediaList) {
-            output.write(" ");
+            if (first) {
+                output.write(" ");
+                first = false;
+            } else {
+                output.write(", ");
+            }
             output.write(medium);
         }
         output.write(";\n");
