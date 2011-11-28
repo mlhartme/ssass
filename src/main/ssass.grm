@@ -24,14 +24,16 @@
  * in "media_list" rule: changed "COMMA" to ","
  * removed BAD_STRING and BAD_URI rules (with sub-rules) because Mork has no feature to report them as errors
  * removed BAD_COMMENT because Mork has no feature to accept it at EOF
- * various helper symbols (starting with) added to add semantics
+ * various helper symbols (starting with_) added to add semantics
+ * additional symbols for sass end with _
 */
 
 [PARSER]
 
      stylesheet ::= ( CHARSET_SYM STRING ";" )? (S|CDO|CDC)*
                     ( imprt ( CDO S* | CDC S* )* )*
-                    ( (ruleset | media | page) (CDO S* | CDC S*)* )* ;
+                    variables_
+                    ( (ruleset | media | page ) (CDO S* | CDC S*)* )* ;
           imprt ::= IMPORT_SYM S* (STRING|URI) S* media_list? ";" S* ;
           media ::= MEDIA_SYM S* media_list "{" S* ruleset* "}" S* ;
      media_list ::= medium ( "," S* medium )* ;
@@ -66,7 +68,7 @@ simple_selector ::= element_name ( _hash | class | attrib | pseudo )*
            prio ::= IMPORTANT_SYM S* ;
            expr ::= term ( operator? term )* ;
            term ::= _term1 | _term2 ;
-         _term1 ::= unary_operator? ( _number S* | _percentage S* | _length S* | _ems S* | _exs S* | _angle S* | _time S* | _freq S* );
+         _term1 ::= unary_operator? ( _number S* | _percentage S* | _length S* | _ems S* | _exs S* | _angle S* | _time S* | _freq S* | reference_ S* );
          _term2 ::= _string S* | _ident S* | _uri S* | hexcolor | function ;
         _number ::= NUMBER ;
     _percentage ::= PERCENTAGE ;
@@ -78,9 +80,16 @@ simple_selector ::= element_name ( _hash | class | attrib | pseudo )*
           _freq ::= FREQ ;
         _string ::= STRING ;
          _ident ::= IDENT ;
-           _uri ::= URI;
+           _uri ::= URI ;
        function ::= FUNCTION S* expr ")" S* ;
        hexcolor ::= HASH S* ;
+
+# sass addtions
+
+     variables_ ::= variable_* ;
+      variable_ ::= "$" IDENT S* ":" S* _string ";" S*; # TODO: expr
+     reference_ ::= "$" IDENT ;
+
 
 [SCANNER]
     white = comment ;
