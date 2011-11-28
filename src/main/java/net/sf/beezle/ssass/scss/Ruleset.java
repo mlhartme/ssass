@@ -1,5 +1,7 @@
 package net.sf.beezle.ssass.scss;
 
+import net.sf.beezle.mork.misc.GenericException;
+
 public class Ruleset extends Statement {
     private Selector[] selectors;
     private Declaration[] declarations;
@@ -10,7 +12,7 @@ public class Ruleset extends Statement {
     }
 
     @Override
-    public void toCss(Output output) {
+    public void toCss(Output output) throws GenericException {
         boolean first;
 
         first = true;

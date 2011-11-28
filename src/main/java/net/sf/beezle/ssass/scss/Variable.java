@@ -1,26 +1,26 @@
 package net.sf.beezle.ssass.scss;
 
-import net.sf.beezle.ssass.scss.term.BaseTerm;
+import net.sf.beezle.mork.misc.GenericException;
 
-public class Variable extends Base {
+public class Variable extends Statement {
     private final String name;
-    private final Term term;
+    private final Expr expr;
 
-    public Variable(String name, BaseTerm baseTerm) {
+    public Variable(String name, Expr expr) {
         this.name = name;
-        this.term = new Term(baseTerm);
+        this.expr = expr;
     }
 
     @Override
-    public void toCss(Output output) {
-        // nothing
+    public void toCss(Output output) throws GenericException {
+        output.set(this);
     }
 
     public String getName() {
         return name;
     }
 
-    public Term getTerm() {
-        return term;
+    public Expr getExpr() {
+        return expr;
     }
 }

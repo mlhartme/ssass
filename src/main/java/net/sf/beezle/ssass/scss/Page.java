@@ -1,5 +1,7 @@
 package net.sf.beezle.ssass.scss;
 
+import net.sf.beezle.mork.misc.GenericException;
+
 public class Page extends Statement {
     // may be null
     private final String pseudoPage;
@@ -12,7 +14,7 @@ public class Page extends Statement {
     }
 
     @Override
-    public void toCss(Output output) {
+    public void toCss(Output output) throws GenericException {
         output.string("@page");
         if (pseudoPage != null) {
             output.string(" :", pseudoPage);

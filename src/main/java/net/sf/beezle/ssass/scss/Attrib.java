@@ -1,5 +1,7 @@
 package net.sf.beezle.ssass.scss;
 
+import net.sf.beezle.mork.misc.GenericException;
+
 public class Attrib extends BaseSelector {
     private String name;
     private AttribOp op;
@@ -12,7 +14,7 @@ public class Attrib extends BaseSelector {
     }
 
     @Override
-    public void toCss(Output output) {
+    public void toCss(Output output) throws GenericException {
         output.object("[", name, op.toString(), value, "]");
     }
 }

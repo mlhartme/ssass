@@ -1,5 +1,7 @@
 package net.sf.beezle.ssass.scss;
 
+import net.sf.beezle.mork.misc.GenericException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +32,7 @@ public class Expr extends Base {
     }
 
     @Override
-    public void toCss(Output output) {
+    public void toCss(Output output) throws GenericException {
         Object last;
 
         last = null;

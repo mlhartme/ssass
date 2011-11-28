@@ -32,8 +32,7 @@
 
      stylesheet ::= ( CHARSET_SYM STRING ";" )? (S|CDO|CDC)*
                     ( imprt ( CDO S* | CDC S* )* )*
-                    variables_
-                    ( (ruleset | media | page ) (CDO S* | CDC S*)* )* ;
+                    ( (ruleset | media | page | variable_) (CDO S* | CDC S*)* )* ;
           imprt ::= IMPORT_SYM S* (STRING|URI) S* media_list? ";" S* ;
           media ::= MEDIA_SYM S* media_list "{" S* ruleset* "}" S* ;
      media_list ::= medium ( "," S* medium )* ;
@@ -86,8 +85,7 @@ simple_selector ::= element_name ( _hash | class | attrib | pseudo )*
 
 # sass addtions
 
-     variables_ ::= variable_* ;
-      variable_ ::= "$" IDENT S* ":" S* _string ";" S*; # TODO: expr
+      variable_ ::= "$" IDENT S* ":" S* expr ";" S*;
      reference_ ::= "$" IDENT ;
 
 

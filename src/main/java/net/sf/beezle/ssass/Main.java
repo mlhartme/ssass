@@ -1,11 +1,12 @@
 package net.sf.beezle.ssass;
 
 import net.sf.beezle.mork.mapping.Mapper;
+import net.sf.beezle.mork.misc.GenericException;
 import net.sf.beezle.ssass.scss.Output;
 import net.sf.beezle.ssass.scss.Stylesheet;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws GenericException {
         Mapper mapper;
         int ok;
         long tmp;

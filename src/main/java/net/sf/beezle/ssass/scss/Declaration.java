@@ -1,5 +1,7 @@
 package net.sf.beezle.ssass.scss;
 
+import net.sf.beezle.mork.misc.GenericException;
+
 public class Declaration extends Base {
     private final String property;
     private final Expr expr;
@@ -12,7 +14,7 @@ public class Declaration extends Base {
     }
 
     @Override
-    public void toCss(Output output) {
+    public void toCss(Output output) throws GenericException {
         output.object(property, ":");
         output.spaceOpt();
         output.object(expr);
@@ -22,7 +24,7 @@ public class Declaration extends Base {
         }
     }
 
-    public static void toCss(Declaration[] declarations, Output output) {
+    public static void toCss(Declaration[] declarations, Output output) throws GenericException {
         boolean first;
 
         output.open();

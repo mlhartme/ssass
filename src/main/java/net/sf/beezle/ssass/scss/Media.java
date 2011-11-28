@@ -1,5 +1,7 @@
 package net.sf.beezle.ssass.scss;
 
+import net.sf.beezle.mork.misc.GenericException;
+
 public class Media extends Statement {
     private final String[] mediaList;
     private final Ruleset[] rulesets;
@@ -10,7 +12,7 @@ public class Media extends Statement {
     }
 
     @Override
-    public void toCss(Output output) {
+    public void toCss(Output output) throws GenericException {
         boolean first;
 
         output.string("@media");

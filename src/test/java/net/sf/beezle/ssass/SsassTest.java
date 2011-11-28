@@ -2,6 +2,7 @@ package net.sf.beezle.ssass;
 
 import com.yahoo.platform.yui.compressor.CssCompressor;
 import net.sf.beezle.mork.mapping.Mapper;
+import net.sf.beezle.mork.misc.GenericException;
 import net.sf.beezle.ssass.scss.Output;
 import net.sf.beezle.ssass.scss.Stylesheet;
 import net.sf.beezle.sushi.fs.World;
@@ -17,6 +18,7 @@ import java.io.StringReader;
 import java.io.StringWriter;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 public class SsassTest {
     private static final World world = new World();
@@ -120,7 +122,7 @@ public class SsassTest {
     }
 
     @Test
-    public void complex() throws IOException {
+    public void complex() throws IOException, GenericException {
         FileNode src;
         Stylesheet s;
 
@@ -160,8 +162,12 @@ public class SsassTest {
         tmp = (FileNode) world.getTemp().createTempFile().writeLines(lines);
         s = Main.parse(mapper, tmp.getAbsolute());
         tmp.delete();
-        assertEquals(orig, Output.prettyprint(s).trim());
-        assertEquals(compress(orig), Output.compress(s));
+        try {
+            assertEquals(orig, Output.prettyprint(s).trim());
+            assertEquals(compress(orig), Output.compress(s));
+        } catch (GenericException e) {
+            fail(e.getMessage());
+        }
     }
 
     private String compress(String css) throws IOException {

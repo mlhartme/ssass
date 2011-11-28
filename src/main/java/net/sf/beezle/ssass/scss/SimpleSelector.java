@@ -1,5 +1,7 @@
 package net.sf.beezle.ssass.scss;
 
+import net.sf.beezle.mork.misc.GenericException;
+
 public class SimpleSelector extends Base {
     private BaseSelector[] bases;
 
@@ -14,7 +16,7 @@ public class SimpleSelector extends Base {
     }
 
     @Override
-    public void toCss(Output output) {
+    public void toCss(Output output) throws GenericException {
         output.base(bases);
     }
 }

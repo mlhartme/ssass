@@ -21,7 +21,7 @@ grm = "ssass.grm";
 
 import net.sf.beezle.ssass.scss:
     Attrib, AttribOp, Class, Combinator, Declaration, ElementName, Expr, Hash, Import, Media,
-    Operator, Page, Pseudo, Term, Prio, Reference, Ruleset, Selector, SimpleSelector, Stylesheet, UnaryOperator, Variable, Variables;
+    Operator, Page, Pseudo, Term, Prio, Reference, Ruleset, Selector, SimpleSelector, Stylesheet, UnaryOperator, Variable;
 
 import net.sf.beezle.ssass.scss.term:
     Angle, Ems, Exs, Freq, Function, Hexcolor, Ident, Length, Number, Percentage, Strng, Time, Uri;
@@ -67,9 +67,6 @@ _uri => Uri;
 function => Function;
 hexcolor => Hexcolor;
 
-variables_ => Variables:
-                  > \\stylesheet
-                  > \\stylesheet//reference_;
 variable_ => Variable;
 reference_ => Reference;
 

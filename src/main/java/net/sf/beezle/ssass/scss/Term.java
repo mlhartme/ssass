@@ -1,5 +1,6 @@
 package net.sf.beezle.ssass.scss;
 
+import net.sf.beezle.mork.misc.GenericException;
 import net.sf.beezle.ssass.scss.term.BaseTerm;
 
 public class Term extends Base {
@@ -17,7 +18,7 @@ public class Term extends Base {
     }
 
     @Override
-    public void toCss(Output output) {
+    public void toCss(Output output) throws GenericException {
         if (unary != null) {
             output.string(unary.toString());
         }

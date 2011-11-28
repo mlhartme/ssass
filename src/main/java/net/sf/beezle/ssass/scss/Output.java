@@ -1,14 +1,19 @@
 package net.sf.beezle.ssass.scss;
 
+import net.sf.beezle.mork.misc.GenericException;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class Output {
-    public static String compress(Stylesheet s) {
+    public static String compress(Stylesheet s) throws GenericException {
         return toCss(s, true);
     }
-    public static String prettyprint(Stylesheet s) {
+    public static String prettyprint(Stylesheet s) throws GenericException {
         return toCss(s, false);
     }
 
-    public static String toCss(Stylesheet s, boolean compress) {
+    public static String toCss(Stylesheet s, boolean compress) throws GenericException {
         Output output;
 
         output = new Output(compress);
@@ -23,14 +28,18 @@ public class Output {
     private boolean first;
     private int indent;
 
+    // TODO: block structure
+    private Map<String, Variable> variables;
+
     public Output(boolean compress) {
         this.compress = compress;
         this.builder = new StringBuilder();
         this.first = true;
         this.indent = 0;
+        this.variables = new HashMap<String, Variable>();
     }
 
-    public void object(Object ... objs) {
+    public void object(Object ... objs) throws GenericException {
         for (Object obj : objs) {
             if (obj instanceof String) {
                 string((String) obj);
@@ -44,7 +53,7 @@ public class Output {
         }
     }
 
-    public void base(Base ... bases) {
+    public void base(Base ... bases) throws GenericException {
         for (Base base : bases) {
             base.toCss(this);
         }
@@ -101,6 +110,16 @@ public class Output {
         }
         for (int i = 0; i < indent; i++) {
             builder.append("  ");
+        }
+    }
+
+    public Variable lookup(String name) {
+        return variables.get(name);
+    }
+
+    public void set(Variable var) throws GenericException {
+        if (variables.put(var.getName(), var) != null) {
+            throw new GenericException("duplicate variable");
         }
     }
 

@@ -1,5 +1,7 @@
 package net.sf.beezle.ssass.scss;
 
+import net.sf.beezle.mork.misc.GenericException;
+
 public class Selector extends Base {
     private final SimpleSelector left;
 
@@ -14,7 +16,7 @@ public class Selector extends Base {
     }
 
     @Override
-    public void toCss(Output output) {
+    public void toCss(Output output) throws GenericException {
         output.object(left, combinator == null && right != null ? " " : combinator, right);
     }
 }
