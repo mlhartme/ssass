@@ -4,6 +4,7 @@ import net.sf.beezle.mork.mapping.Mapper;
 import net.sf.beezle.mork.misc.GenericException;
 import net.sf.beezle.ssass.scss.Output;
 import net.sf.beezle.ssass.scss.Stylesheet;
+import net.sf.beezle.sushi.util.Strings;
 
 public class Main {
     public static void main(String[] args) throws GenericException {
@@ -11,10 +12,17 @@ public class Main {
         int ok;
         long tmp;
         Stylesheet s;
+        boolean compress;
 
         if (args.length == 0) {
-            System.out.println("usage: ssass <filename>+");
+            System.out.println("usage: ssass [-compress] <filename>+");
         } else {
+            if ("-compress".equals(args[0])) {
+                compress = true;
+                args = Strings.cdr(args);
+            } else {
+                compress = false;
+            }
             mapper = load();
             tmp = System.currentTimeMillis();
             ok = 0;
@@ -22,7 +30,7 @@ public class Main {
                 System.out.println(name + ":");
                 s = parse(mapper, name);
                 if (s != null) {
-                    System.out.println(Output.prettyprint(s));
+                    System.out.println(Output.toCss(s, compress));
                     ok++;
                 }
             }
