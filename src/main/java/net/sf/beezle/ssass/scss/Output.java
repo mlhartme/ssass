@@ -93,7 +93,7 @@ public class Output {
         if (!compress) {
             builder.append("\n");
         } else {
-            builder.append(';'); // TODO: why?
+            builder.append(';'); // yui always defines this. Nico doesn't know why, but the thinks that's not accidentially.
         }
         first = true;
     }

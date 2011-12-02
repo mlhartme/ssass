@@ -2,7 +2,10 @@ package net.sf.beezle.ssass.scss;
 
 import net.sf.beezle.mork.misc.GenericException;
 
-public class Declaration extends Base {
+import java.util.ArrayList;
+import java.util.List;
+
+public class Declaration extends Base implements NestedDeclaration {
     private final String property;
     private final Expr expr;
     private final Prio prio;
@@ -24,20 +27,29 @@ public class Declaration extends Base {
         }
     }
 
-    public static void toCss(Declaration[] declarations, Output output) throws GenericException {
+    public static void toCss(NestedDeclaration[] nestedDeclarations, Output output) throws GenericException {
         boolean first;
+        List<Ruleset> rulesets;
 
+        rulesets = new ArrayList<Ruleset>();
         output.open();
         first = true;
-        for (Declaration declaration : declarations) {
+        for (NestedDeclaration nestedDeclaration : nestedDeclarations) {
             if (first) {
                 first = false;
             } else {
                 output.semicolon();
             }
-            declaration.toCss(output);
+            if (nestedDeclaration instanceof Declaration) {
+                ((Declaration) nestedDeclaration).toCss(output);
+            } else {
+                rulesets.add((Ruleset) nestedDeclaration);
+            }
         }
         output.semicolonOpt();
         output.close();
+        for (Ruleset ruleset : rulesets) {
+            ruleset.toCss(output);
+        }
     }
 }
