@@ -17,7 +17,7 @@
 
 mapper net.sf.beezle.ssass.Mapper;
 
-syntax = "ssass.grm";
+syntax = "ssass.syntax";
 
 import net.sf.beezle.ssass.scss:
     Attrib, AttribOp, Class, Combinator, Declaration, ElementName, Expr, Hash, Import, Media,

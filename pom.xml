@@ -73,7 +73,7 @@
                   <arg value="-d" />
                   <arg path="${basedir}/target/classes" />
                   <arg value="-lst" />
-                  <arg path="${basedir}/src/main/Mapper.map" />
+                  <arg path="${basedir}/src/main/Mapper.mapper" />
                 </java>
               </target>
             </configuration>

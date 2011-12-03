@@ -29,7 +29,7 @@
 */
 
 [PARSER]
-   resolve element_name when ";" <> property when "{" ;
+   resolve element_name when "{" <> property when ";", "}" ;
 
 
 
