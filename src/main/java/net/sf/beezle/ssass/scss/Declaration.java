@@ -27,7 +27,7 @@ public class Declaration extends Base implements NestedDeclaration {
         }
     }
 
-    public static void toCss(NestedDeclaration[] nestedDeclarations, Output output) throws GenericException {
+    public static void toCss(Selector[] context, NestedDeclaration[] nestedDeclarations, Output output) throws GenericException {
         boolean first;
         List<Ruleset> rulesets;
 
@@ -48,8 +48,10 @@ public class Declaration extends Base implements NestedDeclaration {
         }
         output.semicolonOpt();
         output.close();
+        output.push(context);
         for (Ruleset ruleset : rulesets) {
             ruleset.toCss(output);
         }
+        output.pop();
     }
 }

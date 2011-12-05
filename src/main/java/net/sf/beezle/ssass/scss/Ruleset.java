@@ -20,6 +20,17 @@ public class Ruleset extends Statement implements NestedDeclaration {
         boolean first;
 
         first = true;
+        for (Selector[] context : output.nested) {
+            for (Selector selector : context) {
+                if (first) {
+                    first = false;
+                } else {
+                    output.string(",");
+                    output.spaceOpt();
+                }
+                selector.toCss(output);
+            }
+        }
         for (Selector selector : selectors) {
             if (first) {
                 first = false;
@@ -29,6 +40,6 @@ public class Ruleset extends Statement implements NestedDeclaration {
             }
             selector.toCss(output);
         }
-        Declaration.toCss(nestedDeclarations, output);
+        Declaration.toCss(selectors, nestedDeclarations, output);
     }
 }

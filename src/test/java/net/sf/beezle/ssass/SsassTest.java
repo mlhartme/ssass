@@ -151,6 +151,38 @@ public class SsassTest {
                 "}");
     }
 
+    //-- ssass
+
+    @Test
+    public void variable() throws IOException {
+        sass(
+                "$blue: \"abc\";\n" +
+                ".content-navigation {\n" +
+                "  border-color: $blue;\n" +
+                "}\n",
+                ".content-navigation {\n" +
+                "  border-color: \"abc\"\n" +
+                "}\n"
+                );
+    }
+
+    @Test
+    public void nested() throws IOException {
+        sass(  "table.hl {\n" +
+                "  margin: 2em 0;\n" +
+                "  td.ln {\n" +
+                "    text-align: right;\n" +
+                "  }\n" +
+                "}",
+                "table.hl {\n" +
+                "  margin: 2em 0;\n" +
+                "\n" +
+                "}\n" +
+                "table.hl, td.ln {\n" +
+                "  text-align: right\n" +
+                "}\n");
+    }
+
     //--
 
     private void check(String ... lines) throws IOException {
@@ -179,4 +211,20 @@ public class SsassTest {
         new CssCompressor(src).compress(dest, 30000);
         return dest.toString();
     }
+
+    private void sass(String sass, String css) throws IOException {
+        FileNode tmp;
+        Stylesheet s;
+
+        tmp = (FileNode) world.getTemp().createTempFile().writeString(sass);
+        s = Main.parse(mapper, tmp.getAbsolute());
+        tmp.delete();
+        try {
+            assertEquals(css, Output.prettyprint(s));
+        } catch (GenericException e) {
+            fail(e.getMessage());
+        }
+    }
+
+
 }

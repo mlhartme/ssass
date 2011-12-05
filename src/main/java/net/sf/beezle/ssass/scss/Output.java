@@ -2,7 +2,9 @@ package net.sf.beezle.ssass.scss;
 
 import net.sf.beezle.mork.misc.GenericException;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Output {
@@ -27,9 +29,18 @@ public class Output {
     private final StringBuilder builder;
     private boolean first;
     private int indent;
+    public final List<Selector[]> nested;
 
     // TODO: block structure
     private Map<String, Variable> variables;
+
+
+    public void push(Selector[] context) {
+        nested.add(context);
+    }
+    public void pop() {
+        nested.remove(nested.size() - 1);
+    }
 
     public Output(boolean compress) {
         this.compress = compress;
@@ -37,6 +48,7 @@ public class Output {
         this.first = true;
         this.indent = 0;
         this.variables = new HashMap<String, Variable>();
+        this.nested = new ArrayList<Selector[]>();
     }
 
     public void object(Object ... objs) throws GenericException {
