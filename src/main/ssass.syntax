@@ -25,7 +25,9 @@
  * removed BAD_STRING and BAD_URI rules (with sub-rules) because Mork has no feature to report them as errors
  * removed BAD_COMMENT because Mork has no feature to accept it at EOF
  * various helper symbols (starting with_) added to add semantics
- * additional symbols for sass end with _
+ * additional symbols for sass features, marked with a tailing _
+   * variables (variable_, reference_)
+   * nested rulesets (nested_declaration_)
 */
 
 [PARSER]
@@ -66,7 +68,6 @@ simple_selector ::= element_name ( _hash | class | attrib | pseudo )*
          pseudo ::= ":" ( _pseudo1 | _pseudo2 ) ;
        _pseudo1 ::= IDENT ;
        _pseudo2 ::= FUNCTION S* (IDENT S*)? ")" ;
-nested_declaration_ ::= declaration | ruleset ;
     declaration ::= property S* ":" S* expr prio? ;
            prio ::= IMPORTANT_SYM S* ;
            expr ::= term ( operator? term )* ;
@@ -89,6 +90,7 @@ nested_declaration_ ::= declaration | ruleset ;
 
 # sass addtions
 
+nested_declaration_ ::= declaration | ruleset ;
       variable_ ::= "$" IDENT S* ":" S* expr ";" S*;
      reference_ ::= "$" IDENT ;
 
