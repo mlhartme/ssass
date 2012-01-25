@@ -2,7 +2,7 @@ package net.sf.beezle.ssass.scss;
 
 import net.sf.beezle.mork.misc.GenericException;
 
-public class Selector extends Base {
+public class Selector implements Base {
     private final SimpleSelector left;
 
     /* may be null */

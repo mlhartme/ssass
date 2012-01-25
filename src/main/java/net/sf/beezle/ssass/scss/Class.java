@@ -1,6 +1,6 @@
 package net.sf.beezle.ssass.scss;
 
-public class Class extends BaseSelector {
+public class Class implements BaseSelector {
     private final String name;
 
     public Class(String name) {

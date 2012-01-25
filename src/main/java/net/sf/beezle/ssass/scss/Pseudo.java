@@ -1,6 +1,6 @@
 package net.sf.beezle.ssass.scss;
 
-public class Pseudo extends BaseSelector {
+public class Pseudo implements BaseSelector {
     private final String function;
     private final String name;
 

@@ -2,7 +2,7 @@ package net.sf.beezle.ssass.scss.term;
 
 import net.sf.beezle.ssass.scss.Output;
 
-public class Ems extends BaseTerm {
+public class Ems implements BaseTerm {
     private String ems;
 
     public Ems(String ems) {

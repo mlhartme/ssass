@@ -2,7 +2,7 @@ package net.sf.beezle.ssass.scss.term;
 
 import net.sf.beezle.ssass.scss.Output;
 
-public class Time extends BaseTerm {
+public class Time implements BaseTerm {
     private final String time;
 
     public Time(String time) {

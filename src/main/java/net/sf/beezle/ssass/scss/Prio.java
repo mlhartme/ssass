@@ -1,6 +1,6 @@
 package net.sf.beezle.ssass.scss;
 
-public class Prio extends Base {
+public class Prio implements Base {
     @Override
     public void toCss(Output output) {
         output.string("!important");

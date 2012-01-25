@@ -2,7 +2,7 @@ package net.sf.beezle.ssass.scss;
 
 import net.sf.beezle.mork.misc.GenericException;
 
-public class Variable extends Statement {
+public class Variable implements Statement {
     private final String name;
     private final Expr expr;
 

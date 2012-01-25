@@ -1,4 +1,4 @@
 package net.sf.beezle.ssass.scss;
 
-public abstract class BaseSelector extends Base {
+public interface BaseSelector extends Base {
 }

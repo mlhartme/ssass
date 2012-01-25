@@ -2,7 +2,7 @@ package net.sf.beezle.ssass.scss.term;
 
 import net.sf.beezle.ssass.scss.Output;
 
-public class Number extends BaseTerm {
+public class Number implements BaseTerm {
     private final String num;
 
     public Number(String num) {

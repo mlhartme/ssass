@@ -2,7 +2,7 @@ package net.sf.beezle.ssass.scss;
 
 import net.sf.beezle.mork.misc.GenericException;
 
-public class Stylesheet extends Base {
+public class Stylesheet implements Base {
     private final String charset;
     private final Import[] imports;
     private final Statement[] statements;

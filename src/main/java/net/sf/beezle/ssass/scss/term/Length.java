@@ -2,7 +2,7 @@ package net.sf.beezle.ssass.scss.term;
 
 import net.sf.beezle.ssass.scss.Output;
 
-public class Length extends BaseTerm {
+public class Length implements BaseTerm {
     private final String len;
 
     public Length(String len) {

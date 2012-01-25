@@ -1,6 +1,6 @@
 package net.sf.beezle.ssass.scss;
 
-public class Hash extends BaseSelector {
+public class Hash implements BaseSelector {
     private final String hash;
 
     public Hash(String hash) {

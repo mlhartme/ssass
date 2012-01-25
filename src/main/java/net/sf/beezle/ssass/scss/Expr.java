@@ -5,7 +5,7 @@ import net.sf.beezle.mork.misc.GenericException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Expr extends Base {
+public class Expr implements Base {
     private final Object[] opsOrTerms;  // TODO: redundant
     private final List<Operator> ops;
     private final List<Term> terms;

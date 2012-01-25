@@ -2,7 +2,7 @@ package net.sf.beezle.ssass.scss;
 
 import net.sf.beezle.mork.misc.GenericException;
 
-public class Attrib extends BaseSelector {
+public class Attrib implements BaseSelector {
     private String name;
     private AttribOp op;
     private String value;

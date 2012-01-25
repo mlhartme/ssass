@@ -3,7 +3,7 @@ package net.sf.beezle.ssass.scss;
 import net.sf.beezle.mork.misc.GenericException;
 import net.sf.beezle.ssass.scss.term.BaseTerm;
 
-public class Term extends Base {
+public class Term implements Base {
     /** may be null */
     private final UnaryOperator unary;
     private final BaseTerm baseTerm;

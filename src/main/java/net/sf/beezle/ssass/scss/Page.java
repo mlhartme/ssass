@@ -2,7 +2,7 @@ package net.sf.beezle.ssass.scss;
 
 import net.sf.beezle.mork.misc.GenericException;
 
-public class Page extends Statement {
+public class Page implements Statement {
     private static final Selector[] NO_SELECTORS = new Selector[0];
 
     // may be null

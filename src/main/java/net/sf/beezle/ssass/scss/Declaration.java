@@ -5,7 +5,7 @@ import net.sf.beezle.mork.misc.GenericException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Declaration extends Base implements NestedDeclaration {
+public class Declaration implements Base, NestedDeclaration {
     private final String property;
     private final Expr expr;
     private final Prio prio;

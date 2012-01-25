@@ -2,7 +2,7 @@ package net.sf.beezle.ssass.scss;
 
 import net.sf.beezle.mork.misc.GenericException;
 
-public class Ruleset extends Statement implements NestedDeclaration {
+public class Ruleset implements Statement, NestedDeclaration {
     private Selector[] selectors;
     private NestedDeclaration[] nestedDeclarations;
 

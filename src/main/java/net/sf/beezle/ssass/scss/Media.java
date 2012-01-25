@@ -2,7 +2,7 @@ package net.sf.beezle.ssass.scss;
 
 import net.sf.beezle.mork.misc.GenericException;
 
-public class Media extends Statement {
+public class Media implements Statement {
     private final String[] mediaList;
     private final Ruleset[] rulesets;
 

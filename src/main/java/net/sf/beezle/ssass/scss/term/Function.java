@@ -4,7 +4,7 @@ import net.sf.beezle.mork.misc.GenericException;
 import net.sf.beezle.ssass.scss.Expr;
 import net.sf.beezle.ssass.scss.Output;
 
-public class Function extends BaseTerm {
+public class Function implements BaseTerm {
     private final String name;
     private final Expr expr;
 

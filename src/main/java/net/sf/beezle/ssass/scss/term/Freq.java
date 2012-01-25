@@ -2,7 +2,7 @@ package net.sf.beezle.ssass.scss.term;
 
 import net.sf.beezle.ssass.scss.Output;
 
-public class Freq extends BaseTerm {
+public class Freq implements BaseTerm {
     private final String freq;
 
     public Freq(String freq) {

@@ -1,4 +1,4 @@
 package net.sf.beezle.ssass.scss;
 
-public interface NestedDeclaration {
+public interface NestedDeclaration extends Base {
 }

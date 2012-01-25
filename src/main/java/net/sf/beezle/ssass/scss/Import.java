@@ -1,6 +1,6 @@
 package net.sf.beezle.ssass.scss;
 
-public class Import extends Base {
+public class Import implements Base {
     private final String src;
     private final String[] mediaList;
 

@@ -2,7 +2,7 @@ package net.sf.beezle.ssass.scss.term;
 
 import net.sf.beezle.ssass.scss.Output;
 
-public class Hexcolor extends BaseTerm {
+public class Hexcolor implements BaseTerm {
     private final String hexcolor;
 
     public Hexcolor(String hexcolor) {

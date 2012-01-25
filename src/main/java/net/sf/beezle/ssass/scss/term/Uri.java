@@ -2,7 +2,7 @@ package net.sf.beezle.ssass.scss.term;
 
 import net.sf.beezle.ssass.scss.Output;
 
-public class Uri extends BaseTerm {
+public class Uri implements BaseTerm {
     private final String uri;
 
     public Uri(String uri) {
