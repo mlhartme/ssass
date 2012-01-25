@@ -24,7 +24,7 @@
  * in "media_list" rule: changed "COMMA" to ","
  * removed BAD_STRING and BAD_URI rules (with sub-rules) because Mork has no feature to report them as errors
  * removed BAD_COMMENT because Mork has no feature to accept it at EOF
- * various helper symbols (starting with_) added to add semantics
+ * various helper symbols (starting with _) added to add semantics
  * additional symbols for sass features, marked with a tailing _
    * variables (variable_, reference_)
    * nested rulesets (nested_declaration_)
