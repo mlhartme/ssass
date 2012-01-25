@@ -28,6 +28,8 @@
  * additional symbols for sass features, marked with a tailing _
    * variables (variable_, reference_)
    * nested rulesets (nested_declaration_)
+ * conflict resolution
+   * replaced S* with Sp+ and S+ with Sp, where SP ::= s+
 */
 
 [PARSER]
@@ -35,45 +37,45 @@
 
 
 
-     stylesheet ::= ( CHARSET_SYM STRING ";" )? (S|CDO|CDC)*
-                    ( imprt ( CDO S* | CDC S* )* )*
-                    ( (ruleset | media | page | variable_) (CDO S* | CDC S*)* )* ;
-          imprt ::= IMPORT_SYM S* (STRING|URI) S* media_list? ";" S* ;
-          media ::= MEDIA_SYM S* media_list "{" S* ruleset* "}" S* ;
-     media_list ::= medium ( "," S* medium )* ;
-         medium ::= IDENT S* ;
-           page ::= PAGE_SYM S* pseudo_page? "{" S* declaration? ( ";" S* declaration? )* "}" S* ;
-    pseudo_page ::= ":" IDENT S* ;
+     stylesheet ::= ( CHARSET_SYM STRING ";" )? (Sp|CDO|CDC)*
+                    ( imprt ( CDO Sp? | CDC Sp? )* )*
+                    ( (ruleset | media | page | variable_) (CDO Sp? | CDC Sp?)* )* ;
+          imprt ::= IMPORT_SYM Sp? (STRING|URI) Sp? media_list? ";" Sp? ;
+          media ::= MEDIA_SYM Sp? media_list "{" Sp? ruleset* "}" Sp? ;
+     media_list ::= medium ( "," Sp? medium )* ;
+         medium ::= IDENT Sp? ;
+           page ::= PAGE_SYM Sp? pseudo_page? "{" Sp? declaration? ( ";" Sp? declaration? )* "}" Sp? ;
+    pseudo_page ::= ":" IDENT Sp? ;
        operator ::= _slash | _comma ;
-         _slash ::= "/" S* ;
-         _comma ::= "," S* ;
+         _slash ::= "/" Sp? ;
+         _comma ::= "," Sp? ;
      combinator ::= _plus | _gt ;
-          _plus ::= "+" S* ;
-            _gt ::= ">" S* ;
+          _plus ::= "+" Sp? ;
+            _gt ::= ">" Sp? ;
  unary_operator ::= _unary_minus | _unary_plus ;
     _unary_plus ::= "+" ;
    _unary_minus ::= "-" ;
        property ::= IDENT ;
-        ruleset ::= selector ( "," S* selector )* "{" S* nested_declaration_? ( ";" S* nested_declaration_? )* "}" S* ;
-       selector ::= simple_selector ( combinator selector | S+ ( combinator? selector )? )? ;
+        ruleset ::= selector ( "," Sp? selector )* "{" Sp? nested_declaration_? ( ";" Sp? nested_declaration_? )* "}" Sp? ;
+       selector ::= simple_selector ( combinator selector | Sp ( combinator? selector )? )? ;
 simple_selector ::= element_name ( _hash | class | attrib | pseudo )*
                   | ( _hash | class | attrib | pseudo )+ ;
           _hash ::= HASH ;
           class ::= "." IDENT ;
    element_name ::= IDENT | "*" ;
-         attrib ::= "[" S* IDENT S* ( ( _eq | _includes | _dashmatch ) S* ( IDENT | STRING ) S* )? "]" ;
+         attrib ::= "[" Sp? IDENT Sp? ( ( _eq | _includes | _dashmatch ) Sp? ( IDENT | STRING ) Sp? )? "]" ;
             _eq ::= "=" ;
       _includes ::= INCLUDES ;
      _dashmatch ::= DASHMATCH ;
          pseudo ::= ":" ( _pseudo1 | _pseudo2 ) ;
        _pseudo1 ::= IDENT ;
-       _pseudo2 ::= FUNCTION S* (IDENT S*)? ")" ;
-    declaration ::= property S* ":" S* expr prio? ;
-           prio ::= IMPORTANT_SYM S* ;
+       _pseudo2 ::= FUNCTION Sp? (IDENT Sp?)? ")" ;
+    declaration ::= property Sp? ":" Sp? expr prio? ;
+           prio ::= IMPORTANT_SYM Sp? ;
            expr ::= term ( operator? term )* ;
            term ::= _term1 | _term2 ;
-         _term1 ::= unary_operator? ( _number S* | _percentage S* | _length S* | _ems S* | _exs S* | _angle S* | _time S* | _freq S* | reference_ S* );
-         _term2 ::= _string S* | _ident S* | _uri S* | hexcolor | function ;
+         _term1 ::= unary_operator? ( _number Sp? | _percentage Sp? | _length Sp? | _ems Sp? | _exs Sp? | _angle Sp? | _time Sp? | _freq Sp? | reference_ Sp? );
+         _term2 ::= _string Sp? | _ident Sp? | _uri Sp? | hexcolor | function ;
         _number ::= NUMBER ;
     _percentage ::= PERCENTAGE ;
         _length ::= LENGTH ;
@@ -85,20 +87,20 @@ simple_selector ::= element_name ( _hash | class | attrib | pseudo )*
         _string ::= STRING ;
          _ident ::= IDENT ;
            _uri ::= URI ;
-       function ::= FUNCTION S* expr ")" S* ;
-       hexcolor ::= HASH S* ;
+       function ::= FUNCTION Sp? expr ")" Sp? ;
+       hexcolor ::= HASH Sp? ;
 
 # sass addtions
 
 nested_declaration_ ::= declaration | ruleset ;
-      variable_ ::= "$" IDENT S* ":" S* expr ";" S*;
+      variable_ ::= "$" IDENT Sp? ":" Sp? expr ";" Sp?;
      reference_ ::= "$" IDENT ;
 
 
 [SCANNER]
     white = comment ;
 
-              S ::= s;
+             Sp ::= s+;
             CDO ::= "<!--";
             CDC ::= "-->";
        INCLUDES ::= "~=";
