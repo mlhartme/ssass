@@ -30,13 +30,10 @@
    * nested rulesets (nested_declaration_)
  * conflict resolution
    * replaced S* with Sp+ and S+ with Sp, where SP ::= s+
+   * changed declaration to require Sp after ":". This is a language change, but resolves my conflicts
 */
 
 [PARSER]
-   resolve element_name when "{" <> property when ";", "}" ;
-
-
-
      stylesheet ::= ( CHARSET_SYM STRING ";" )? (Sp|CDO|CDC)*
                     ( imprt ( CDO Sp? | CDC Sp? )* )*
                     ( (ruleset | media | page | variable_) (CDO Sp? | CDC Sp?)* )* ;
@@ -70,7 +67,7 @@ simple_selector ::= element_name ( _hash | class | attrib | pseudo )*
          pseudo ::= ":" ( _pseudo1 | _pseudo2 ) ;
        _pseudo1 ::= IDENT ;
        _pseudo2 ::= FUNCTION Sp? (IDENT Sp?)? ")" ;
-    declaration ::= property Sp? ":" Sp? expr prio? ;
+    declaration ::= property Sp? ":" Sp expr prio? ;
            prio ::= IMPORTANT_SYM Sp? ;
            expr ::= term ( operator? term )* ;
            term ::= _term1 | _term2 ;

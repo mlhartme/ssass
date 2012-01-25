@@ -73,7 +73,7 @@
                   </classpath>
                   <arg value="-verbose" />
                   <arg value="-k" />
-                  <arg value="1" />
+                  <arg value="3" />
                   <arg value="-d" />
                   <arg path="${basedir}/target/classes" />
                   <arg value="-lst" />
