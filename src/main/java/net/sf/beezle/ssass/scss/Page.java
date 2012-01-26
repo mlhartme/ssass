@@ -8,9 +8,9 @@ public class Page implements Statement {
     // may be null
     private final String pseudoPage;
 
-    private final Declaration[] declarations;
+    private final NestedDeclaration[] declarations;
 
-    public Page(String pseudoPage, Declaration[] declarations) {
+    public Page(String pseudoPage, NestedDeclaration[] declarations) {
         this.pseudoPage = pseudoPage;
         this.declarations = declarations;
     }

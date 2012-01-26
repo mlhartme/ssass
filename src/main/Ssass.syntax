@@ -28,6 +28,7 @@
  * additional symbols for sass features, marked with a tailing _
    * variables (variable_, reference_)
    * nested rulesets (nested_declaration_)
+   * nested properties
  * conflict resolution
    * replaced S* with Sp+ and S+ with Sp, where SP ::= s+
    * changed declaration to require Sp after ":". This is a language change, but resolves my conflicts
@@ -41,7 +42,7 @@
           media ::= MEDIA_SYM Sp? media_list "{" Sp? ruleset* "}" Sp? ;
      media_list ::= medium ( "," Sp? medium )* ;
          medium ::= IDENT Sp? ;
-           page ::= PAGE_SYM Sp? pseudo_page? "{" Sp? declaration? ( ";" Sp? declaration? )* "}" Sp? ;
+           page ::= PAGE_SYM Sp? pseudo_page? "{" Sp? nested_declaration_? ( ";" Sp? nested_declaration_? )* "}" Sp? ;
     pseudo_page ::= ":" IDENT Sp? ;
        operator ::= _slash | _comma ;
          _slash ::= "/" Sp? ;
@@ -87,7 +88,7 @@ simple_selector ::= element_name ( _hash | class | attrib | pseudo )*
        function ::= FUNCTION Sp? expr ")" Sp? ;
        hexcolor ::= HASH Sp? ;
 
-# sass addtions
+# sass additions
 
 nested_declaration_ ::= declaration | ruleset ;
       variable_ ::= "$" IDENT Sp? ":" Sp? expr ";" Sp?;
