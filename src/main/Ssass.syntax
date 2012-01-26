@@ -27,8 +27,7 @@
  * various helper symbols (starting with _) added to add semantics
  * additional symbols for sass features, marked with a tailing _
    * variables (variable_, reference_)
-   * nested rulesets (nested_declaration_)
-   * nested properties
+   * nesting (nested_declaration_, nested_property)
  * conflict resolution
    * replaced S* with Sp+ and S+ with Sp, where SP ::= s+
    * changed declaration to require Sp after ":". This is a language change, but resolves my conflicts
@@ -90,9 +89,10 @@ simple_selector ::= element_name ( _hash | class | attrib | pseudo )*
 
 # sass additions
 
-nested_declaration_ ::= declaration | ruleset ;
-      variable_ ::= "$" IDENT Sp? ":" Sp? expr ";" Sp?;
-     reference_ ::= "$" IDENT ;
+nested_declaration_ ::= declaration | ruleset | nested_property_ ;
+   nested_property_ ::= property Sp? ":" Sp "{" Sp? nested_declaration_? ( ";" Sp? nested_declaration_? )* "}" Sp? ;
+          variable_ ::= "$" IDENT Sp? ":" Sp? expr ";" Sp?;
+         reference_ ::= "$" IDENT ;
 
 
 [SCANNER]

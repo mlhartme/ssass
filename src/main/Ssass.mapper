@@ -20,7 +20,7 @@ mapper net.sf.beezle.ssass.Mapper;
 syntax = "Ssass.syntax";
 
 import net.sf.beezle.ssass.scss:
-    Attrib, AttribOp, Class, Combinator, Declaration, ElementName, Expr, Hash, Import, Media,
+    Attrib, AttribOp, Class, Combinator, Declaration, ElementName, Expr, Hash, Import, Media, NestedProperty,
     Operator, Page, Pseudo, Term, Prio, Reference, Ruleset, Selector, SimpleSelector, Stylesheet, UnaryOperator, Variable;
 
 import net.sf.beezle.ssass.scss.term:
@@ -49,6 +49,7 @@ _dashmatch => AttribOp.DASHMATCH;
 _pseudo1 => Pseudo;
 _pseudo2 => Pseudo;
 declaration => Declaration;
+nested_property_ => NestedProperty;
 prio => Prio;
 expr => Expr;
 _term1 => Term;

@@ -16,7 +16,7 @@ public class Ruleset implements Statement, NestedDeclaration {
         boolean first;
 
         first = true;
-        for (Selector[] context : output.nested) {
+        for (Selector[] context : output.selectorContext) {
             for (Selector selector : context) {
                 if (first) {
                     first = false;

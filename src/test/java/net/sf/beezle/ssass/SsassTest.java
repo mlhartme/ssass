@@ -8,8 +8,6 @@ import net.sf.beezle.ssass.scss.Stylesheet;
 import net.sf.beezle.sushi.fs.World;
 import net.sf.beezle.sushi.fs.file.FileNode;
 import net.sf.beezle.sushi.io.OS;
-import net.sf.beezle.sushi.util.Separator;
-import net.sf.beezle.sushi.util.Strings;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -167,7 +165,7 @@ public class SsassTest {
     }
 
     @Test
-    public void nested() throws IOException {
+    public void nestedRuleset() throws IOException {
         sass(  "table.hl {\n" +
                 "  margin: 2em 0;\n" +
                 "  td.ln {\n" +
@@ -183,6 +181,22 @@ public class SsassTest {
                 "}\n");
     }
 
+    @Test
+    public void nestedProperties() throws IOException {
+        sass(   "li {\n" +
+                "  font: {\n" +
+                "    family: serif;\n" +
+                "    weight: bold;\n" +
+                "    size: 1.2em;\n" +
+                "  }\n" +
+                "}",
+                "li {\n" +
+                "  font-family: serif;\n" +
+                "  font-weight: bold;\n" +
+                "  font-size: 1.2em\n" +
+                "\n" +
+                "}\n");
+    }
     //--
 
     private void check(String ... lines) throws IOException {
@@ -218,6 +232,9 @@ public class SsassTest {
 
         tmp = (FileNode) world.getTemp().createTempFile().writeString(sass);
         s = Main.parse(mapper, tmp.getAbsolute());
+        if (s == null) {
+            throw new IOException("syntax error");
+        }
         tmp.delete();
         try {
             assertEquals(css, Output.prettyprint(s));

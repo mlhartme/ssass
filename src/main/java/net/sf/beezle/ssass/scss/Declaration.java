@@ -2,9 +2,6 @@ package net.sf.beezle.ssass.scss;
 
 import net.sf.beezle.mork.misc.GenericException;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Declaration implements Base, NestedDeclaration {
     private final String property;
     private final Expr expr;
@@ -18,6 +15,7 @@ public class Declaration implements Base, NestedDeclaration {
 
     @Override
     public void toCss(Output output) throws GenericException {
+        output.propertyPrefix();
         output.object(property, ":");
         output.spaceOpt();
         output.object(expr);
@@ -29,9 +27,7 @@ public class Declaration implements Base, NestedDeclaration {
 
     public static void toCss(Selector[] context, NestedDeclaration[] nestedDeclarations, Output output) throws GenericException {
         boolean first;
-        List<Ruleset> rulesets;
 
-        rulesets = new ArrayList<Ruleset>();
         output.open();
         first = true;
         for (NestedDeclaration nestedDeclaration : nestedDeclarations) {
@@ -40,18 +36,18 @@ public class Declaration implements Base, NestedDeclaration {
             } else {
                 output.semicolon();
             }
-            if (nestedDeclaration instanceof Declaration) {
-                ((Declaration) nestedDeclaration).toCss(output);
-            } else {
-                rulesets.add((Ruleset) nestedDeclaration);
+            if (!(nestedDeclaration instanceof Ruleset)) {
+                nestedDeclaration.toCss(output);
             }
         }
         output.semicolonOpt();
         output.close();
-        output.push(context);
-        for (Ruleset ruleset : rulesets) {
-            ruleset.toCss(output);
+        output.pushSelector(context);
+        for (NestedDeclaration nestedDeclaration : nestedDeclarations) {
+            if (nestedDeclaration instanceof Ruleset) {
+                nestedDeclaration.toCss(output);
+            }
         }
-        output.pop();
+        output.popSelector();
     }
 }

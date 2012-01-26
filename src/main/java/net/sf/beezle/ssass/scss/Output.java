@@ -29,17 +29,25 @@ public class Output {
     private final StringBuilder builder;
     private boolean first;
     private int indent;
-    public final List<Selector[]> nested;
+    public final List<Selector[]> selectorContext;
+    public final List<String> propertyContext;
 
     // TODO: block structure
     private Map<String, Variable> variables;
 
 
-    public void push(Selector[] context) {
-        nested.add(context);
+    public void pushSelector(Selector[] context) {
+        selectorContext.add(context);
     }
-    public void pop() {
-        nested.remove(nested.size() - 1);
+    public void popSelector() {
+        selectorContext.remove(selectorContext.size() - 1);
+    }
+
+    public void pushProperty(String property) {
+        propertyContext.add(property);
+    }
+    public void popProperty() {
+        propertyContext.remove(propertyContext.size() - 1);
     }
 
     public Output(boolean compress) {
@@ -48,7 +56,8 @@ public class Output {
         this.first = true;
         this.indent = 0;
         this.variables = new HashMap<String, Variable>();
-        this.nested = new ArrayList<Selector[]>();
+        this.selectorContext = new ArrayList<Selector[]>();
+        this.propertyContext = new ArrayList<String>();
     }
 
     public void object(Object ... objs) throws GenericException {
@@ -133,6 +142,16 @@ public class Output {
         if (variables.put(var.getName(), var) != null) {
             throw new GenericException("duplicate variable");
         }
+    }
+
+    public String propertyPrefix() {
+        StringBuilder builder;
+
+        builder = new StringBuilder();
+        for (String property : propertyContext) {
+            string(property, "-");
+        }
+        return builder.toString();
     }
 
     //--
