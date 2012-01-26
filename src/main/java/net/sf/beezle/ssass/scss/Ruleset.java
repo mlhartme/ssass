@@ -6,13 +6,9 @@ public class Ruleset implements Statement, NestedDeclaration {
     private Selector[] selectors;
     private NestedDeclaration[] nestedDeclarations;
 
-    // TODO: NestedDeclaration[] nestedDeclarations
-    public Ruleset(Selector[] selectors, Base[] nestedDeclarations) {
+    public Ruleset(Selector[] selectors, NestedDeclaration[] nestedDeclarations) {
         this.selectors = selectors;
-        this.nestedDeclarations = new NestedDeclaration[nestedDeclarations.length];
-        for (int i = 0; i < nestedDeclarations.length; i++) {
-            this.nestedDeclarations[i] = (NestedDeclaration) nestedDeclarations[i];
-        }
+        this.nestedDeclarations = nestedDeclarations;
     }
 
     @Override
