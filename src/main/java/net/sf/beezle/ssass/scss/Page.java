@@ -19,6 +19,6 @@ public class Page implements Statement {
         if (pseudoPage != null) {
             output.string(" :", pseudoPage);
         }
-        Declaration.toCss(declarations, output);
+        Ruleset.toCss(declarations, output);
     }
 }

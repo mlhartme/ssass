@@ -36,6 +36,38 @@ public class Ruleset implements Statement, SsassDeclaration {
             }
             selector.toCss(output);
         }
-        Declaration.toCss(selectors, ssassDeclarations, output);
+        toCss(selectors, ssassDeclarations, output);
+    }
+
+    private static final Selector[] NO_SELECTORS = new Selector[0];
+
+    public static void toCss(SsassDeclaration[] ssassDeclarations, Output output) throws GenericException {
+        toCss(NO_SELECTORS, ssassDeclarations, output);
+    }
+
+    public static void toCss(Selector[] context, SsassDeclaration[] ssassDeclarations, Output output) throws GenericException {
+        boolean first;
+
+        output.open();
+        first = true;
+        for (SsassDeclaration ssassDeclaration : ssassDeclarations) {
+            if (first) {
+                first = false;
+            } else {
+                output.semicolon();
+            }
+            if (!(ssassDeclaration instanceof Ruleset)) {
+                ssassDeclaration.toCss(output);
+            }
+        }
+        output.semicolonOpt();
+        output.close();
+        output.pushSelector(context);
+        for (SsassDeclaration ssassDeclaration : ssassDeclarations) {
+            if (ssassDeclaration instanceof Ruleset) {
+                ssassDeclaration.toCss(output);
+            }
+        }
+        output.popSelector();
     }
 }
