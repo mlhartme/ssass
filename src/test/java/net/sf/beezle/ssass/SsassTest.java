@@ -215,7 +215,24 @@ public class SsassTest {
                 "  font-family: serif;\n" +
                 "  font-weight: bold;\n" +
                 "  font-size: 1.2em\n" +
-                "\n" +
+                "}\n");
+    }
+
+    @Test
+    public void nestedPropertiesTwice() throws IOException {
+        sass(   "top {\n" +
+                "  a: 1;\n" +
+                "  mid: {\n" +
+                "    b: 2;\n" +
+                "    bottom: {\n" +
+                "      c: 3;\n" +
+                "    }\n" +
+                "  }\n" +
+                "}",
+                "top {\n" +
+                "  a: 1;\n" +
+                "  mid-b: 2;\n" +
+                "  mid-bottom-c: 3\n" +
                 "}\n");
     }
 

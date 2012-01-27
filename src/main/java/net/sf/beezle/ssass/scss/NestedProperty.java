@@ -23,11 +23,8 @@ public class NestedProperty implements SsassDeclaration {
             } else {
                 output.semicolon();
             }
-            if (ssassDeclaration instanceof Declaration) {
-                ssassDeclaration.toCss(output);
-            }
+            ssassDeclaration.toCss(output);
         }
-        output.semicolonOpt();
         output.popProperty();
     }
 }
