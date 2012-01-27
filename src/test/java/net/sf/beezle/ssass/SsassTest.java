@@ -173,11 +173,32 @@ public class SsassTest {
                 "  }\n" +
                 "}",
                 "table.hl {\n" +
-                "  margin: 2em 0;\n" +
-                "\n" +
+                "  margin: 2em 0\n" +
                 "}\n" +
                 "table.hl, td.ln {\n" +
                 "  text-align: right\n" +
+                "}\n");
+    }
+
+    @Test
+    public void nestedRulesetTwice() throws IOException {
+        sass(  "top {\n" +
+                "  a: b;\n" +
+                "  mid {\n" +
+                "    foo: bar;\n" +
+                "    bottom {\n" +
+                "      x: y;\n" +
+                "    }\n" +
+                "  }\n" +
+                "}",
+                "top {\n" +
+                "  a: b\n" +
+                "}\n" +
+                "top, mid {\n" +
+                "  foo: bar\n" +
+                "}\n" +
+                "top, mid, bottom {\n" +
+                "  x: y\n" +
                 "}\n");
     }
 

@@ -29,12 +29,12 @@ public class Ruleset implements Statement, SsassDeclaration {
         output.open();
         first = true;
         for (SsassDeclaration ssassDeclaration : ssassDeclarations) {
-            if (first) {
-                first = false;
-            } else {
-                output.semicolon();
-            }
             if (!(ssassDeclaration instanceof Ruleset)) {
+                if (first) {
+                    first = false;
+                } else {
+                    output.semicolon();
+                }
                 ssassDeclaration.toCss(output);
             }
         }
