@@ -247,7 +247,6 @@ public class SsassTest {
                 "}",
                 "#data {\n" +
                 "  float: left\n" +
-                "\n" +
                 "}\n");
     }
 
@@ -263,6 +262,7 @@ public class SsassTest {
                 "#data {\n" +
                 "  @include table-base;\n" +
                 "}",
+
                 "#data th {\n" +
                 "  text-align: center;\n" +
                 "  font-weight: bold;\n" +
