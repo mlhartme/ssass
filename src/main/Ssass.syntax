@@ -26,6 +26,7 @@
  * fixes
    * removed BAD_STRING and BAD_URI rules (with sub-rules) because Mork has no feature to report them as errors
    * removed BAD_COMMENT because Mork has no feature to accept it at EOF
+   * removed DIMENSION because it's not used
  * various helper symbols (starting with _) added to add semantics
  * additional symbols for sass features, marked with a tailing _
    * variables (variable_, reference_)
@@ -118,8 +119,6 @@ ssass_declaration_ ::= ruleset | nested_property_ | include_ | declaration ;
           ANGLE ::= num ("deg" | "rad" | "grad");
            TIME ::= num ("ms" | "s");
            FREQ ::= num ("hz" | "khz");
-    # TODO: not used:
-    # DIMENSION ::= num ident;
      PERCENTAGE ::= num "%";
          NUMBER ::= num;
 
