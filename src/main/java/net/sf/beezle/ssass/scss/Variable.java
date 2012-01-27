@@ -13,7 +13,7 @@ public class Variable implements Statement {
 
     @Override
     public void toCss(Output output) throws GenericException {
-        output.set(this);
+        output.defineVariable(this);
     }
 
     public String getName() {

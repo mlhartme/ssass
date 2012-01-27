@@ -197,6 +197,20 @@ public class SsassTest {
                 "\n" +
                 "}\n");
     }
+
+    @Test
+    public void mixin() throws IOException {
+        sass   ("@mixin left {\n" +
+                "  float: left;\n" +
+                "}\n" +
+                "\n" +
+                "#data {\n" +
+                "  @include left;\n" +
+                "}",
+                "#data {\n" +
+                "  float: left\n" +
+                "}\n");
+    }
     //--
 
     private void check(String ... lines) throws IOException {

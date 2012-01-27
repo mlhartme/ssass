@@ -33,7 +33,8 @@ public class Output {
     public final List<String> propertyContext;
 
     // TODO: block structure
-    private Map<String, Variable> variables;
+    private final Map<String, Variable> variables;
+    private final Map<String, Mixin> mixins;
 
 
     public void pushSelector(Selector[] context) {
@@ -56,6 +57,7 @@ public class Output {
         this.first = true;
         this.indent = 0;
         this.variables = new HashMap<String, Variable>();
+        this.mixins = new HashMap<String, Mixin>();
         this.selectorContext = new ArrayList<Selector[]>();
         this.propertyContext = new ArrayList<String>();
     }
@@ -134,13 +136,23 @@ public class Output {
         }
     }
 
-    public Variable lookup(String name) {
+    public Variable lookupVariable(String name) {
         return variables.get(name);
     }
 
-    public void set(Variable var) throws GenericException {
+    public void defineVariable(Variable var) throws GenericException {
         if (variables.put(var.getName(), var) != null) {
             throw new GenericException("duplicate variable");
+        }
+    }
+
+    public Mixin lookupMixin(String name) {
+        return mixins.get(name);
+    }
+
+    public void defineMixin(Mixin mixin) throws GenericException {
+        if (mixins.put(mixin.getName(), mixin) != null) {
+            throw new GenericException("duplicate mixin");
         }
     }
 

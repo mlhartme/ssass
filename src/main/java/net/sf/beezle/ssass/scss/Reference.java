@@ -14,7 +14,7 @@ public class Reference implements BaseTerm {
     public void toCss(Output output) throws GenericException {
         Variable variable;
 
-        variable = output.lookup(name);
+        variable = output.lookupVariable(name);
         if (variable == null) {
             throw new GenericException("undefined variable: " + name);
         }

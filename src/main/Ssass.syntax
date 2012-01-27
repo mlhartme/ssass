@@ -36,7 +36,7 @@
 [PARSER]
      stylesheet ::= ( CHARSET_SYM STRING ";" )? (Sp|CDO|CDC)*
                     ( imprt ( CDO Sp? | CDC Sp? )* )*
-                    ( (ruleset | media | page | variable_) (CDO Sp? | CDC Sp?)* )* ;
+                    ( (ruleset | media | page | variable_ | mixin_) (CDO Sp? | CDC Sp?)* )* ;
           imprt ::= IMPORT_SYM Sp? (STRING|URI) Sp? media_list? ";" Sp? ;
           media ::= MEDIA_SYM Sp? media_list "{" Sp? ruleset* "}" Sp? ;
      media_list ::= medium ( "," Sp? medium )* ;
@@ -89,11 +89,12 @@ simple_selector ::= element_name ( _hash | class | attrib | pseudo )*
 
 # sass additions
 
-nested_declaration_ ::= declaration | ruleset | nested_property_ ;
+nested_declaration_ ::= declaration | ruleset | nested_property_ | include_ ;
    nested_property_ ::= property Sp? ":" Sp "{" Sp? nested_declaration_? ( ";" Sp? nested_declaration_? )* "}" Sp? ;
           variable_ ::= "$" IDENT Sp? ":" Sp? expr ";" Sp?;
          reference_ ::= "$" IDENT ;
-
+             mixin_ ::= "@mixin" Sp? IDENT Sp? "{" Sp? nested_declaration_? ( ";" Sp? nested_declaration_? )* "}" Sp?;
+           include_ ::= "@include" Sp? IDENT ;
 
 [SCANNER]
     white = comment ;
