@@ -22,6 +22,7 @@
 
  Changes:
  * in "media_list" rule: changed "COMMA" to ","
+ * inclined keyword symbols like MEDIA_SYM or CHARSET_SYM
  * fixes
    * removed BAD_STRING and BAD_URI rules (with sub-rules) because Mork has no feature to report them as errors
    * removed BAD_COMMENT because Mork has no feature to accept it at EOF
@@ -36,67 +37,67 @@
 */
 
 [PARSER]
-     stylesheet ::= ( CHARSET_SYM STRING ";" )? (Sp|CDO|CDC)*
-                    ( imprt ( CDO Sp? | CDC Sp? )* )*
-                    ( (ruleset | media | page | variable_ | mixin_) (CDO Sp? | CDC Sp?)* )* ;
-          imprt ::= IMPORT_SYM Sp? (STRING|URI) Sp? media_list? ";" Sp? ;
-          media ::= MEDIA_SYM Sp? media_list "{" Sp? ruleset* "}" Sp? ;
-     media_list ::= medium ( "," Sp? medium )* ;
-         medium ::= IDENT Sp? ;
-           page ::= PAGE_SYM Sp? pseudo_page? "{" Sp? ssass_declaration_? ( ";" Sp? ssass_declaration_? )* "}" Sp? ;
-    pseudo_page ::= ":" IDENT Sp? ;
+        stylesheet ::= ( "@charset " STRING ";" )? (Sp|CDO|CDC)*
+                       ( imprt ( CDO Sp? | CDC Sp? )* )*
+                       ( (ruleset | media | page | variable_ | mixin_) (CDO Sp? | CDC Sp?)* )* ;
+             imprt ::= "@import" Sp? (STRING|URI) Sp? media_list? ";" Sp? ;
+             media ::= "@media" Sp? media_list "{" Sp? ruleset* "}" Sp? ;
+        media_list ::= medium ( "," Sp? medium )* ;
+            medium ::= IDENT Sp? ;
+              page ::= "@page" Sp? pseudo_page? "{" Sp? ssass_declaration_? ( ";" Sp? ssass_declaration_? )* "}" Sp? ;
+       pseudo_page ::= ":" IDENT Sp? ;
+         variable_ ::= "$" IDENT Sp? ":" Sp? expr ";" Sp?;
+            mixin_ ::= "@mixin" Sp? IDENT Sp? "{" Sp? ssass_declaration_? ( ";" Sp? ssass_declaration_? )* "}" Sp?;
 
-        ruleset ::= selector ( "," Sp? selector )* "{" Sp? ssass_declaration_? ( ";" Sp? ssass_declaration_? )* "}" Sp? ;
-       selector ::= simple_selector ( combinator selector | Sp ( combinator? selector )? )? ;
-simple_selector ::= element_name ( _hash | class | attrib | pseudo )*
-                  | ( _hash | class | attrib | pseudo )+ ;
-     combinator ::= _plus | _gt ;
-          _plus ::= "+" Sp? ;
-            _gt ::= ">" Sp? ;
-          _hash ::= HASH ;
-          class ::= "." IDENT ;
-   element_name ::= IDENT | "*" ;
-         attrib ::= "[" Sp? IDENT Sp? ( ( _eq | _includes | _dashmatch ) Sp? ( IDENT | STRING ) Sp? )? "]" ;
-            _eq ::= "=" ;
-      _includes ::= INCLUDES ;
-     _dashmatch ::= DASHMATCH ;
-         pseudo ::= ":" ( _pseudo1 | _pseudo2 ) ;
-       _pseudo1 ::= IDENT ;
-       _pseudo2 ::= FUNCTION Sp? (IDENT Sp?)? ")" ;
+           ruleset ::= selector ( "," Sp? selector )* "{" Sp? ssass_declaration_? ( ";" Sp? ssass_declaration_? )* "}" Sp? ;
+          selector ::= simple_selector ( combinator selector | Sp ( combinator? selector )? )? ;
+   simple_selector ::= element_name ( _hash | class | attrib | pseudo )*
+                     | ( _hash | class | attrib | pseudo )+ ;
+        combinator ::= _plus | _gt ;
+             _plus ::= "+" Sp? ;
+               _gt ::= ">" Sp? ;
+             _hash ::= HASH ;
+             class ::= "." IDENT ;
+      element_name ::= IDENT | "*" ;
+            attrib ::= "[" Sp? IDENT Sp? ( ( _eq | _includes | _dashmatch ) Sp? ( IDENT | STRING ) Sp? )? "]" ;
+               _eq ::= "=" ;
+         _includes ::= INCLUDES ;
+        _dashmatch ::= DASHMATCH ;
+            pseudo ::= ":" ( _pseudo1 | _pseudo2 ) ;
+          _pseudo1 ::= IDENT ;
+          _pseudo2 ::= FUNCTION Sp? (IDENT Sp?)? ")" ;
 
 ssass_declaration_ ::= ruleset | nested_property_ | include_ | declaration ;
   nested_property_ ::= property Sp? ":" Sp "{" Sp? ssass_declaration_? ( ";" Sp? ssass_declaration_? )* "}" Sp? ;
-         variable_ ::= "$" IDENT Sp? ":" Sp? expr ";" Sp?;
         reference_ ::= "$" IDENT ;
-            mixin_ ::= "@mixin" Sp? IDENT Sp? "{" Sp? ssass_declaration_? ( ";" Sp? ssass_declaration_? )* "}" Sp?;
           include_ ::= "@include" Sp? IDENT ;
 
-    declaration ::= property Sp? ":" Sp expr prio? ;
-       property ::= IDENT ;
-           prio ::= IMPORTANT_SYM Sp? ;
-           expr ::= term ( operator? term )* ;
-       operator ::= _slash | _comma ;
-         _slash ::= "/" Sp? ;
-         _comma ::= "," Sp? ;
-           term ::= _term1 | _term2 ;
-         _term1 ::= unary_operator? ( _number Sp? | _percentage Sp? | _length Sp? | _ems Sp? | _exs Sp? | _angle Sp? | _time Sp? | _freq Sp? | reference_ Sp? );
- unary_operator ::= _unary_minus | _unary_plus ;
-    _unary_plus ::= "+" ;
-   _unary_minus ::= "-" ;
-         _term2 ::= _string Sp? | _ident Sp? | _uri Sp? | hexcolor | function ;
-        _number ::= NUMBER ;
-    _percentage ::= PERCENTAGE ;
-        _length ::= LENGTH ;
-           _ems ::= EMS ;
-           _exs ::= EXS ;
-         _angle ::= ANGLE ;
-          _time ::= TIME ;
-          _freq ::= FREQ ;
-        _string ::= STRING ;
-         _ident ::= IDENT ;
-           _uri ::= URI ;
-       function ::= FUNCTION Sp? expr ")" Sp? ;
-       hexcolor ::= HASH Sp? ;
+       declaration ::= property Sp? ":" Sp expr prio? ;
+          property ::= IDENT ;
+              prio ::= IMPORTANT_SYM Sp? ;
+              expr ::= term ( operator? term )* ;
+          operator ::= _slash | _comma ;
+            _slash ::= "/" Sp? ;
+            _comma ::= "," Sp? ;
+              term ::= _term1 | _term2 ;
+            _term1 ::= unary_operator? ( _number Sp? | _percentage Sp? | _length Sp? | _ems Sp? | _exs Sp? | _angle Sp? | _time Sp? | _freq Sp? | reference_ Sp? );
+    unary_operator ::= _unary_minus | _unary_plus ;
+       _unary_plus ::= "+" ;
+      _unary_minus ::= "-" ;
+            _term2 ::= _string Sp? | _ident Sp? | _uri Sp? | hexcolor | function ;
+           _number ::= NUMBER ;
+       _percentage ::= PERCENTAGE ;
+           _length ::= LENGTH ;
+              _ems ::= EMS ;
+              _exs ::= EXS ;
+            _angle ::= ANGLE ;
+             _time ::= TIME ;
+             _freq ::= FREQ ;
+           _string ::= STRING ;
+            _ident ::= IDENT ;
+              _uri ::= URI ;
+          function ::= FUNCTION Sp? expr ")" Sp? ;
+          hexcolor ::= HASH Sp? ;
 
 [SCANNER]
     white = comment ;
@@ -110,10 +111,6 @@ ssass_declaration_ ::= ruleset | nested_property_ | include_ | declaration ;
           IDENT ::= ident;
            HASH ::= "#" name;
 
-     IMPORT_SYM ::= "@import";
-       PAGE_SYM ::= "@page";
-      MEDIA_SYM ::= "@media";
-    CHARSET_SYM ::= "@charset ";
   IMPORTANT_SYM ::= "!" (w | comment)* "important" ;
             EMS ::= num "em";
             EXS ::= num "ex";
