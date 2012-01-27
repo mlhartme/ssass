@@ -29,8 +29,8 @@ public class Output {
     private final StringBuilder builder;
     private boolean first;
     private int indent;
-    public final List<Selector[]> selectorContext;
-    public final List<String> propertyContext;
+    private final List<Selector[]> selectorContext;
+    private final List<String> propertyContext;
 
     // TODO: block structure
     private final Map<String, Variable> variables;
@@ -73,6 +73,32 @@ public class Output {
             } else {
                 throw new IllegalArgumentException(obj.getClass().toString());
             }
+        }
+    }
+
+    public void selectors(Selector[] selectors) throws GenericException {
+        boolean first;
+
+        first = true;
+        for (Selector[] context : selectorContext) {
+            for (Selector selector : context) {
+                if (first) {
+                    first = false;
+                } else {
+                    string(",");
+                    spaceOpt();
+                }
+                selector.toCss(this);
+            }
+        }
+        for (Selector selector : selectors) {
+            if (first) {
+                first = false;
+            } else {
+                string(",");
+                spaceOpt();
+            }
+            selector.toCss(this);
         }
     }
 

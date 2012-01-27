@@ -13,29 +13,7 @@ public class Ruleset implements Statement, SsassDeclaration {
 
     @Override
     public void toCss(Output output) throws GenericException {
-        boolean first;
-
-        first = true;
-        for (Selector[] context : output.selectorContext) {
-            for (Selector selector : context) {
-                if (first) {
-                    first = false;
-                } else {
-                    output.string(",");
-                    output.spaceOpt();
-                }
-                selector.toCss(output);
-            }
-        }
-        for (Selector selector : selectors) {
-            if (first) {
-                first = false;
-            } else {
-                output.string(",");
-                output.spaceOpt();
-            }
-            selector.toCss(output);
-        }
+        output.selectors(selectors);
         toCss(selectors, ssassDeclarations, output);
     }
 
