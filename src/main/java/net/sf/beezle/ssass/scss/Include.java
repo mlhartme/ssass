@@ -17,8 +17,19 @@ public class Include implements SsassDeclaration {
         if (def == null) {
             throw new GenericException("undefined mixin: " + mixin);
         }
-        for (SsassDeclaration decl : def.getSsassDeclarations()) {
-            decl.toCss(output);
+        boolean first;
+
+        first = true;
+        for (SsassDeclaration ssassDeclaration : def.getSsassDeclarations()) {
+            if (first) {
+                first = false;
+            } else {
+                output.semicolon();
+            }
+            if (!(ssassDeclaration instanceof Ruleset)) {
+                ssassDeclaration.toCss(output);
+            }
         }
+        output.semicolonOpt();
     }
 }

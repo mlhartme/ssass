@@ -199,7 +199,7 @@ public class SsassTest {
     }
 
     @Test
-    public void mixin() throws IOException {
+    public void mixinProperties() throws IOException {
         sass   ("@mixin left {\n" +
                 "  float: left;\n" +
                 "}\n" +
@@ -209,8 +209,31 @@ public class SsassTest {
                 "}",
                 "#data {\n" +
                 "  float: left\n" +
+                "\n" +
                 "}\n");
     }
+
+    @Test
+    public void mixinRuleset() throws IOException {
+        sass   ("@mixin table-base {\n" +
+                "  th {\n" +
+                "    text-align: center;\n" +
+                "    font-weight: bold;\n" +
+                "  };\n" +
+                "  td, th {padding: 2px}\n" +
+                "}\n" +
+                "#data {\n" +
+                "  @include table-base;\n" +
+                "}",
+                "#data th {\n" +
+                "  text-align: center;\n" +
+                "  font-weight: bold;\n" +
+                "}\n" +
+                "#data td, #data th {\n" +
+                "  padding: 2px;\n" +
+                "}");
+    }
+
     //--
 
     private void check(String ... lines) throws IOException {

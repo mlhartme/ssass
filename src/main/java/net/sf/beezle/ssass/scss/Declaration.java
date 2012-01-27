@@ -24,6 +24,11 @@ public class Declaration implements Base, SsassDeclaration {
             output.base(prio);
         }
     }
+    private static final Selector[] NO_SELECTORS = new Selector[0];
+
+    public static void toCss(SsassDeclaration[] ssassDeclarations, Output output) throws GenericException {
+        toCss(NO_SELECTORS, ssassDeclarations, output);
+    }
 
     public static void toCss(Selector[] context, SsassDeclaration[] ssassDeclarations, Output output) throws GenericException {
         boolean first;

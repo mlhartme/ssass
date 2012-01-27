@@ -3,8 +3,6 @@ package net.sf.beezle.ssass.scss;
 import net.sf.beezle.mork.misc.GenericException;
 
 public class Page implements Statement {
-    private static final Selector[] NO_SELECTORS = new Selector[0];
-
     // may be null
     private final String pseudoPage;
 
@@ -21,6 +19,6 @@ public class Page implements Statement {
         if (pseudoPage != null) {
             output.string(" :", pseudoPage);
         }
-        Declaration.toCss(NO_SELECTORS, declarations, output);
+        Declaration.toCss(declarations, output);
     }
 }
