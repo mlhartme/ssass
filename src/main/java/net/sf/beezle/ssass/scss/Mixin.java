@@ -4,19 +4,19 @@ import net.sf.beezle.mork.misc.GenericException;
 
 public class Mixin implements Statement {
     private final String name;
-    private final NestedDeclaration[] nestedDeclarations;
+    private final SsassDeclaration[] ssassDeclarations;
 
-    public Mixin(String name, NestedDeclaration[] nestedDeclarations) {
+    public Mixin(String name, SsassDeclaration[] ssassDeclarations) {
         this.name = name;
-        this.nestedDeclarations = nestedDeclarations;
+        this.ssassDeclarations = ssassDeclarations;
     }
 
     public String getName() {
         return name;
     }
 
-    public NestedDeclaration[] getNestedDeclarations() {
-        return nestedDeclarations;
+    public SsassDeclaration[] getSsassDeclarations() {
+        return ssassDeclarations;
     }
 
     @Override

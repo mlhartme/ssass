@@ -2,13 +2,13 @@ package net.sf.beezle.ssass.scss;
 
 import net.sf.beezle.mork.misc.GenericException;
 
-public class Ruleset implements Statement, NestedDeclaration {
+public class Ruleset implements Statement, SsassDeclaration {
     private Selector[] selectors;
-    private NestedDeclaration[] nestedDeclarations;
+    private SsassDeclaration[] ssassDeclarations;
 
-    public Ruleset(Selector[] selectors, NestedDeclaration[] nestedDeclarations) {
+    public Ruleset(Selector[] selectors, SsassDeclaration[] ssassDeclarations) {
         this.selectors = selectors;
-        this.nestedDeclarations = nestedDeclarations;
+        this.ssassDeclarations = ssassDeclarations;
     }
 
     @Override
@@ -36,6 +36,6 @@ public class Ruleset implements Statement, NestedDeclaration {
             }
             selector.toCss(output);
         }
-        Declaration.toCss(selectors, nestedDeclarations, output);
+        Declaration.toCss(selectors, ssassDeclarations, output);
     }
 }

@@ -2,7 +2,7 @@ package net.sf.beezle.ssass.scss;
 
 import net.sf.beezle.mork.misc.GenericException;
 
-public class Include implements NestedDeclaration {
+public class Include implements SsassDeclaration {
     private final String mixin;
 
     public Include(String mixin) {
@@ -17,7 +17,7 @@ public class Include implements NestedDeclaration {
         if (def == null) {
             throw new GenericException("undefined mixin: " + mixin);
         }
-        for (NestedDeclaration decl : def.getNestedDeclarations()) {
+        for (SsassDeclaration decl : def.getSsassDeclarations()) {
             decl.toCss(output);
         }
     }

@@ -2,13 +2,13 @@ package net.sf.beezle.ssass.scss;
 
 import net.sf.beezle.mork.misc.GenericException;
 
-public class NestedProperty implements NestedDeclaration {
+public class NestedProperty implements SsassDeclaration {
     private final String property;
-    private final NestedDeclaration[] nestedDeclarations;
+    private final SsassDeclaration[] ssassDeclarations;
 
-    public NestedProperty(String property, NestedDeclaration[] nestedDeclarations) {
+    public NestedProperty(String property, SsassDeclaration[] ssassDeclarations) {
         this.property = property;
-        this.nestedDeclarations = nestedDeclarations;
+        this.ssassDeclarations = ssassDeclarations;
     }
 
     @Override
@@ -17,14 +17,14 @@ public class NestedProperty implements NestedDeclaration {
 
         output.pushProperty(property);
         first = true;
-        for (NestedDeclaration nestedDeclaration : nestedDeclarations) {
+        for (SsassDeclaration ssassDeclaration : ssassDeclarations) {
             if (first) {
                 first = false;
             } else {
                 output.semicolon();
             }
-            if (nestedDeclaration instanceof Declaration) {
-                nestedDeclaration.toCss(output);
+            if (ssassDeclaration instanceof Declaration) {
+                ssassDeclaration.toCss(output);
             }
         }
         output.semicolonOpt();

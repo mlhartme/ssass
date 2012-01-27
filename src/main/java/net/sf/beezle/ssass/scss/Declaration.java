@@ -2,7 +2,7 @@ package net.sf.beezle.ssass.scss;
 
 import net.sf.beezle.mork.misc.GenericException;
 
-public class Declaration implements Base, NestedDeclaration {
+public class Declaration implements Base, SsassDeclaration {
     private final String property;
     private final Expr expr;
     private final Prio prio;
@@ -25,27 +25,27 @@ public class Declaration implements Base, NestedDeclaration {
         }
     }
 
-    public static void toCss(Selector[] context, NestedDeclaration[] nestedDeclarations, Output output) throws GenericException {
+    public static void toCss(Selector[] context, SsassDeclaration[] ssassDeclarations, Output output) throws GenericException {
         boolean first;
 
         output.open();
         first = true;
-        for (NestedDeclaration nestedDeclaration : nestedDeclarations) {
+        for (SsassDeclaration ssassDeclaration : ssassDeclarations) {
             if (first) {
                 first = false;
             } else {
                 output.semicolon();
             }
-            if (!(nestedDeclaration instanceof Ruleset)) {
-                nestedDeclaration.toCss(output);
+            if (!(ssassDeclaration instanceof Ruleset)) {
+                ssassDeclaration.toCss(output);
             }
         }
         output.semicolonOpt();
         output.close();
         output.pushSelector(context);
-        for (NestedDeclaration nestedDeclaration : nestedDeclarations) {
-            if (nestedDeclaration instanceof Ruleset) {
-                nestedDeclaration.toCss(output);
+        for (SsassDeclaration ssassDeclaration : ssassDeclarations) {
+            if (ssassDeclaration instanceof Ruleset) {
+                ssassDeclaration.toCss(output);
             }
         }
         output.popSelector();

@@ -27,7 +27,7 @@
  * various helper symbols (starting with _) added to add semantics
  * additional symbols for sass features, marked with a tailing _
    * variables (variable_, reference_)
-   * nesting (nested_declaration_, nested_property)
+   * nesting (ssass_declaration_, nested_property)
  * conflict resolution
    * replaced S* with Sp+ and S+ with Sp, where SP ::= s+
    * changed declaration to require Sp after ":". This is a language change, but resolves my conflicts
@@ -41,7 +41,7 @@
           media ::= MEDIA_SYM Sp? media_list "{" Sp? ruleset* "}" Sp? ;
      media_list ::= medium ( "," Sp? medium )* ;
          medium ::= IDENT Sp? ;
-           page ::= PAGE_SYM Sp? pseudo_page? "{" Sp? nested_declaration_? ( ";" Sp? nested_declaration_? )* "}" Sp? ;
+           page ::= PAGE_SYM Sp? pseudo_page? "{" Sp? ssass_declaration_? ( ";" Sp? ssass_declaration_? )* "}" Sp? ;
     pseudo_page ::= ":" IDENT Sp? ;
        operator ::= _slash | _comma ;
          _slash ::= "/" Sp? ;
@@ -53,7 +53,7 @@
     _unary_plus ::= "+" ;
    _unary_minus ::= "-" ;
        property ::= IDENT ;
-        ruleset ::= selector ( "," Sp? selector )* "{" Sp? nested_declaration_? ( ";" Sp? nested_declaration_? )* "}" Sp? ;
+        ruleset ::= selector ( "," Sp? selector )* "{" Sp? ssass_declaration_? ( ";" Sp? ssass_declaration_? )* "}" Sp? ;
        selector ::= simple_selector ( combinator selector | Sp ( combinator? selector )? )? ;
 simple_selector ::= element_name ( _hash | class | attrib | pseudo )*
                   | ( _hash | class | attrib | pseudo )+ ;
@@ -89,12 +89,12 @@ simple_selector ::= element_name ( _hash | class | attrib | pseudo )*
 
 # sass additions
 
-nested_declaration_ ::= declaration | ruleset | nested_property_ | include_ ;
-   nested_property_ ::= property Sp? ":" Sp "{" Sp? nested_declaration_? ( ";" Sp? nested_declaration_? )* "}" Sp? ;
-          variable_ ::= "$" IDENT Sp? ":" Sp? expr ";" Sp?;
-         reference_ ::= "$" IDENT ;
-             mixin_ ::= "@mixin" Sp? IDENT Sp? "{" Sp? nested_declaration_? ( ";" Sp? nested_declaration_? )* "}" Sp?;
-           include_ ::= "@include" Sp? IDENT ;
+ssass_declaration_ ::= declaration | ruleset | nested_property_ | include_ ;
+  nested_property_ ::= property Sp? ":" Sp "{" Sp? ssass_declaration_? ( ";" Sp? ssass_declaration_? )* "}" Sp? ;
+         variable_ ::= "$" IDENT Sp? ":" Sp? expr ";" Sp?;
+        reference_ ::= "$" IDENT ;
+            mixin_ ::= "@mixin" Sp? IDENT Sp? "{" Sp? ssass_declaration_? ( ";" Sp? ssass_declaration_? )* "}" Sp?;
+          include_ ::= "@include" Sp? IDENT ;
 
 [SCANNER]
     white = comment ;
