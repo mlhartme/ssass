@@ -26,10 +26,13 @@ public class Ruleset implements Statement, SsassDeclaration {
     public static void toCss(Selector[] context, SsassDeclaration[] ssassDeclarations, Output output) throws GenericException {
         boolean first;
 
+        output.pushSelector(context);
         output.open();
         first = true;
         for (SsassDeclaration ssassDeclaration : ssassDeclarations) {
-            if (!(ssassDeclaration instanceof Ruleset)) {
+            if (ssassDeclaration instanceof Ruleset) {
+                output.delay((Ruleset) ssassDeclaration);
+            } else {
                 if (first) {
                     first = false;
                 } else {
@@ -40,12 +43,10 @@ public class Ruleset implements Statement, SsassDeclaration {
         }
         output.semicolonOpt();
         output.close();
-        output.pushSelector(context);
-        for (SsassDeclaration ssassDeclaration : ssassDeclarations) {
-            if (ssassDeclaration instanceof Ruleset) {
-                ssassDeclaration.toCss(output);
-            }
-        }
         output.popSelector();
+
+        if (output.isTopLevel()) {
+            output.delayed();
+        }
     }
 }

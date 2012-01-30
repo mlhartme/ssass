@@ -4,6 +4,7 @@ import net.sf.beezle.mork.misc.GenericException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -31,6 +32,7 @@ public class Output {
     private int indent;
     private final List<Selector[]> selectorContext;
     private final List<String> propertyContext;
+    private final LinkedHashMap<List<Selector[]>, Ruleset> delayedDeclarations;
 
     // TODO: block structure
     private final Map<String, Variable> variables;
@@ -60,6 +62,7 @@ public class Output {
         this.mixins = new HashMap<String, Mixin>();
         this.selectorContext = new ArrayList<Selector[]>();
         this.propertyContext = new ArrayList<String>();
+        this.delayedDeclarations = new LinkedHashMap<List<Selector[]>, Ruleset>();
     }
 
     public void object(Object ... objs) throws GenericException {
@@ -190,6 +193,33 @@ public class Output {
             string(property, "-");
         }
         return builder.toString();
+    }
+
+    public boolean isTopLevel() {
+        return selectorContext.size() == 0;
+    }
+
+    public void delay(Ruleset ruleset) {
+        delayedDeclarations.put(new ArrayList<Selector[]>(selectorContext), ruleset);
+    }
+
+    public void delayed() throws GenericException {
+        LinkedHashMap<List<Selector[]>, Ruleset> all;
+
+        if (!selectorContext.isEmpty()) {
+            // because we're executing top-level
+            throw new IllegalStateException();
+        }
+        while (!delayedDeclarations.isEmpty()) {
+            all = new LinkedHashMap<List<Selector[]>, Ruleset>(delayedDeclarations);
+            delayedDeclarations.clear();
+            for (Map.Entry<List<Selector[]>, Ruleset> entry : all.entrySet()) {
+                selectorContext.clear();
+                selectorContext.addAll(entry.getKey());
+                entry.getValue().toCss(this);
+            }
+        }
+        selectorContext.clear();
     }
 
     //--

@@ -21,7 +21,9 @@ public class Include implements SsassDeclaration {
 
         first = true;
         for (SsassDeclaration ssassDeclaration : def.getSsassDeclarations()) {
-            if (!(ssassDeclaration instanceof Ruleset)) {
+            if (ssassDeclaration instanceof Ruleset) {
+                output.delay((Ruleset) ssassDeclaration);
+            } else {
                 if (first) {
                     first = false;
                 } else {
