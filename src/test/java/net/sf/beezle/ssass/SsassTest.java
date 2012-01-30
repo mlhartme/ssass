@@ -106,8 +106,16 @@ public class SsassTest {
     }
 
     @Test
-    public void term1() throws IOException {
+    public void term() throws IOException {
         check("term1 {",
+              "  number: 42;",
+              "  percentage: 2%;",
+              "  length-px: 3px;",
+              "  length-cm: 4cm;",
+              "  length-mm: 5mm;",
+              "  length-in: 6in;",
+              "  length-pt: 7pt;",
+              "  length-pc: 8pc",
               "  a: -3;",
               "  b: +4%;",
               "  c: -100cm;",
@@ -121,19 +129,6 @@ public class SsassTest {
               "  k: 2hz;",
               "  l: 3khz",
               "}");
-    }
-    @Test
-    public void term2() throws IOException {
-        check(  "foo {",
-                "  number: 42;",
-                "  percentage: 2%;",
-                "  length-px: 3px;",
-                "  length-cm: 4cm;",
-                "  length-mm: 5mm;",
-                "  length-in: 6in;",
-                "  length-pt: 7pt;",
-                "  length-pc: 8pc",
-                "}");
     }
 
     @Test
@@ -352,6 +347,4 @@ public class SsassTest {
             fail(e.getMessage());
         }
     }
-
-
 }
