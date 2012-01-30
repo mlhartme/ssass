@@ -264,12 +264,15 @@ public class SsassTest {
                 "  @include table-base;\n" +
                 "}",
 
+                "#data {\n" +
+                "\n" +
+                "}\n" +
                 "#data th {\n" +
                 "  text-align: center;\n" +
-                "  font-weight: bold;\n" +
+                "  font-weight: bold\n" +
                 "}\n" +
                 "#data td, #data th {\n" +
-                "  padding: 2px;\n" +
+                "  padding: 2px\n" +
                 "}\n");
     }
 

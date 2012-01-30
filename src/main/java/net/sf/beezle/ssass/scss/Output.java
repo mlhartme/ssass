@@ -32,7 +32,8 @@ public class Output {
     private int indent;
     private final List<Selector[]> selectorContext;
     private final List<String> propertyContext;
-    private final LinkedHashMap<Selector[], Ruleset> delayedDeclarations;
+    private final List<Selector[]> delayedContexts;
+    private final List<Ruleset> delayedRulesets;
 
     // TODO: block structure
     private final Map<String, Variable> variables;
@@ -70,7 +71,8 @@ public class Output {
         this.mixins = new HashMap<String, Mixin>();
         this.selectorContext = new ArrayList<Selector[]>();
         this.propertyContext = new ArrayList<String>();
-        this.delayedDeclarations = new LinkedHashMap<Selector[], Ruleset>();
+        this.delayedContexts = new ArrayList<Selector[]>();
+        this.delayedRulesets = new ArrayList<Ruleset>();
     }
 
     public void object(Object ... objs) throws GenericException {
@@ -205,26 +207,24 @@ public class Output {
     }
 
     public void delay(Ruleset ruleset) {
-        delayedDeclarations.put(selectorContext.get(selectorContext.size() - 1), ruleset);
+        delayedContexts.add(selectorContext.get(selectorContext.size() - 1));
+        delayedRulesets.add(ruleset);
     }
 
     public void delayed() throws GenericException {
-        LinkedHashMap<Selector[], Ruleset> all;
-
         if (!selectorContext.isEmpty()) {
             // because we're executing top-level
             throw new IllegalStateException();
         }
-        while (!delayedDeclarations.isEmpty()) {
-            all = new LinkedHashMap<Selector[], Ruleset>(delayedDeclarations);
-            delayedDeclarations.clear();
-            for (Map.Entry<Selector[], Ruleset> entry : all.entrySet()) {
-                selectorContext.clear();
-                selectorContext.add(entry.getKey());
-                entry.getValue().toCss(this);
-            }
+
+        // size grows!
+        for (int i = 0; i < delayedContexts.size(); i++) {
+            selectorContext.clear();
+            selectorContext.add(delayedContexts.get(i));
+            delayedRulesets.get(i).toCss(this);
         }
-        selectorContext.clear();
+        delayedContexts.clear();
+        delayedRulesets.clear();
     }
 
     //--
