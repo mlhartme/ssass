@@ -106,6 +106,37 @@ public class SsassTest {
     }
 
     @Test
+    public void term1() throws IOException {
+        check("term1 {",
+              "  a: -3;",
+              "  b: +4%;",
+              "  c: -100cm;",
+              "  d: 12em;",
+              "  e: 13ex;",
+              "  f: 20deg;",
+              "  g: 21rad;",
+              "  h: 22grad;",
+              "  i: 0s;",
+              "  j: 1ms;",
+              "  k: 2hz;",
+              "  l: 3khz",
+              "}");
+    }
+    @Test
+    public void term2() throws IOException {
+        check(  "foo {",
+                "  number: 42;",
+                "  percentage: 2%;",
+                "  length-px: 3px;",
+                "  length-cm: 4cm;",
+                "  length-mm: 5mm;",
+                "  length-in: 6in;",
+                "  length-pt: 7pt;",
+                "  length-pc: 8pc",
+                "}");
+    }
+
+    @Test
     public void attrib() throws IOException {
         check(
                 "foo[bar=\"x\"] {",
