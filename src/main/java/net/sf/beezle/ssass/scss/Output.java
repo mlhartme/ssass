@@ -32,7 +32,7 @@ public class Output {
     private int indent;
     private final List<Selector[]> selectorContext;
     private final List<String> propertyContext;
-    private final LinkedHashMap<List<Selector[]>, Ruleset> delayedDeclarations;
+    private final LinkedHashMap<Selector[], Ruleset> delayedDeclarations;
 
     // TODO: block structure
     private final Map<String, Variable> variables;
@@ -40,8 +40,16 @@ public class Output {
 
 
     public void pushSelector(Selector[] context) {
-        selectorContext.add(context);
+        int size;
+
+        size = selectorContext.size();
+        if (size == 0) {
+            selectorContext.add(context);
+        } else {
+            selectorContext.add(Selector.cross(selectorContext.get(size - 1), context));
+        }
     }
+
     public void popSelector() {
         selectorContext.remove(selectorContext.size() - 1);
     }
@@ -62,7 +70,7 @@ public class Output {
         this.mixins = new HashMap<String, Mixin>();
         this.selectorContext = new ArrayList<Selector[]>();
         this.propertyContext = new ArrayList<String>();
-        this.delayedDeclarations = new LinkedHashMap<List<Selector[]>, Ruleset>();
+        this.delayedDeclarations = new LinkedHashMap<Selector[], Ruleset>();
     }
 
     public void object(Object ... objs) throws GenericException {
@@ -80,21 +88,18 @@ public class Output {
     }
 
     public void selectors(Selector[] selectors) throws GenericException {
+        int size;
+        Selector[] lst;
         boolean first;
 
-        first = true;
-        for (Selector[] context : selectorContext) {
-            for (Selector selector : context) {
-                if (first) {
-                    first = false;
-                } else {
-                    string(",");
-                    spaceOpt();
-                }
-                selector.toCss(this);
-            }
+        size = selectorContext.size();
+        if (size == 0) {
+            lst = selectors;
+        } else {
+            lst = Selector.cross(selectorContext.get(size - 1), selectors);
         }
-        for (Selector selector : selectors) {
+        first = true;
+        for (Selector selector : lst) {
             if (first) {
                 first = false;
             } else {
@@ -200,22 +205,22 @@ public class Output {
     }
 
     public void delay(Ruleset ruleset) {
-        delayedDeclarations.put(new ArrayList<Selector[]>(selectorContext), ruleset);
+        delayedDeclarations.put(selectorContext.get(selectorContext.size() - 1), ruleset);
     }
 
     public void delayed() throws GenericException {
-        LinkedHashMap<List<Selector[]>, Ruleset> all;
+        LinkedHashMap<Selector[], Ruleset> all;
 
         if (!selectorContext.isEmpty()) {
             // because we're executing top-level
             throw new IllegalStateException();
         }
         while (!delayedDeclarations.isEmpty()) {
-            all = new LinkedHashMap<List<Selector[]>, Ruleset>(delayedDeclarations);
+            all = new LinkedHashMap<Selector[], Ruleset>(delayedDeclarations);
             delayedDeclarations.clear();
-            for (Map.Entry<List<Selector[]>, Ruleset> entry : all.entrySet()) {
+            for (Map.Entry<Selector[], Ruleset> entry : all.entrySet()) {
                 selectorContext.clear();
-                selectorContext.addAll(entry.getKey());
+                selectorContext.add(entry.getKey());
                 entry.getValue().toCss(this);
             }
         }

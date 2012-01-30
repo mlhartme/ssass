@@ -172,10 +172,11 @@ public class SsassTest {
                 "    text-align: right;\n" +
                 "  }\n" +
                 "}",
+
                 "table.hl {\n" +
                 "  margin: 2em 0\n" +
                 "}\n" +
-                "table.hl, td.ln {\n" +
+                "table.hl td.ln {\n" +
                 "  text-align: right\n" +
                 "}\n");
     }
@@ -194,10 +195,10 @@ public class SsassTest {
                 "top {\n" +
                 "  a: b\n" +
                 "}\n" +
-                "top, mid {\n" +
+                "top mid {\n" +
                 "  foo: bar\n" +
                 "}\n" +
-                "top, mid, bottom {\n" +
+                "top mid bottom {\n" +
                 "  x: y\n" +
                 "}\n");
     }
@@ -269,7 +270,7 @@ public class SsassTest {
                 "}\n" +
                 "#data td, #data th {\n" +
                 "  padding: 2px;\n" +
-                "}");
+                "}\n");
     }
 
     //--
