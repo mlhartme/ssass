@@ -21,15 +21,14 @@ public class Include implements SsassDeclaration {
 
         first = true;
         for (SsassDeclaration ssassDeclaration : def.getSsassDeclarations()) {
-            if (first) {
-                first = false;
-            } else {
-                output.semicolon();
-            }
             if (!(ssassDeclaration instanceof Ruleset)) {
+                if (first) {
+                    first = false;
+                } else {
+                    output.semicolon();
+                }
                 ssassDeclaration.toCss(output);
             }
         }
-        output.semicolonOpt();
     }
 }
