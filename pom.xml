@@ -40,7 +40,7 @@
     <dependency>
       <groupId>net.sf.beezle.mork</groupId>
       <artifactId>mork</artifactId>
-      <version>1.0</version>
+      <version>1.0.1-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
@@ -71,7 +71,8 @@
                     <pathelement path="${basedir}/target/classes" />
                     <path refid="maven.compile.classpath" />
                   </classpath>
-                  <arg value="-verbose" />
+                  <arg value="-v" />
+                  <arg value="-stat" />
                   <arg value="-k" />
                   <arg value="3" />
                   <arg value="-d" />

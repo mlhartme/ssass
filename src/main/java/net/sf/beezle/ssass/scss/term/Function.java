@@ -15,6 +15,6 @@ public class Function implements BaseTerm {
 
     @Override
     public void toCss(Output output) throws GenericException {
-        output.object(name, expr, ")");
+        output.object(name, "(", expr, ")");
     }
 }

@@ -66,7 +66,7 @@
         _dashmatch ::= DASHMATCH ;
             pseudo ::= ":" ( _pseudo1 | _pseudo2 ) ;
           _pseudo1 ::= IDENT ;
-          _pseudo2 ::= FUNCTION Sp? (IDENT Sp?)? ")" ;
+          _pseudo2 ::= IDENT "(" Sp? (IDENT Sp?)? ")" ;
 
 ssass_declaration_ ::= ruleset | nested_property_ | include_ | declaration ;
   nested_property_ ::= property Sp? ":" Sp "{" Sp? ssass_declaration_? ( ";" Sp? ssass_declaration_? )* "}" Sp? ;
@@ -98,7 +98,7 @@ ssass_declaration_ ::= ruleset | nested_property_ | include_ | declaration ;
             _ident ::= IDENT ;
               _uri ::= URI ;
           hexcolor ::= HASH Sp? ;
-          function ::= FUNCTION Sp? expr ")" Sp? ;
+          function ::= IDENT "(" Sp? expr ")" Sp? ;
 
 [SCANNER]
     white = comment ;
@@ -124,7 +124,6 @@ ssass_declaration_ ::= ruleset | nested_property_ | include_ | declaration ;
 
             URI ::= "url(" w string w ")";
             URI ::= "url(" w url w ")";
-       FUNCTION ::= ident "(";
 
               h ::= 'A'..'Z' | 'a'..'z' | '0' .. '9' ;
        nonascii ::= (160 .. 255);

@@ -85,4 +85,3 @@ NUMBER => [text];
 STRING => [text];
 URI => [text];
 HASH => [text];
-FUNCTION => [text]; # TODO: without failing "("
