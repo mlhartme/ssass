@@ -48,8 +48,8 @@
               page ::= "@page" Sp? pseudo_page? "{" Sp? ssass_declaration_? ( ";" Sp? ssass_declaration_? )* "}" Sp? ;
        pseudo_page ::= ":" IDENT Sp? ;
          variable_ ::= "$" IDENT Sp? ":" Sp? expr ";" Sp?;
-            mixin_ ::= "@mixin" Sp? IDENT Sp? "{" Sp? ssass_declaration_? ( ";" Sp? ssass_declaration_? )* "}" Sp?;
-
+            mixin_ ::= "@mixin" Sp? IDENT Sp? mixin_args_? "{" Sp? ssass_declaration_? ( ";" Sp? ssass_declaration_? )* "}" Sp?;
+       mixin_args_ ::= "(" "$" IDENT Sp? ("," Sp? "$" IDENT )* Sp? ")" Sp?;
            ruleset ::= selector ( "," Sp? selector )* "{" Sp? ssass_declaration_? ( ";" Sp? ssass_declaration_? )* "}" Sp? ;
           selector ::= simple_selector ( combinator selector | Sp ( combinator? selector )? )? ;
    simple_selector ::= element_name ( _hash | class | attrib | pseudo )*
@@ -97,8 +97,8 @@ ssass_declaration_ ::= ruleset | nested_property_ | include_ | declaration ;
            _string ::= STRING ;
             _ident ::= IDENT ;
               _uri ::= URI ;
-          function ::= FUNCTION Sp? expr ")" Sp? ;
           hexcolor ::= HASH Sp? ;
+          function ::= FUNCTION Sp? expr ")" Sp? ;
 
 [SCANNER]
     white = comment ;
@@ -132,13 +132,13 @@ ssass_declaration_ ::= ruleset | nested_property_ | include_ | declaration ;
          escape ::= unicode | '\\' ('\r' | '\n' | '\f' | '0'..'9' | 'A'..'F' | 'a'..'f')! ;
         nmstart ::= ('_' | 'A' .. 'Z' | 'a'..'z' | nonascii | escape );
          nmchar ::= ('_' | 'A' .. 'Z' | 'a'..'z' | '0'..'9' | '-' | nonascii | escape );
-        string1 ::= '"' (('\n' | '\r' | '\f' | '"')! | '\\' nl | escape)* '"';
-        string2 ::= '\'' (('\n' | '\r' | '\f' | '\'')! | '\\' nl | escape)* '\'';
         comment ::= '/' '*' '*'!* '*'+ (('/' | '*')! '*'!* '*'+)* '/' ;
           ident ::= '-'? nmstart nmchar* ;
            name ::= nmchar+ ;
             num ::= ('0'..'9')+ | ('0'..'9')* '.' ('0'..'9')+;
          string ::= string1 | string2 ;
+        string1 ::= '"' (('\n' | '\r' | '\f' | '"')! | '\\' nl | escape)* '"';
+        string2 ::= '\'' (('\n' | '\r' | '\f' | '\'')! | '\\' nl | escape)* '\'';
 
             url ::= ("!" | "#" | "$" | "%" | "&" | '*'..'~' | nonascii | escape )*;
 

@@ -106,7 +106,7 @@ public class SsassTest {
     }
 
     @Test
-    public void term() throws IOException {
+    public void term1() throws IOException {
         check("term1 {",
               "  number: 42;",
               "  percentage: 2%;",
@@ -115,7 +115,7 @@ public class SsassTest {
               "  length-mm: 5mm;",
               "  length-in: 6in;",
               "  length-pt: 7pt;",
-              "  length-pc: 8pc",
+              "  length-pc: 8pc;",
               "  a: -3;",
               "  b: +4%;",
               "  c: -100cm;",
@@ -128,6 +128,18 @@ public class SsassTest {
               "  j: 1ms;",
               "  k: 2hz;",
               "  l: 3khz",
+              "}");
+    }
+
+    @Test
+    public void term2() throws IOException {
+        check("term2 {",
+              "  string1: \"str\";",
+              "  string2: 'str';",
+              "  ident: ident;",
+              "  url: url(foo);",
+              "  hexcolor: #name;",
+              "  function: foo(bar)",
               "}");
     }
 
