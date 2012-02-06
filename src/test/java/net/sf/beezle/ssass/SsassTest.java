@@ -314,6 +314,21 @@ public class SsassTest {
                 "}\n");
     }
 
+    @Test
+    public void mixinArguments() throws IOException {
+        sass   ("@mixin left ($dist) {\n" +
+                "  float: left;\n" +
+                "  margin-left: $dist;\n" +
+                "}\n" +
+                "#data {\n" +
+                "  @include left(10px);\n" +
+                "}\n",
+                "#data {\n" +
+                "  float: left;\n" +
+                "  margin-left: 10px;\n" +
+                "}\n");
+    }
+
     //--
 
     private void check(String ... lines) throws IOException {

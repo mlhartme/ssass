@@ -48,8 +48,8 @@
               page ::= "@page" Sp? pseudo_page? "{" Sp? ssass_declaration_? ( ";" Sp? ssass_declaration_? )* "}" Sp? ;
        pseudo_page ::= ":" IDENT Sp? ;
          variable_ ::= "$" IDENT Sp? ":" Sp? expr ";" Sp?;
-            mixin_ ::= "@mixin" Sp? IDENT Sp? mixin_args_? "{" Sp? ssass_declaration_? ( ";" Sp? ssass_declaration_? )* "}" Sp?;
-       mixin_args_ ::= "(" "$" IDENT Sp? ("," Sp? "$" IDENT )* Sp? ")" Sp?;
+            mixin_ ::= "@mixin" Sp? IDENT Sp? mixin_args_? Sp? "{" Sp? ssass_declaration_? ( ";" Sp? ssass_declaration_? )* "}" Sp?;
+       mixin_args_ ::= "(" Sp? "$" IDENT Sp? ("," Sp? "$" IDENT )* Sp? ")";
            ruleset ::= selector ( "," Sp? selector )* "{" Sp? ssass_declaration_? ( ";" Sp? ssass_declaration_? )* "}" Sp? ;
           selector ::= simple_selector ( combinator selector | Sp ( combinator? selector )? )? ;
    simple_selector ::= element_name ( _hash | class | attrib | pseudo )*
@@ -71,7 +71,7 @@
 ssass_declaration_ ::= ruleset | nested_property_ | include_ | declaration ;
   nested_property_ ::= property Sp? ":" Sp "{" Sp? ssass_declaration_? ( ";" Sp? ssass_declaration_? )* "}" Sp? ;
         reference_ ::= "$" IDENT ;
-          include_ ::= "@include" Sp? IDENT ;
+          include_ ::= "@include" Sp? (_ident | function);
 
        declaration ::= property Sp? ":" Sp expr prio? ;
           property ::= IDENT ;

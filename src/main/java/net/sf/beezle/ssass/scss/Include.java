@@ -1,12 +1,24 @@
 package net.sf.beezle.ssass.scss;
 
 import net.sf.beezle.mork.misc.GenericException;
+import net.sf.beezle.ssass.scss.term.Function;
+import net.sf.beezle.ssass.scss.term.Ident;
 
 public class Include implements SsassDeclaration {
     private final String mixin;
+    private final Expr expression;
 
-    public Include(String mixin) {
-        this.mixin = mixin;
+    public Include(Object identOrFunction) {
+        Function fn;
+
+        if (identOrFunction instanceof Ident) {
+            this.mixin = ((Ident) identOrFunction).name;
+            this.expression = null;
+        } else {
+            fn = (Function) identOrFunction;
+            this.mixin = fn.name;
+            this.expression = fn.expr;
+        }
     }
 
     @Override

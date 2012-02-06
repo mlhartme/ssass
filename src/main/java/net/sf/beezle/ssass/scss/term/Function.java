@@ -5,8 +5,8 @@ import net.sf.beezle.ssass.scss.Expr;
 import net.sf.beezle.ssass.scss.Output;
 
 public class Function implements BaseTerm {
-    private final String name;
-    private final Expr expr;
+    public final String name;
+    public final Expr expr;
 
     public Function(String name, Expr expr) {
         this.name = name;
