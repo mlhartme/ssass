@@ -4,7 +4,6 @@ import net.sf.beezle.mork.misc.GenericException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -35,9 +34,10 @@ public class Output {
     private final List<Selector[]> delayedContexts;
     private final List<Ruleset> delayedRulesets;
 
-    // TODO: block structure
-    private final Map<String, Variable> variables;
     private final Map<String, Mixin> mixins;
+
+    private final Map<String, Variable> variables;
+    private final List<Map<String, Expr>> mixinContexts;
 
 
     public void pushSelector(Selector[] context) {
@@ -73,6 +73,7 @@ public class Output {
         this.propertyContext = new ArrayList<String>();
         this.delayedContexts = new ArrayList<Selector[]>();
         this.delayedRulesets = new ArrayList<Ruleset>();
+        this.mixinContexts = new ArrayList<Map<String, Expr>>();
     }
 
     public void object(Object ... objs) throws GenericException {
@@ -172,8 +173,20 @@ public class Output {
         }
     }
 
-    public Variable lookupVariable(String name) {
-        return variables.get(name);
+    public Expr lookupVariable(String name) {
+        Map<String, Expr> context;
+        Variable variable;
+        Expr result;
+
+        for (int i = mixinContexts.size() - 1; i >= 0; i--) {
+            context = mixinContexts.get(i);
+            result = context.get(name);
+            if (result != null) {
+                return result;
+            }
+        }
+        variable = variables.get(name);
+        return variable == null ? null : variable.getExpr();
     }
 
     public void defineVariable(Variable var) throws GenericException {
@@ -190,6 +203,23 @@ public class Output {
         if (mixins.put(mixin.getName(), mixin) != null) {
             throw new GenericException("duplicate mixin");
         }
+    }
+
+    public void pushMixin(Mixin mixin, Expr ... values) throws GenericException {
+        Map<String, Expr> data;
+
+        if (mixin.variables.length != values.length) {
+            throw new GenericException("argument count mismatch");
+        }
+        data = new HashMap<String, Expr>();
+        for (int i = 0; i < values.length; i++) {
+            data.put(mixin.variables[i], values[i]);
+        }
+        mixinContexts.add(data);
+    }
+
+    public void popMixin() {
+        mixins.remove(mixinContexts.size() - 1);
     }
 
     public String propertyPrefix() {

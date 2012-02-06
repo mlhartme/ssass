@@ -5,7 +5,7 @@ import net.sf.beezle.sushi.util.Strings;
 
 public class Mixin implements Statement {
     private final String name;
-    private final String[] variables;
+    public final String[] variables;
     private final SsassDeclaration[] ssassDeclarations;
 
     public Mixin(String[] nameAndVariables, SsassDeclaration[] ssassDeclarations) {

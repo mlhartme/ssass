@@ -325,7 +325,7 @@ public class SsassTest {
                 "}\n",
                 "#data {\n" +
                 "  float: left;\n" +
-                "  margin-left: 10px;\n" +
+                "  margin-left: 10px\n" +
                 "}\n");
     }
 

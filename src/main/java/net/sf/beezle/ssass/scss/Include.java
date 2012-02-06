@@ -29,6 +29,12 @@ public class Include implements SsassDeclaration {
         if (def == null) {
             throw new GenericException("undefined mixin: " + mixin);
         }
+        if (expression != null) {
+            output.pushMixin(def, expression);
+        } else {
+            output.pushMixin(def);
+        }
+
         boolean first;
 
         first = true;
@@ -44,5 +50,6 @@ public class Include implements SsassDeclaration {
                 ssassDeclaration.toCss(output);
             }
         }
+        output.popMixin();
     }
 }

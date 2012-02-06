@@ -12,12 +12,12 @@ public class Reference implements BaseTerm {
 
     @Override
     public void toCss(Output output) throws GenericException {
-        Variable variable;
+        Expr value;
 
-        variable = output.lookupVariable(name);
-        if (variable == null) {
+        value = output.lookupVariable(name);
+        if (value == null) {
             throw new GenericException("undefined variable: " + name);
         }
-        variable.getExpr().toCss(output);
+        value.toCss(output);
     }
 }
