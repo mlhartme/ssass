@@ -29,11 +29,7 @@ public class Include implements SsassDeclaration {
         if (def == null) {
             throw new GenericException("undefined mixin: " + mixin);
         }
-        if (expression != null) {
-            output.pushMixin(def, expression);
-        } else {
-            output.pushMixin(def);
-        }
+        output.pushMixin(def, expression);
 
         boolean first;
 

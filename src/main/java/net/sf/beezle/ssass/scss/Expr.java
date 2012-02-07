@@ -31,6 +31,16 @@ public class Expr implements Base {
         }
     }
 
+    public void toArguments(List<Expr> result) throws GenericException {
+        for (Object obj : opsOrTerms) {
+            if (obj instanceof Term) {
+                result.add(new Expr(new Object[] { obj }));
+            } else if (obj != Operator.COMMA) {
+                throw new GenericException("argument list expected");
+            }
+        }
+    }
+
     @Override
     public void toCss(Output output) throws GenericException {
         Object last;

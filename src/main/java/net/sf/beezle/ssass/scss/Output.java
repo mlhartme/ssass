@@ -205,15 +205,20 @@ public class Output {
         }
     }
 
-    public void pushMixin(Mixin mixin, Expr ... values) throws GenericException {
+    public void pushMixin(Mixin mixin, Expr expr) throws GenericException {
         Map<String, Expr> data;
+        List<Expr> arguments;
 
-        if (mixin.variables.length != values.length) {
-            throw new GenericException("argument count mismatch");
+        arguments = new ArrayList<Expr>();
+        if (expr != null) {
+            expr.toArguments(arguments);
+        }
+        if (mixin.variables.length != arguments.size()) {
+            throw new GenericException("argument count mismatch: " + mixin.variables.length + " vs " + arguments.size());
         }
         data = new HashMap<String, Expr>();
-        for (int i = 0; i < values.length; i++) {
-            data.put(mixin.variables[i], values[i]);
+        for (int i = 0; i < arguments.size(); i++) {
+            data.put(mixin.variables[i], arguments.get(i));
         }
         mixinContexts.add(data);
     }

@@ -315,7 +315,7 @@ public class SsassTest {
     }
 
     @Test
-    public void mixinArguments() throws IOException {
+    public void mixinArgument() throws IOException {
         sass   ("@mixin left ($dist) {\n" +
                 "  float: left;\n" +
                 "  margin-left: $dist;\n" +
@@ -326,6 +326,28 @@ public class SsassTest {
                 "#data {\n" +
                 "  float: left;\n" +
                 "  margin-left: 10px\n" +
+                "}\n");
+    }
+
+    @Test
+    public void mixinArgumentLists() throws IOException {
+        sass   ("@mixin point ($x, $y) {\n" +
+                "  x: $x;\n" +
+                "  y: $y;\n" +
+                "}\n" +
+                "#a {\n" +
+                "  @include point(1, 2);\n" +
+                "}\n" +
+                "#b {\n" +
+                "  @include point(10, 11);\n" +
+                "}\n",
+                "#a {\n" +
+                "  x: 1;\n" +
+                "  y: 2\n" +
+                "}\n" +
+                "#b {\n" +
+                "  x: 10;\n" +
+                "  y: 11\n" +
                 "}\n");
     }
 
