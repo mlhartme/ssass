@@ -6,6 +6,7 @@ import net.sf.beezle.ssass.scss.Output;
 import net.sf.beezle.ssass.scss.Stylesheet;
 import net.sf.beezle.sushi.cli.Cli;
 import net.sf.beezle.sushi.cli.Command;
+import net.sf.beezle.sushi.cli.Console;
 import net.sf.beezle.sushi.cli.Option;
 import net.sf.beezle.sushi.cli.Remaining;
 
@@ -29,6 +30,10 @@ public class Main extends Cli implements Command {
     public Main() {
         this.files = new ArrayList<String>();
         this.mapper = new Mapper("net.sf.beezle.ssass.Mapper");
+    }
+
+    public Console getConsole() {
+        return console;
     }
 
     @Remaining

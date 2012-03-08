@@ -131,7 +131,8 @@ ssass_declaration_ ::= ruleset | nested_property_ | include_ | declaration ;
          escape ::= unicode | '\\' ('\r' | '\n' | '\f' | '0'..'9' | 'A'..'F' | 'a'..'f')! ;
         nmstart ::= ('_' | 'A' .. 'Z' | 'a'..'z' | nonascii | escape );
          nmchar ::= ('_' | 'A' .. 'Z' | 'a'..'z' | '0'..'9' | '-' | nonascii | escape );
-        comment ::= '/' '*' '*'!* '*'+ (('/' | '*')! '*'!* '*'+)* '/' ;
+        comment ::= '/' '*' '*'!* '*'+ (('/' | '*')! '*'!* '*'+)* '/' s*;
+                          # tailing s* because the parser skips comments, and thus leading and tailing blanks cannot be merged
           ident ::= '-'? nmstart nmchar* ;
            name ::= nmchar+ ;
             num ::= ('0'..'9')+ | ('0'..'9')* '.' ('0'..'9')+;

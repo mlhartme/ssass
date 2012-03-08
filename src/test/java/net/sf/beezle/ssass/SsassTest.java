@@ -1,7 +1,6 @@
 package net.sf.beezle.ssass;
 
 import com.yahoo.platform.yui.compressor.CssCompressor;
-import net.sf.beezle.mork.mapping.Mapper;
 import net.sf.beezle.mork.misc.GenericException;
 import net.sf.beezle.ssass.scss.Output;
 import net.sf.beezle.ssass.scss.Stylesheet;
@@ -19,8 +18,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 public class SsassTest {
-    private static final World world = new World();
     private static final Main main = new Main();
+    private static final World world = main.getConsole().world;
 
     @Test
     public void empty() throws IOException {
@@ -38,6 +37,18 @@ public class SsassTest {
                 "@import url('/css/typography.css');",
                 "@import url('/css/layout.css') print;",
                 "@import url('/css/color.css') foo, bar;");
+    }
+
+    @Test
+    public void comment() throws IOException {
+        main.getConsole().setVerbose(true);
+        checkCmp(new String[] {
+                    "@import url('/css/typography.css');",
+                    "@import url('/css/color.css') foo, bar;"},
+                 new String[] {
+                    "@import url('/css/typography.css');",
+                    "/* hi */",
+                    "@import url('/css/color.css') foo, bar;"});
     }
 
     @Test
@@ -354,17 +365,21 @@ public class SsassTest {
     //--
 
     private void check(String ... lines) throws IOException {
-        String orig;
+        checkCmp(lines, lines);
+    }
+
+    private void checkCmp(String[] expectedLines, String[] actual) throws IOException {
+        String expected;
         FileNode tmp;
         Stylesheet s;
 
-        orig = OS.CURRENT.lineSeparator.join(lines);
-        tmp = (FileNode) world.getTemp().createTempFile().writeLines(lines);
+        expected = OS.CURRENT.lineSeparator.join(expectedLines);
+        tmp = (FileNode) world.getTemp().createTempFile().writeLines(actual);
         s = main.parse(tmp.getAbsolute());
         tmp.delete();
         try {
-            assertEquals(orig, Output.prettyprint(s).trim());
-            assertEquals(compress(orig), Output.compress(s));
+            assertEquals(expected, Output.prettyprint(s).trim());
+            assertEquals(compress(expected), Output.compress(s));
         } catch (GenericException e) {
             fail(e.getMessage());
         }
