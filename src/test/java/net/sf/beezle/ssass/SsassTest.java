@@ -20,7 +20,7 @@ import static org.junit.Assert.fail;
 
 public class SsassTest {
     private static final World world = new World();
-    private static final Mapper mapper = Main.load();
+    private static final Main main = new Main();
 
     @Test
     public void empty() throws IOException {
@@ -163,7 +163,7 @@ public class SsassTest {
         Stylesheet s;
 
         src = world.guessProjectHome(getClass()).join("src/test/complex.css");
-        s = Main.parse(mapper, src.getAbsolute());
+        s = main.parse(src.getAbsolute());
         assertEquals(src.readString(), Output.prettyprint(s));
         assertEquals(compress(src.readString()), Output.compress(s));
     }
@@ -360,7 +360,7 @@ public class SsassTest {
 
         orig = OS.CURRENT.lineSeparator.join(lines);
         tmp = (FileNode) world.getTemp().createTempFile().writeLines(lines);
-        s = Main.parse(mapper, tmp.getAbsolute());
+        s = main.parse(tmp.getAbsolute());
         tmp.delete();
         try {
             assertEquals(orig, Output.prettyprint(s).trim());
@@ -385,7 +385,7 @@ public class SsassTest {
         Stylesheet s;
 
         tmp = (FileNode) world.getTemp().createTempFile().writeString(sass);
-        s = Main.parse(mapper, tmp.getAbsolute());
+        s = main.parse(tmp.getAbsolute());
         if (s == null) {
             throw new IOException("syntax error");
         }

@@ -66,11 +66,13 @@
             <phase>process-classes</phase>
             <configuration>
               <target>
-                <java fork="true" dir="${basedir}" classname="net.sf.beezle.mork.compiler.Main" failonerror="true">
+                <java fork="false" dir="${basedir}" classname="net.sf.beezle.mork.compiler.Main" failonerror="true">
                   <classpath>
                     <pathelement path="${basedir}/target/classes" />
                     <path refid="maven.compile.classpath" />
                   </classpath>
+                  <!-- <arg value="-t" />
+                  <arg value="1" />-->
                   <arg value="-v" />
                   <arg value="-stat" />
                   <arg value="-k" />
