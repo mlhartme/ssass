@@ -21,7 +21,7 @@ syntax = "Ssass.syntax";
 
 import net.sf.beezle.ssass.scss:
     Attrib, AttribOp, Class, Combinator, Declaration, ElementName, Expr, Hash, Import, Include,
-    Media, MediaQuery, MediaExpr, MediaOperator,
+    Media, MediaQuery, MediaExpr, MediaOperator, Namespace,
     Mixin, NestedProperty, Operator, Page, Pseudo, Term, Prio, Reference, Ruleset,
     Selector, SimpleSelector, Stylesheet, UnaryOperator, Variable;
 
@@ -30,6 +30,7 @@ import net.sf.beezle.ssass.scss.term:
 
 stylesheet => Stylesheet;
 imprt => Import;
+namespace => Namespace;
 media => Media;
 media_query => MediaQuery;
 media_expr => MediaExpr;

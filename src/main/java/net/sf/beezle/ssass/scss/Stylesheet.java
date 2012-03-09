@@ -5,11 +5,13 @@ import net.sf.beezle.mork.misc.GenericException;
 public class Stylesheet implements Base {
     private final String charset;
     private final Import[] imports;
+    private final Namespace[] namespaces;
     private final Statement[] statements;
 
-    public Stylesheet(String charset, Import[] imports, Statement[] statements) {
+    public Stylesheet(String charset, Import[] imports, Namespace[] namespaces, Statement[] statements) {
         this.charset = charset;
         this.imports = imports;
+        this.namespaces = namespaces;
         this.statements = statements;
     }
 
@@ -20,6 +22,7 @@ public class Stylesheet implements Base {
             output.semicolon();
         }
         output.base(imports);
+        output.base(namespaces);
         output.base(statements);
     }
 }
