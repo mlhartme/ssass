@@ -22,10 +22,9 @@
  the following parts form the basis for this file:
  * http://www.w3.org/TR/CSS2/grammar.html.
  * http://www.w3.org/TR/css3-mediaqueries/#syntax
- * TODO: http://www.w3.org/TR/css3-namespace/
+ * http://www.w3.org/TR/css3-namespace/#syntax
  * TODO: http://www.w3.org/TR/css3-selectors/
  * TODO: http://www.w3.org/TR/css3-color/
- * TODO - wo im Container ist die Referenz: http://www.w3.org/TR/css3-content/#syntax
 
  Changes:
  * inclined keyword symbols like MEDIA_SYM or CHARSET_SYM
@@ -47,8 +46,10 @@
 [PARSER]
         stylesheet ::= ( "@charset " STRING ";" )? (Sp|CDO|CDC)*
                        ( imprt ( CDO Sp? | CDC Sp? )* )*
+                       ( namespace (Sp|CDO|CDC)* )*
                        ( (ruleset | media | page | variable_ | mixin_) (CDO Sp? | CDC Sp?)* )* ;
              imprt ::= "@import" Sp? (STRING|URI) Sp? media_query_list? ";" Sp? ;
+         namespace ::= "@namespace" Sp? (IDENT Sp?)? (STRING|URI) Sp? ";" Sp? ;
              media ::= "@media" Sp? media_query_list? "{" Sp? ruleset* "}" Sp? ;
   media_query_list ::= media_query ( "," Sp? media_query )* ;
        media_query ::= ((media_only Sp? | media_not Sp?)? IDENT Sp?) ("and" Sp? media_expr)*
