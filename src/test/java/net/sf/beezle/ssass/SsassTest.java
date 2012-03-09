@@ -24,17 +24,17 @@ public class SsassTest {
 
     @Test
     public void empty() throws IOException {
-        check();
+        css2();
     }
 
     @Test
     public void charset() throws IOException {
-        check("@charset \"ISO-8859-1\";");
+        css2("@charset \"ISO-8859-1\";");
     }
 
     @Test
     public void imports() throws IOException {
-        check(
+        css2(
                 "@import url('/css/typography.css');",
                 "@import url('/css/layout.css') print;",
                 "@import url('/css/color.css') foo, bar;");
@@ -42,26 +42,26 @@ public class SsassTest {
 
     @Test
     public void comment() throws IOException {
-        checkCmp(new String[] {
-                    "@import url('/css/typography.css');",
-                    "@import url('/css/color.css') foo, bar;"},
-                 new String[] {
-                    "@import url('/css/typography.css');",
-                    "/* hi */",
-                    "@import url('/css/color.css') foo, bar;"});
+        cssCmp(new String[]{
+                "@import url('/css/typography.css');",
+                "@import url('/css/color.css') foo, bar;"},
+                new String[]{
+                        "@import url('/css/typography.css');",
+                        "/* hi */",
+                        "@import url('/css/color.css') foo, bar;"}, true);
     }
 
     @Test
     public void ruleset() throws IOException {
-        check("p {",
-              "  margin-top: abc;",
-              "  margin-right: xyz !important",
-              "}");
+        css2("p {",
+                "  margin-top: abc;",
+                "  margin-right: xyz !important",
+                "}");
     }
 
     @Test
     public void media() throws IOException {
-        check(
+        css2(
                 "@media print {",
                 "  p {",
                 "    font-family: Arial,Helvetica,sans-serif;",
@@ -82,8 +82,16 @@ public class SsassTest {
     }
 
     @Test
+    public void mediaQuery() throws IOException {
+        css3("@media (min-width:-100px) {",
+             "}");
+        css3("@media handheld and (min-width: 20em), screen and (min-width: 20em) {",
+             "}");
+    }
+
+    @Test
     public void page() throws IOException {
-        check(
+        css2(
                 "@page {",
                 "  size: 21.0cm 14.85cm;",
                 "  margin-top: 1.5cm;",
@@ -101,7 +109,7 @@ public class SsassTest {
 
     @Test
     public void pseudoFunctionSelector() throws IOException {
-        check(
+        css2(
                 "tr:nth-child(odd) td {",
                 "  background: #C1B49A",
                 "}");
@@ -109,7 +117,7 @@ public class SsassTest {
 
     @Test
     public void function() throws IOException {
-        check(
+        css2(
                 "p:before {",
                 "  counter-increment: paras 1;",
                 "  content: \"New Paragraph:\" counter(paras,decimal) \":\"",
@@ -118,47 +126,47 @@ public class SsassTest {
 
     @Test
     public void term1() throws IOException {
-        check("term1 {",
-              "  number: 42;",
-              "  percentage: 2%;",
-              "  length-px: 3px;",
-              "  length-cm: 4cm;",
-              "  length-mm: 5mm;",
-              "  length-in: 6in;",
-              "  length-pt: 7pt;",
-              "  length-pc: 8pc;",
-              "  a: -3;",
-              "  b: +4%;",
-              "  c: -100cm;",
-              "  d: 12em;",
-              "  e: 13ex;",
-              "  f: 20deg;",
-              "  g: 21rad;",
-              "  h: 22grad;",
-              "  i: 0s;",
-              "  j: 1ms;",
-              "  k: 2hz;",
-              "  l: 3khz",
-              "}");
+        css2("term1 {",
+                "  number: 42;",
+                "  percentage: 2%;",
+                "  length-px: 3px;",
+                "  length-cm: 4cm;",
+                "  length-mm: 5mm;",
+                "  length-in: 6in;",
+                "  length-pt: 7pt;",
+                "  length-pc: 8pc;",
+                "  a: -3;",
+                "  b: +4%;",
+                "  c: -100cm;",
+                "  d: 12em;",
+                "  e: 13ex;",
+                "  f: 20deg;",
+                "  g: 21rad;",
+                "  h: 22grad;",
+                "  i: 0s;",
+                "  j: 1ms;",
+                "  k: 2hz;",
+                "  l: 3khz",
+                "}");
     }
 
     @Test
     public void term2() throws IOException {
-        check("term2 {",
-              "  string1: \"str\";",
-              "  string2: 'str';",
-              "  ident: ident;",
-              "  url: url(foo);",
-              "  resolution: 12dpi;",
-              "  resolution2: 12dpcm;",
-              "  hexcolor: #name;",
-              "  function: foo(bar)",
-              "}");
+        css2("term2 {",
+                "  string1: \"str\";",
+                "  string2: 'str';",
+                "  ident: ident;",
+                "  url: url(foo);",
+                "  resolution: 12dpi;",
+                "  resolution2: 12dpcm;",
+                "  hexcolor: #name;",
+                "  function: foo(bar)",
+                "}");
     }
 
     @Test
     public void attrib() throws IOException {
-        check(
+        css2(
                 "foo[bar=\"x\"] {",
                 "  background-color: yellow",
                 "}",
@@ -185,7 +193,7 @@ public class SsassTest {
 
     @Ignore // TODO
     public void weiredFunctionCompression() throws IOException {
-        check(
+        css2(
                 "p:before {",
                 "  counter-increment: paras 1;",
                 "  content: \"New Paragraph: \" counter(paras,decimal) \": \"",
@@ -194,7 +202,7 @@ public class SsassTest {
 
     @Ignore // TODO
     public void hexColorCompress() throws IOException {
-        check(
+        css2(
                 "foo[bar=\"x\"] {",
                 "  background-color: #ffffff",
                 "}");
@@ -366,11 +374,15 @@ public class SsassTest {
 
     //--
 
-    private void check(String ... lines) throws IOException {
-        checkCmp(lines, lines);
+    private void css2(String... lines) throws IOException {
+        cssCmp(lines, lines, true);
     }
 
-    private void checkCmp(String[] expectedLines, String[] actual) throws IOException {
+    private void css3(String... lines) throws IOException {
+        cssCmp(lines, lines, false);
+    }
+
+    private void cssCmp(String[] expectedLines, String[] actual, boolean level2) throws IOException {
         String expected;
         FileNode tmp;
         Stylesheet s;
@@ -382,7 +394,9 @@ public class SsassTest {
         tmp.delete();
         try {
             assertEquals(expected, Output.prettyprint(s).trim());
-            assertEquals(compress(expected), Output.compress(s));
+            if (level2) {
+                assertEquals(compress(expected), Output.compress(s));
+            }
         } catch (GenericException e) {
             fail(e.getMessage());
         }
