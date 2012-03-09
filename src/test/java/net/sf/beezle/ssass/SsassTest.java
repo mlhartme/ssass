@@ -15,6 +15,7 @@ import java.io.StringReader;
 import java.io.StringWriter;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 public class SsassTest {
@@ -375,6 +376,7 @@ public class SsassTest {
         expected = OS.CURRENT.lineSeparator.join(expectedLines);
         tmp = (FileNode) world.getTemp().createTempFile().writeLines(actual);
         s = main.parse(tmp.getAbsolute());
+        assertTrue(s != null);
         tmp.delete();
         try {
             assertEquals(expected, Output.prettyprint(s).trim());

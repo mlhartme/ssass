@@ -20,15 +20,21 @@ mapper net.sf.beezle.ssass.Mapper;
 syntax = "Ssass.syntax";
 
 import net.sf.beezle.ssass.scss:
-    Attrib, AttribOp, Class, Combinator, Declaration, ElementName, Expr, Hash, Import, Include, Media, Mixin, NestedProperty,
-    Operator, Page, Pseudo, Term, Prio, Reference, Ruleset, Selector, SimpleSelector, Stylesheet, UnaryOperator, Variable;
+    Attrib, AttribOp, Class, Combinator, Declaration, ElementName, Expr, Hash, Import, Include,
+    Media, MediaQuery, MediaExpr, MediaOperator,
+    Mixin, NestedProperty, Operator, Page, Pseudo, Term, Prio, Reference, Ruleset,
+    Selector, SimpleSelector, Stylesheet, UnaryOperator, Variable;
 
 import net.sf.beezle.ssass.scss.term:
-    Angle, Ems, Exs, Freq, Function, Hexcolor, Ident, Length, Number, Percentage, Strng, Time, Uri;
+    Angle, Ems, Exs, Freq, Function, Hexcolor, Ident, Length, Number, Percentage, Resolution, Strng, Time, Uri;
 
 stylesheet => Stylesheet;
 imprt => Import;
 media => Media;
+media_query => MediaQuery;
+media_expr => MediaExpr;
+media_not => MediaOperator.NOT;
+media_only => MediaOperator.ONLY;
 page => Page;
 _slash => Operator.SLASH;
 _comma => Operator.COMMA;
@@ -65,6 +71,7 @@ _freq => Freq;
 _string => Strng;
 _ident => Ident;
 _uri => Uri;
+_resolution => Resolution;
 function => Function;
 hexcolor => Hexcolor;
 
@@ -84,4 +91,5 @@ PERCENTAGE => [text];
 NUMBER => [text];
 STRING => [text];
 URI => [text];
+RESOLUTION => [text];
 HASH => [text];

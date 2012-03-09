@@ -1,21 +1,23 @@
 package net.sf.beezle.ssass.scss;
 
+import net.sf.beezle.mork.misc.GenericException;
+
 public class Import implements Base {
     private final String src;
-    private final String[] mediaList;
+    private final MediaQuery[] mediaQueryList;
 
-    public Import(String src, String[] mediaList) {
+    public Import(String src, MediaQuery[] mediaQueryList) {
         this.src = src;
-        this.mediaList = mediaList;
+        this.mediaQueryList = mediaQueryList;
     }
 
     @Override
-    public void toCss(Output output) {
+    public void toCss(Output output) throws GenericException {
         boolean first;
 
         output.string("@import ", src);
         first = true;
-        for (String medium : mediaList) {
+        for (MediaQuery query : mediaQueryList) {
             if (first) {
                 output.string(" ");
                 first = false;
@@ -23,7 +25,7 @@ public class Import implements Base {
                 output.string(",");
                 output.spaceOpt();
             }
-            output.string(medium);
+            query.toCss(output);
         }
         output.semicolon();
     }

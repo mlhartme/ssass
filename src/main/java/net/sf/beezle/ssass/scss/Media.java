@@ -3,11 +3,11 @@ package net.sf.beezle.ssass.scss;
 import net.sf.beezle.mork.misc.GenericException;
 
 public class Media implements Statement {
-    private final String[] mediaList;
+    private final MediaQuery[] mediaQueryList;
     private final Ruleset[] rulesets;
 
-    public Media(String[] mediaList, Ruleset[] rulesets) {
-        this.mediaList = mediaList;
+    public Media(MediaQuery[] mediaQueryList, Ruleset[] rulesets) {
+        this.mediaQueryList = mediaQueryList;
         this.rulesets = rulesets;
     }
 
@@ -17,14 +17,14 @@ public class Media implements Statement {
 
         output.string("@media");
         first = true;
-        for (String medium : mediaList) {
+        for (MediaQuery query : mediaQueryList) {
             if (first) {
                 output.string(" ");
                 first = false;
             } else {
                 output.string(", ");
             }
-            output.string(medium);
+            query.toCss(output);
         }
         output.open();
         output.base(rulesets);
