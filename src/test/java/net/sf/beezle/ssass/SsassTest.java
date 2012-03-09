@@ -41,7 +41,6 @@ public class SsassTest {
 
     @Test
     public void comment() throws IOException {
-        main.getConsole().setVerbose(true);
         checkCmp(new String[] {
                     "@import url('/css/typography.css');",
                     "@import url('/css/color.css') foo, bar;"},
