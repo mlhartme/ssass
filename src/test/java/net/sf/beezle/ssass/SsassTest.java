@@ -149,6 +149,8 @@ public class SsassTest {
               "  string2: 'str';",
               "  ident: ident;",
               "  url: url(foo);",
+              "  resolution: 12dpi;",
+              "  resolution2: 12dpcm;",
               "  hexcolor: #name;",
               "  function: foo(bar)",
               "}");
