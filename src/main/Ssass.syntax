@@ -20,8 +20,8 @@
 
  Grammar according to http://www.w3.org/TR/2011/NOTE-css-2010-20110512/. This is a container spec,
  the following parts form the basis for this file:
- * http://www.w3.org/TR/CSS2/grammar.html.
- * TODO: http://www.w3.org/TR/css3-selectors/
+ * http://www.w3.org/TR/CSS2/grammar.html
+ * TODO: http://www.w3.org/TR/css3-selectors/#w3cselgrammar
  * http://www.w3.org/TR/css3-mediaqueries/#syntax
  * http://www.w3.org/TR/css3-namespace/#syntax
 
