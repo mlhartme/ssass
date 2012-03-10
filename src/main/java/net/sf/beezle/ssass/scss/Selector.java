@@ -49,6 +49,13 @@ public class Selector implements Base {
 
     @Override
     public void toCss(Output output) throws GenericException {
-        output.object(left, combinator == null && right != null ? " " : combinator, right);
+        output.object(left);
+        if (right != null) {
+            output.object(combinator == null ? " " : combinator.toString(), right);
+        } else {
+            if (combinator != null) {
+                throw new IllegalStateException();
+            }
+        }
     }
 }

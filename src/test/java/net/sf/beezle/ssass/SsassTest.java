@@ -100,6 +100,22 @@ public class SsassTest {
     }
 
     @Test
+    public void combinators() throws IOException {
+        css3("a b {",
+                "  one: lime",
+                "}");
+        css3("a+b {",
+                "  one: lime",
+                "}");
+        css3("a>b {",
+                "  one: lime",
+                "}");
+        css3("a~b {",
+                "  one: lime",
+                "}");
+    }
+
+    @Test
     public void color() throws IOException {
         css3("em {",
              "  one: lime;",
