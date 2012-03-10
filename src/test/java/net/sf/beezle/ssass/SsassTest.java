@@ -83,7 +83,7 @@ public class SsassTest {
 
     @Test
     public void mediaQuery() throws IOException {
-        css3("@media (min-width:-100px) {",
+        css3("@media (min-width: -100px) {",
              "}");
         css3("@media handheld and (min-width: 20em), screen and (min-width: 20em) {",
              "}");

@@ -15,7 +15,7 @@ public class MediaExpr implements Base {
     public void toCss(Output output) throws GenericException {
         output.string("(", feature);
         if (expr != null) {
-            output.string(":");
+            output.string(": ");
             output.object(expr);
         }
         output.string(")");

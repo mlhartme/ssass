@@ -26,13 +26,15 @@ public class MediaQuery implements Base {
         }
         if (type != null) {
             output.string(type);
+            first = false;
+        } else {
+            first = true;
         }
-        first = true;
         for (MediaExpr expr : exprs) {
             if (first) {
                 first = false;
             } else {
-                output.string("and");
+                output.string(" and ");
             }
             expr.toCss(output);
         }
