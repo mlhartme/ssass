@@ -128,6 +128,18 @@ public class SsassTest {
     }
 
     @Test
+    public void pseudo() throws IOException {
+        css2(
+                ":foo {",
+                "  background: #C1B49A",
+                "}");
+        css2(
+                "::foo {",
+                "  background: #C1B49A",
+                "}");
+    }
+
+    @Test
     public void pseudoFunctionSelector() throws IOException {
         css2(
                 "tr:nth-child(odd) td {",
