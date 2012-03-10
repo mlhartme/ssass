@@ -23,6 +23,7 @@ public class MediaQuery implements Base {
 
         if (op != null) {
             output.string(op.toString());
+            output.string(" ");
         }
         if (type != null) {
             output.string(type);

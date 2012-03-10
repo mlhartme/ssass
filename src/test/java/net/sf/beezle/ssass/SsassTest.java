@@ -87,6 +87,10 @@ public class SsassTest {
              "}");
         css3("@media handheld and (min-width: 20em), screen and (min-width: 20em) {",
              "}");
+        css3("@media not handheld {",
+                "}");
+        css3("@media only handheld {",
+             "}");
     }
 
     @Test
