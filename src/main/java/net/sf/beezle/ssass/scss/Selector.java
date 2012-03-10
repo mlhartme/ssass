@@ -21,7 +21,7 @@ public class Selector implements Base {
         return result;
     }
 
-    private final SimpleSelector left;
+    private final SimpleSelectorSequence left;
 
     /* null when right == null or to represent " " */
     private final Combinator combinator;
@@ -29,7 +29,7 @@ public class Selector implements Base {
     /* may be null */
     private final Selector right;
 
-    public Selector(SimpleSelector left, Combinator combinator, Selector right) {
+    public Selector(SimpleSelectorSequence left, Combinator combinator, Selector right) {
         this.left = left;
         this.combinator = combinator;
         this.right = right;

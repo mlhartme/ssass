@@ -63,8 +63,8 @@
        mixin_args_ ::= "(" Sp? "$" IDENT Sp? ("," Sp? "$" IDENT )* Sp? ")";
            ruleset ::= selectors_group "{" Sp? ssass_declaration_? ( ";" Sp? ssass_declaration_? )* "}" Sp? ;
    selectors_group ::= selector ( "," Sp? selector )* ;
-          selector ::= simple_selector ( combinator selector | Sp ( combinator? selector )? )? ;
-   simple_selector ::= element_name ( _hash | class | attrib | pseudo )*
+          selector ::= simple_selector_sequence ( combinator selector | Sp ( combinator? selector )? )? ;
+   simple_selector_sequence ::= element_name ( _hash | class | attrib | pseudo )*
                      | ( _hash | class | attrib | pseudo )+ ;
         combinator ::= _plus | _gt ;
              _plus ::= "+" Sp? ;

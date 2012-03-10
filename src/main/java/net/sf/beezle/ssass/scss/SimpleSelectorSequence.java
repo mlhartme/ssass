@@ -2,10 +2,10 @@ package net.sf.beezle.ssass.scss;
 
 import net.sf.beezle.mork.misc.GenericException;
 
-public class SimpleSelector implements Base {
+public class SimpleSelectorSequence implements Base {
     private BaseSelector[] bases;
 
-    public SimpleSelector(ElementName first, BaseSelector[] bases) {
+    public SimpleSelectorSequence(ElementName first, BaseSelector[] bases) {
         if (first == null) {
             this.bases = bases;
         } else {

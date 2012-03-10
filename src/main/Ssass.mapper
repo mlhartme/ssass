@@ -23,7 +23,7 @@ import net.sf.beezle.ssass.scss:
     Attrib, AttribOp, Class, Combinator, Declaration, ElementName, Expr, Hash, Import, Include,
     Media, MediaQuery, MediaExpr, MediaOperator, Namespace,
     Mixin, NestedProperty, Operator, Page, Pseudo, Term, Prio, Reference, Ruleset,
-    Selector, SimpleSelector, Stylesheet, UnaryOperator, Variable;
+    Selector, SimpleSelectorSequence, Stylesheet, UnaryOperator, Variable;
 
 import net.sf.beezle.ssass.scss.term:
     Angle, Ems, Exs, Freq, Function, Hexcolor, Ident, Length, Number, Percentage, Resolution, Strng, Time, Uri;
@@ -45,7 +45,7 @@ _unary_plus => UnaryOperator.PLUS;
 _unary_minus => UnaryOperator.MINUS;
 ruleset => Ruleset;
 selector => Selector;
-simple_selector => SimpleSelector;
+simple_selector_sequence => SimpleSelectorSequence;
 _hash => Hash;
 class => Class;
 element_name => ElementName;
