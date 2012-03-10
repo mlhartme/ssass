@@ -48,7 +48,7 @@
                        ( namespace (Sp|CDO|CDC)* )*
                        ( (ruleset | media | page | variable_ | mixin_) (CDO Sp? | CDC Sp?)* )* ;
              imprt ::= "@import" Sp? (STRING|URI) Sp? media_query_list? ";" Sp? ;
-         namespace ::= "@namespace" Sp? (IDENT Sp?)? (STRING|URI) Sp? ";" Sp? ;
+         namespace ::= "@namespace" Sp? (IDENT Sp?)? (STRING|URI) Sp? ";" ;
              media ::= "@media" Sp? media_query_list? "{" Sp? ruleset* "}" Sp? ;
   media_query_list ::= media_query ( "," Sp? media_query )* ;
        media_query ::= ((media_only Sp? | media_not Sp?)? IDENT Sp?) ("and" Sp? media_expr)*
