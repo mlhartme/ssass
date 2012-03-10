@@ -26,7 +26,7 @@
  * http://www.w3.org/TR/css3-namespace/#syntax
 
  Changes:
- * inclined keyword symbols like MEDIA_SYM or CHARSET_SYM
+ * inlined keyword symbols like MEDIA_SYM or CHARSET_SYM
  * fixes
    * removed BAD_STRING and BAD_URI rules (with sub-rules) because Mork has no feature to report them as errors
    * removed BAD_COMMENT because Mork has no feature to accept it at EOF
@@ -44,10 +44,10 @@
 
 [PARSER]
         stylesheet ::= ( "@charset " STRING ";" )? (Sp|CDO|CDC)*
-                       ( imprt ( CDO Sp? | CDC Sp? )* )*
+                       ( imprt (Sp|CDO|CDC)* )*
                        ( namespace (Sp|CDO|CDC)* )*
                        ( (ruleset | media | page | variable_ | mixin_) (CDO Sp? | CDC Sp?)* )* ;
-             imprt ::= "@import" Sp? (STRING|URI) Sp? media_query_list? ";" Sp? ;
+             imprt ::= "@import" Sp? (STRING|URI) Sp? media_query_list? ";" ;
          namespace ::= "@namespace" Sp? (IDENT Sp?)? (STRING|URI) Sp? ";" ;
              media ::= "@media" Sp? media_query_list? "{" Sp? ruleset* "}" Sp? ;
   media_query_list ::= media_query ( "," Sp? media_query )* ;
