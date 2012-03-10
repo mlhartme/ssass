@@ -5,7 +5,7 @@ import net.sf.beezle.mork.misc.GenericException;
 public class SimpleSelectorSequence implements Base {
     private BaseSelector[] bases;
 
-    public SimpleSelectorSequence(ElementName first, BaseSelector[] bases) {
+    public SimpleSelectorSequence(TypeSelector first, BaseSelector[] bases) {
         if (first == null) {
             this.bases = bases;
         } else {

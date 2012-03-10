@@ -69,7 +69,9 @@
                _gt ::= ">" Sp? ;
    simple_selector_sequence ::= ( type_selector | universal ) ( _hash | class | attrib | pseudo )*
                      | ( _hash | class | attrib | pseudo )+ ;
-     type_selector ::= element_name ;
+     type_selector ::= namespace_prefix? element_name ;
+  namespace_prefix ::= (IDENT | namespace_star)? "|";
+    namespace_star ::= "*" ;
       element_name ::= IDENT ;
          universal ::= "*" ;
              _hash ::= HASH ;

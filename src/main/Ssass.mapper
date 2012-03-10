@@ -20,10 +20,10 @@ mapper net.sf.beezle.ssass.Mapper;
 syntax = "Ssass.syntax";
 
 import net.sf.beezle.ssass.scss:
-    Attrib, AttribOp, Class, Combinator, Declaration, ElementName, Expr, Hash, Import, Include,
+    Attrib, AttribOp, Class, Combinator, Declaration, Expr, Hash, Import, Include,
     Media, MediaQuery, MediaExpr, MediaOperator, Namespace,
     Mixin, NestedProperty, Operator, Page, Pseudo, Term, Prio, Reference, Ruleset,
-    Selector, SimpleSelectorSequence, Stylesheet, UnaryOperator, Variable;
+    Selector, SimpleSelectorSequence, Stylesheet, TypeSelector,  UnaryOperator, Variable;
 
 import net.sf.beezle.ssass.scss.term:
     Angle, Ems, Exs, Freq, Function, Hexcolor, Ident, Length, Number, Percentage, Resolution, Strng, Time, Uri;
@@ -48,8 +48,9 @@ selector => Selector;
 simple_selector_sequence => SimpleSelectorSequence;
 _hash => Hash;
 class => Class;
-element_name => ElementName;
-universal => ElementName.UNIVERSAL;
+type_selector => TypeSelector;
+namespace_star => TypeSelector.NAMESPACE_STAR;
+universal => TypeSelector.UNIVERSAL;
 attrib => Attrib;
 _eq => AttribOp.EQ;
 _includes => AttribOp.INCLUDES;

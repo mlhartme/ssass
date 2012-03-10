@@ -145,6 +145,22 @@ public class SsassTest {
     }
 
     @Test
+    public void typeSelector() throws IOException {
+        css2(
+                "a {",
+                "  background: #C1B49A",
+                "}");
+        css2(
+                "foo|b {",
+                "  background: #C1B49A",
+                "}");
+        css2(
+                "*|c {",
+                "  background: #C1B49A",
+                "}");
+    }
+
+    @Test
     public void universal() throws IOException {
         css2(
                 "* {",
