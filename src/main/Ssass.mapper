@@ -49,6 +49,7 @@ simple_selector_sequence => SimpleSelectorSequence;
 _hash => Hash;
 class => Class;
 element_name => ElementName;
+universal => ElementName.UNIVERSAL;
 attrib => Attrib;
 _eq => AttribOp.EQ;
 _includes => AttribOp.INCLUDES;

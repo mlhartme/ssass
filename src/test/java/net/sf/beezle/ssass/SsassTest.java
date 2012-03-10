@@ -145,6 +145,14 @@ public class SsassTest {
     }
 
     @Test
+    public void universal() throws IOException {
+        css2(
+                "* {",
+                "  background: #C1B49A",
+                "}");
+    }
+
+    @Test
     public void term1() throws IOException {
         css2("term1 {",
                 "  number: 42;",

@@ -64,7 +64,7 @@
            ruleset ::= selectors_group "{" Sp? ssass_declaration_? ( ";" Sp? ssass_declaration_? )* "}" Sp? ;
    selectors_group ::= selector ( "," Sp? selector )* ;
           selector ::= simple_selector_sequence ( combinator selector | Sp ( combinator? selector )? )? ;
-   simple_selector_sequence ::= type_selector ( _hash | class | attrib | pseudo )*
+   simple_selector_sequence ::= ( type_selector | universal ) ( _hash | class | attrib | pseudo )*
                      | ( _hash | class | attrib | pseudo )+ ;
         combinator ::= _plus | _gt ;
              _plus ::= "+" Sp? ;
@@ -72,7 +72,8 @@
              _hash ::= HASH ;
              class ::= "." IDENT ;
      type_selector ::= element_name ;
-      element_name ::= IDENT | "*" ;
+      element_name ::= IDENT ;
+         universal ::= "*" ;
             attrib ::= "[" Sp? IDENT Sp? ( ( _eq | _includes | _dashmatch ) Sp? ( IDENT | STRING ) Sp? )? "]" ;
                _eq ::= "=" ;
          _includes ::= INCLUDES ;
