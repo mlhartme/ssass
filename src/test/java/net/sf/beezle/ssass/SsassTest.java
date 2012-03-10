@@ -94,6 +94,12 @@ public class SsassTest {
     }
 
     @Test
+    public void namespace() throws IOException {
+        css3("@namespace toto \"http://toto.example.org\";",
+             "@namespace url(\"http://example.com/foo\");");
+    }
+
+    @Test
     public void page() throws IOException {
         css2(
                 "@page {",
