@@ -96,7 +96,17 @@ public class SsassTest {
     @Test
     public void namespace() throws IOException {
         css3("@namespace toto \"http://toto.example.org\";",
-             "@namespace url(\"http://example.com/foo\");");
+                "@namespace url(\"http://example.com/foo\");");
+    }
+
+    @Test
+    public void color() throws IOException {
+        css3("em {",
+             "  one: lime;",
+             "  two: rgb(0,255,0);",
+             "  three: hsl(0,100%,50%);",
+             "  four: hsla(240,100%,50%,0.5)",
+             "}");
     }
 
     @Test
