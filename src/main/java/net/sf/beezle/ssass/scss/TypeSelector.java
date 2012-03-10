@@ -1,8 +1,12 @@
 package net.sf.beezle.ssass.scss;
 
 public class TypeSelector implements BaseSelector {
-    public static final TypeSelector UNIVERSAL = new TypeSelector(null, "*");
     public static final String NAMESPACE_STAR = "*";
+    public static final String NAMESPACE_EMPTY = "";
+
+    public static TypeSelector universal(String namespace) {
+        return new TypeSelector(namespace, "*");
+    }
 
     private final String namespace;
     private final String elementName;

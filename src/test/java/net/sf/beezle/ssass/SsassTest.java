@@ -151,6 +151,10 @@ public class SsassTest {
                 "  background: #C1B49A",
                 "}");
         css2(
+                "|b {",
+                "  background: #C1B49A",
+                "}");
+        css2(
                 "foo|b {",
                 "  background: #C1B49A",
                 "}");
@@ -164,6 +168,18 @@ public class SsassTest {
     public void universal() throws IOException {
         css2(
                 "* {",
+                "  background: #C1B49A",
+                "}");
+        css2(
+                "|* {",
+                "  background: #C1B49A",
+                "}");
+        css2(
+                "a|* {",
+                "  background: #C1B49A",
+                "}");
+        css2(
+                "*|* {",
                 "  background: #C1B49A",
                 "}");
     }
