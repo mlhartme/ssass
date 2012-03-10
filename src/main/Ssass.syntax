@@ -64,16 +64,16 @@
            ruleset ::= selectors_group "{" Sp? ssass_declaration_? ( ";" Sp? ssass_declaration_? )* "}" Sp? ;
    selectors_group ::= selector ( "," Sp? selector )* ;
           selector ::= simple_selector_sequence ( combinator selector | Sp ( combinator? selector )? )? ;
-   simple_selector_sequence ::= ( type_selector | universal ) ( _hash | class | attrib | pseudo )*
-                     | ( _hash | class | attrib | pseudo )+ ;
         combinator ::= _plus | _gt ;
              _plus ::= "+" Sp? ;
                _gt ::= ">" Sp? ;
-             _hash ::= HASH ;
-             class ::= "." IDENT ;
+   simple_selector_sequence ::= ( type_selector | universal ) ( _hash | class | attrib | pseudo )*
+                     | ( _hash | class | attrib | pseudo )+ ;
      type_selector ::= element_name ;
       element_name ::= IDENT ;
          universal ::= "*" ;
+             _hash ::= HASH ;
+             class ::= "." IDENT ;
             attrib ::= "[" Sp? IDENT Sp? ( ( _eq | _includes | _dashmatch ) Sp? ( IDENT | STRING ) Sp? )? "]" ;
                _eq ::= "=" ;
          _includes ::= INCLUDES ;
