@@ -21,7 +21,7 @@
  Grammar according to http://www.w3.org/TR/2011/NOTE-css-2010-20110512/. This is a container spec,
  the following parts form the basis for this file:
  * http://www.w3.org/TR/CSS2/grammar.html
- * TODO: http://www.w3.org/TR/css3-selectors/#w3cselgrammar
+ * http://www.w3.org/TR/css3-selectors/#w3cselgrammar
  * http://www.w3.org/TR/css3-mediaqueries/#syntax
  * http://www.w3.org/TR/css3-namespace/#syntax
 
@@ -30,7 +30,6 @@
  * fixes
    * removed BAD_STRING and BAD_URI rules (with sub-rules) because Mork has no feature to report them as errors
    * removed BAD_COMMENT because Mork has no feature to accept it at EOF
-   * removed DIMENSION because it's not used
  * various helper symbols (starting with _) added to add semantics
  * additional symbols for sass features, marked with a tailing _
    * variables (variable_, reference_)
@@ -85,7 +84,7 @@
             pseudo ::= ( _pseudo1 | functional_pseudo ) ;
           _pseudo1 ::= pseudo_type IDENT ;
  functional_pseudo ::= pseudo_type FUNCTION expression ")" ;
-        expression ::= ( ( expression_plus | expression_minus | NUMBER | STRING | IDENT ) Sp? )+ ;
+        expression ::= ( ( expression_plus | expression_minus | DIMENSION | NUMBER | STRING | IDENT ) Sp? )+ ;
    expression_plus ::= "+" ;
   expression_minus ::= "-" ;
        pseudo_type ::= pseudo_element | pseudo_class;
@@ -149,6 +148,7 @@ ssass_declaration_ ::= ruleset | nested_property_ | include_ | declaration ;
            FREQ ::= num ("hz" | "khz");
      PERCENTAGE ::= num "%";
      RESOLUTION ::= num ("dpi" | "dpcm");
+      DIMENSION ::= num ident;
          NUMBER ::= num;
 
             URI ::= "url(" w string w ")";

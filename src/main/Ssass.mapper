@@ -79,6 +79,7 @@ _exs => Exs;
 _angle => Angle;
 _time => Time;
 _freq => Freq;
+DIMENSION => [text];
 _string => Strng;
 _ident => Ident;
 _uri => Uri;

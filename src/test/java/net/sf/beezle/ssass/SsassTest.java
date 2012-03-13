@@ -170,6 +170,10 @@ public class SsassTest {
                 "  background: #C1B49A",
                 "}");
         css2(
+                "a:b(2dimension) td {",
+                "  background: #C1B49A",
+                "}");
+        css2(
                 "a:b(-\"FOO\") td {",
                 "  background: #C1B49A",
                 "}");
