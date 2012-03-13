@@ -1,30 +1,32 @@
 package net.sf.beezle.ssass.scss;
 
+import net.sf.beezle.mork.misc.GenericException;
+
 public class Pseudo implements BaseSelector {
     public static final String ELEMENT = "::";
     public static final String CLASS = ":";
 
     private final String type;
     private final String function;
-    private final String name;
+    private final Object nameOrExpression;
 
     public Pseudo(String type, String name) {
         this(type, null, name);
     }
 
-    public Pseudo(String type, String function, String name) {
+    public Pseudo(String type, String function, Object nameOrExpression) {
         this.type = type;
         this.function = function;
-        this.name = name;
+        this.nameOrExpression = nameOrExpression;
     }
 
     @Override
-    public void toCss(Output output) {
+    public void toCss(Output output) throws GenericException {
         output.string(type);
         if (function == null) {
-            output.string(name);
+            output.object(nameOrExpression);
         } else {
-            output.string(function, name, ")");
+            output.object(function, nameOrExpression, ")");
         }
     }
 }

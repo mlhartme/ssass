@@ -20,7 +20,7 @@ mapper net.sf.beezle.ssass.Mapper;
 syntax = "Ssass.syntax";
 
 import net.sf.beezle.ssass.scss:
-    Attrib, AttribOp, Class, Combinator, Declaration, Expr, Hash, Import, Include,
+    Attrib, AttribOp, Class, Combinator, Declaration, Expr, Expression, Hash, Import, Include,
     Media, MediaQuery, MediaExpr, MediaOperator, Namespace,
     Mixin, Negation, NestedProperty, Operator, Page, Pseudo, Term, Prio, Reference, Ruleset,
     Selector, SimpleSelectorSequence, Stylesheet, TypeSelector,  UnaryOperator, Variable;
@@ -59,6 +59,9 @@ _includes => AttribOp.INCLUDES;
 _dashmatch => AttribOp.DASHMATCH;
 _pseudo1 => Pseudo;
 functional_pseudo => Pseudo;
+expression => Expression;
+expression_plus => Expression.PLUS;
+expression_minus => Expression.MINUS;
 pseudo_element => Pseudo.ELEMENT;
 pseudo_class => Pseudo.CLASS;
 negation => Negation;

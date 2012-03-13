@@ -161,6 +161,18 @@ public class SsassTest {
                 "tr:nth-child(odd) td {",
                 "  background: #C1B49A",
                 "}");
+        css2(
+                "a:b(1+2) td {",
+                "  background: #C1B49A",
+                "}");
+        css2(
+                "a:b(+2) td {",
+                "  background: #C1B49A",
+                "}");
+        css2(
+                "a:b(-\"FOO\") td {",
+                "  background: #C1B49A",
+                "}");
     }
 
     @Test
