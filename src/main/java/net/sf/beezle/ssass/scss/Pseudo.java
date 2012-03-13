@@ -24,7 +24,7 @@ public class Pseudo implements BaseSelector {
         if (function == null) {
             output.string(name);
         } else {
-            output.string(function, "(", name, ")");
+            output.string(function, name, ")");
         }
     }
 }

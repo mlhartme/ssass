@@ -88,6 +88,7 @@ mixin_ => Mixin;
 include_ => Include;
 
 IDENT => [text];
+FUNCTION => [text];
 EMS => [text];
 EXS => [text];
 LENGTH => [text];
