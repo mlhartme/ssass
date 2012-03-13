@@ -82,9 +82,9 @@
                _eq ::= "=" ;
          _includes ::= INCLUDES ;
         _dashmatch ::= DASHMATCH ;
-            pseudo ::= ( _pseudo1 | _pseudo2 ) ;
+            pseudo ::= ( _pseudo1 | functional_pseudo ) ;
           _pseudo1 ::= pseudo_type IDENT ;
-          _pseudo2 ::= pseudo_type IDENT "(" Sp? (IDENT Sp?)? ")" ;
+ functional_pseudo ::= pseudo_type IDENT "(" Sp? (IDENT Sp?)? ")" ;
        pseudo_type ::= pseudo_element | pseudo_class;
     pseudo_element ::= ":" ":" ;
       pseudo_class ::= ":" ;
