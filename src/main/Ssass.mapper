@@ -22,7 +22,7 @@ syntax = "Ssass.syntax";
 import net.sf.beezle.ssass.scss:
     Attrib, AttribOp, Class, Combinator, Declaration, Expr, Hash, Import, Include,
     Media, MediaQuery, MediaExpr, MediaOperator, Namespace,
-    Mixin, NestedProperty, Operator, Page, Pseudo, Term, Prio, Reference, Ruleset,
+    Mixin, Negation, NestedProperty, Operator, Page, Pseudo, Term, Prio, Reference, Ruleset,
     Selector, SimpleSelectorSequence, Stylesheet, TypeSelector,  UnaryOperator, Variable;
 
 import net.sf.beezle.ssass.scss.term:
@@ -61,6 +61,7 @@ _pseudo1 => Pseudo;
 functional_pseudo => Pseudo;
 pseudo_element => Pseudo.ELEMENT;
 pseudo_class => Pseudo.CLASS;
+negation => Negation;
 declaration => Declaration;
 nested_property_ => NestedProperty;
 prio => Prio;

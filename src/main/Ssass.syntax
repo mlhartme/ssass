@@ -68,8 +68,8 @@
              _plus ::= "+" Sp? ;
           _greater ::= ">" Sp? ;
             _tilde ::= "~" Sp? ;
-   simple_selector_sequence ::= ( type_selector | universal ) ( _hash | class | attrib | pseudo )*
-                     | ( _hash | class | attrib | pseudo )+ ;
+   simple_selector_sequence ::= ( type_selector | universal ) ( _hash | class | attrib | pseudo | negation )*
+                     | ( _hash | class | attrib | pseudo | negation )+ ;
      type_selector ::= namespace_prefix? element_name ;
   namespace_prefix ::= (IDENT | namespace_star | namespace_empty) "|";
     namespace_star ::= "*" ;
@@ -88,6 +88,8 @@
        pseudo_type ::= pseudo_element | pseudo_class;
     pseudo_element ::= ":" ":" ;
       pseudo_class ::= ":" ;
+          negation ::= "not(" Sp? negation_arg Sp? ")" ;
+      negation_arg ::= type_selector | universal | _hash | class | attrib | pseudo ;
 
 ssass_declaration_ ::= ruleset | nested_property_ | include_ | declaration ;
   nested_property_ ::= property Sp? ":" Sp "{" Sp? ssass_declaration_? ( ";" Sp? ssass_declaration_? )* "}" Sp? ;

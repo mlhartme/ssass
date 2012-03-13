@@ -267,6 +267,17 @@ public class SsassTest {
     }
 
     @Test
+    public void negation() throws IOException {
+        css3(
+                "not([bar=\"x\"]) {",
+                "  background-color: yellow",
+                "}",
+                "not(a) {",
+                "  background-color: yellow",
+                "}");
+    }
+
+    @Test
     public void complex() throws IOException, GenericException {
         FileNode src;
         Stylesheet s;
