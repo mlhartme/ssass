@@ -77,7 +77,7 @@
          universal ::= namespace_prefix? "*" ;
              _hash ::= HASH ;
              class ::= "." IDENT ;
-            attrib ::= "[" Sp? IDENT Sp? ( ( _eq | _includes | _dashmatch ) Sp? ( IDENT | STRING ) Sp? )? "]" ;
+            attrib ::= "[" Sp? type_selector Sp? ( ( _eq | _includes | _dashmatch ) Sp? ( IDENT | STRING ) Sp? )? "]" ;
                _eq ::= "=" ;
          _includes ::= INCLUDES ;
         _dashmatch ::= DASHMATCH ;

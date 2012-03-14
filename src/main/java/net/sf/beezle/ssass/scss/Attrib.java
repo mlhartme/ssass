@@ -3,18 +3,18 @@ package net.sf.beezle.ssass.scss;
 import net.sf.beezle.mork.misc.GenericException;
 
 public class Attrib implements BaseSelector {
-    private String name;
-    private AttribOp op;
-    private String value;
+    private final TypeSelector typeSelector;
+    private final AttribOp op;
+    private final String value;
 
-    public Attrib(String name, AttribOp op, String value) {
-        this.name = name;
+    public Attrib(TypeSelector typeSelector, AttribOp op, String value) {
+        this.typeSelector = typeSelector;
         this.op = op;
         this.value = value;
     }
 
     @Override
     public void toCss(Output output) throws GenericException {
-        output.object("[", name, op.toString(), value, "]");
+        output.object("[", typeSelector, op.toString(), value, "]");
     }
 }
