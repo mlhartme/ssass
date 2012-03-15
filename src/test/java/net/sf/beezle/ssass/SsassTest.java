@@ -47,7 +47,7 @@ public class SsassTest {
                 "@import url('/css/color.css') foo, bar;"},
                 new String[]{
                         "@import url('/css/typography.css');",
-                        "/* hi */",
+                        "/* hi */ ",
                         "@import url('/css/color.css') foo, bar;"}, true);
     }
 
@@ -455,7 +455,7 @@ public class SsassTest {
 
     @Test
     public void mixinArgument() throws IOException {
-        sass   ("@mixin left ($dist) {\n" +
+        sass   ("@mixin left($dist) {\n" +
                 "  float: left;\n" +
                 "  margin-left: $dist;\n" +
                 "}\n" +
@@ -470,7 +470,7 @@ public class SsassTest {
 
     @Test
     public void mixinArgumentLists() throws IOException {
-        sass   ("@mixin point ($x, $y) {\n" +
+        sass   ("@mixin point($x, $y) {\n" +
                 "  x: $x;\n" +
                 "  y: $y;\n" +
                 "}\n" +

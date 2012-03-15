@@ -8,9 +8,17 @@ public class Mixin implements Statement {
     public final String[] variables;
     private final SsassDeclaration[] ssassDeclarations;
 
-    public Mixin(String[] nameAndVariables, SsassDeclaration[] ssassDeclarations) {
-        this.name = nameAndVariables[0];
-        this.variables = Strings.cdr(nameAndVariables);
+    public Mixin(String name, String[] variables, SsassDeclaration[] ssassDeclarations) {
+        if (name == null) {
+            if (variables.length != 1) {
+                throw new IllegalStateException();
+            }
+            this.name = variables[0];
+            this.variables = new String[0];
+        } else {
+            this.name = Strings.removeRight(name, "(");
+            this.variables = variables;
+        }
         this.ssassDeclarations = ssassDeclarations;
     }
 
