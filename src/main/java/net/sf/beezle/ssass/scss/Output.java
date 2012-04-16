@@ -40,6 +40,10 @@ public class Output {
     private final List<Map<String, Expr>> mixinContexts;
 
 
+    public boolean compress() {
+        return compress;
+    }
+
     public void pushSelector(Selector[] context) {
         int size;
 

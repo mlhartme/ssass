@@ -48,7 +48,7 @@ public class SsassTest {
                 new String[]{
                         "@import url('/css/typography.css');",
                         "/* hi */ ",
-                        "@import url('/css/color.css') foo, bar;"}, true);
+                        "@import url('/css/color.css') foo, bar;"}, true, true);
     }
 
     @Test
@@ -318,12 +318,21 @@ public class SsassTest {
                 "}");
     }
 
-    @Ignore // TODO
+    @Test
     public void hexColorCompress() throws IOException {
-        css2(
-                "foo[bar=\"x\"] {",
-                "  background-color: #ffffff",
-                "}");
+        property("#fff", "#ffffff");
+    }
+
+    private void property(String expected, String value) throws IOException {
+        cssCmp(new String[] {
+                 "foo {",
+                 "  key: " + expected,
+                 "}"
+               },
+               new String[] {
+                 "foo {",
+                 "  key: " + value,
+                 "}"}, false, true);
     }
 
     //-- ssass
@@ -493,14 +502,14 @@ public class SsassTest {
     //--
 
     private void css2(String... lines) throws IOException {
-        cssCmp(lines, lines, true);
+        cssCmp(lines, lines, true, true);
     }
 
     private void css3(String... lines) throws IOException {
-        cssCmp(lines, lines, false);
+        cssCmp(lines, lines, true, false);
     }
 
-    private void cssCmp(String[] expectedLines, String[] actual, boolean level2) throws IOException {
+    private void cssCmp(String[] expectedLines, String[] actual, boolean origCompare, boolean level2) throws IOException {
         String expected;
         FileNode tmp;
         Stylesheet s;
@@ -511,7 +520,9 @@ public class SsassTest {
         assertTrue(s != null);
         tmp.delete();
         try {
-            assertEquals(expected, Output.prettyprint(s).trim());
+            if (origCompare) {
+                assertEquals(expected, Output.prettyprint(s).trim());
+            }
             if (level2) {
                 assertEquals(compress(expected), Output.compress(s));
             }
