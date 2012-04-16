@@ -11,6 +11,14 @@ public class Length implements BaseTerm {
 
     @Override
     public void toCss(Output output) {
-        output.string(len);
+        if (output.compress() && isZero()) {
+            output.string("0");
+        } else {
+            output.string(len);
+        }
+    }
+
+    private boolean isZero() {
+        return len.length() == 3 && len.charAt(0) == '0';
     }
 }

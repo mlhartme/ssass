@@ -319,20 +319,9 @@ public class SsassTest {
     }
 
     @Test
-    public void hexColorCompress() throws IOException {
+    public void specialProperties() throws IOException {
         property("#fff", "#ffffff");
-    }
-
-    private void property(String expected, String value) throws IOException {
-        cssCmp(new String[] {
-                 "foo {",
-                 "  key: " + expected,
-                 "}"
-               },
-               new String[] {
-                 "foo {",
-                 "  key: " + value,
-                 "}"}, false, true);
+        property("0", "0px");
     }
 
     //-- ssass
@@ -500,6 +489,18 @@ public class SsassTest {
     }
 
     //--
+
+    private void property(String expected, String value) throws IOException {
+        cssCmp(new String[] {
+                "foo {",
+                "  key: " + expected,
+                "}"
+        },
+                new String[] {
+                        "foo {",
+                        "  key: " + value,
+                        "}"}, false, true);
+    }
 
     private void css2(String... lines) throws IOException {
         cssCmp(lines, lines, true, true);
