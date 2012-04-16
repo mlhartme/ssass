@@ -17,6 +17,10 @@ public class Term implements Base {
         this.baseTerm = baseTerm;
     }
 
+    public boolean isZero() {
+        return unary == null && baseTerm instanceof net.sf.beezle.ssass.scss.term.Number && ((net.sf.beezle.ssass.scss.term.Number) baseTerm).isZero();
+    }
+
     @Override
     public void toCss(Output output) throws GenericException {
         if (unary != null) {

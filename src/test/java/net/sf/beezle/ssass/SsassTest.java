@@ -96,7 +96,7 @@ public class SsassTest {
     @Test
     public void namespace() throws IOException {
         css3("@namespace toto \"http://toto.example.org\";",
-                "@namespace url(\"http://example.com/foo\");");
+             "@namespace url(\"http://example.com/foo\");");
     }
 
     @Test
@@ -322,6 +322,7 @@ public class SsassTest {
     public void specialProperties() throws IOException {
         property("#fff", "#ffffff");
         property("0", "0px");
+        property("0", "0 0 0 0");
     }
 
     //-- ssass

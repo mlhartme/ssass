@@ -45,6 +45,10 @@ public class Expr implements Base {
     public void toCss(Output output) throws GenericException {
         Object last;
 
+        if (output.compress() && fourInOne()) {
+            ((Term) opsOrTerms[0]).toCss(output);
+            return;
+        }
         last = null;
         for (Object obj : opsOrTerms) {
             if (obj instanceof Term) {
@@ -59,5 +63,24 @@ public class Expr implements Base {
             }
             last = obj;
         }
+    }
+
+    private boolean fourInOne() {
+        int terms;
+
+        terms = 0;
+        for (Object obj : opsOrTerms) {
+            if (obj instanceof Term) {
+                terms++;
+                if (!((Term) obj).isZero()) {
+                    return false;
+                }
+            } else if (obj instanceof Operator) {
+                return false;
+            } else {
+                throw new IllegalArgumentException("" + obj);
+            }
+        }
+        return terms == 4 || terms == 2;
     }
 }

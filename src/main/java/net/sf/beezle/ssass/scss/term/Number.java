@@ -9,6 +9,10 @@ public class Number implements BaseTerm {
         this.num = num;
     }
 
+    public boolean isZero() {
+        return "0".equals(num);
+    }
+
     @Override
     public void toCss(Output output) {
         output.string(num);
