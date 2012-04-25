@@ -11,6 +11,10 @@ public class Percentage implements BaseTerm {
 
     @Override
     public void toCss(Output output) {
-        output.string(percentage);
+        if (output.compress() && "0%".equals(percentage)) {
+            output.string("0");
+        } else {
+            output.string(percentage);
+        }
     }
 }
