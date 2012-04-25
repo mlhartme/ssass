@@ -326,6 +326,8 @@ public class SsassTest {
 
     @Test
     public void specialProperties() throws IOException {
+        property("0", "0em");
+        property("0", "0ex");
         property("#fff", "#ffffff");
         property("0", "0px");
         property("-0", "-0px");

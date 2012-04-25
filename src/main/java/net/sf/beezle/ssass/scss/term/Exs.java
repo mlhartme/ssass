@@ -11,6 +11,10 @@ public class Exs implements BaseTerm {
 
     @Override
     public void toCss(Output output) {
-        output.string(emx);
+        if (output.compress() && "0ex".equalsIgnoreCase(emx)) {
+            output.string("0");
+        } else {
+            output.string(emx);
+        }
     }
 }

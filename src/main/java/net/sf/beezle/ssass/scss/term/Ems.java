@@ -12,10 +12,14 @@ public class Ems implements BaseTerm {
     @Override
     public void toCss(Output output) {
         if (output.compress()) {
-            if (ems.startsWith("0.")) {
-                output.string(ems.substring(1));
+            if ("0em".equalsIgnoreCase(ems)) {
+                output.string("0");
             } else {
-                output.string(ems);
+                if (ems.startsWith("0.")) {
+                    output.string(ems.substring(1));
+                } else {
+                    output.string(ems);
+                }
             }
         } else {
             output.string(ems);
