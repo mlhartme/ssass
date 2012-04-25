@@ -18,7 +18,15 @@ public class Term implements Base {
     }
 
     public boolean isZero() {
-        return unary == null && baseTerm instanceof net.sf.beezle.ssass.scss.term.Number && ((net.sf.beezle.ssass.scss.term.Number) baseTerm).isZero();
+        if (unary == null) {
+            if (baseTerm instanceof net.sf.beezle.ssass.scss.term.Number) {
+                return ((net.sf.beezle.ssass.scss.term.Number) baseTerm).isZero();
+            }
+            if (baseTerm instanceof net.sf.beezle.ssass.scss.term.Length) {
+                return ((net.sf.beezle.ssass.scss.term.Length) baseTerm).isZero();
+            }
+        }
+        return false;
     }
 
     @Override

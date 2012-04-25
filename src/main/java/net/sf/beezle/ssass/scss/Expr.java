@@ -81,6 +81,6 @@ public class Expr implements Base {
                 throw new IllegalArgumentException("" + obj);
             }
         }
-        return terms == 4 || terms == 2;
+        return terms > 1 && terms < 5;
     }
 }

@@ -18,7 +18,7 @@ public class Length implements BaseTerm {
         }
     }
 
-    private boolean isZero() {
+    public boolean isZero() {
         return len.length() == 3 && len.charAt(0) == '0';
     }
 }
