@@ -332,6 +332,10 @@ public class SsassTest {
         property("0", "0%");
         property("#fff", "#ffffff");
         property("-0", "-0px");
+    }
+
+    @Test
+    public void multiProperties() throws IOException {
         property("0", "0 0 0 0");
         property("0", "0 0");
         property("0", "0px 0");
