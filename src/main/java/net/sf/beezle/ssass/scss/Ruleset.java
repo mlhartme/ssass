@@ -13,6 +13,9 @@ public class Ruleset implements Statement, SsassDeclaration {
 
     @Override
     public void toCss(Output output) throws GenericException {
+        if (output.compress() && isEmpty(ssassDeclarations)) {
+            return;
+        }
         output.selectors(selectors);
         toCss(selectors, ssassDeclarations, output);
     }
@@ -21,6 +24,17 @@ public class Ruleset implements Statement, SsassDeclaration {
 
     public static void toCss(SsassDeclaration[] ssassDeclarations, Output output) throws GenericException {
         toCss(NO_SELECTORS, ssassDeclarations, output);
+    }
+
+    private static boolean isEmpty(SsassDeclaration[] ssassDeclarations) {
+        for (SsassDeclaration ssassDeclaration : ssassDeclarations) {
+            if (ssassDeclaration instanceof Ruleset) {
+                // nothing
+            } else {
+                return false;
+            }
+        }
+        return true;
     }
 
     public static void toCss(Selector[] context, SsassDeclaration[] ssassDeclarations, Output output) throws GenericException {
@@ -41,10 +55,11 @@ public class Ruleset implements Statement, SsassDeclaration {
                 ssassDeclaration.toCss(output);
             }
         }
-        output.semicolonOpt();
+        if (!first) {
+            output.semicolonOpt();
+        }
         output.close();
         output.popSelector();
-
         if (output.isTopLevel()) {
             output.delayed();
         }

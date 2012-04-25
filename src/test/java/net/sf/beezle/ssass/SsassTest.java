@@ -52,7 +52,13 @@ public class SsassTest {
     }
 
     @Test
-    public void ruleset() throws IOException {
+    public void rulesetEmpty() throws IOException {
+        css2("foo {",
+             "}");
+    }
+
+    @Test
+    public void rulesetNormal() throws IOException {
         css2("p {",
                 "  margin-top: abc;",
                 "  margin-right: xyz !important",
@@ -324,6 +330,10 @@ public class SsassTest {
         property("0", "0px");
         property("-0", "-0px");
         property("0", "0 0 0 0");
+        property("0", "0 0");
+        property("0", "0px 0");
+        property("0", "0px 0px");
+        property("0", "0px 0 0");
     }
 
     //-- ssass
