@@ -20,13 +20,13 @@
   </licenses>
   <groupId>net.sf.beezle.ssass</groupId>
   <artifactId>ssass</artifactId>
-  <version>1.0.2-SNAPSHOT</version>
+  <version>1.0.2</version>
   <packaging>jar</packaging>
 
   <scm>
-    <connection>scm:svn:https://beezle.svn.sourceforge.net/svnroot/beezle/ssass/trunk</connection>
-    <developerConnection>scm:svn:https://beezle.svn.sourceforge.net/svnroot/beezle/ssass/trunk</developerConnection>
-    <url>http://beezle.svn.sourceforge.net/viewvc/beezle/ssass/trunk</url>
+    <connection>scm:svn:https://beezle.svn.sourceforge.net/svnroot/beezle/ssass/tags/ssass-1.0.2</connection>
+    <developerConnection>scm:svn:https://beezle.svn.sourceforge.net/svnroot/beezle/ssass/tags/ssass-1.0.2</developerConnection>
+    <url>http://beezle.svn.sourceforge.net/viewvc/beezle/ssass/tags/ssass-1.0.2</url>
   </scm>
 
   <distributionManagement>
