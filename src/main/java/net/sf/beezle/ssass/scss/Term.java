@@ -31,9 +31,14 @@ public class Term implements Base {
 
     @Override
     public void toCss(Output output) throws GenericException {
+        boolean compress;
+
+        compress = output.compress();
         if (unary != null) {
             output.string(unary.toString());
+            output.setCompress(false);
         }
         baseTerm.toCss(output);
+        output.setCompress(compress);
     }
 }

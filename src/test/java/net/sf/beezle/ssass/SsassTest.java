@@ -331,7 +331,7 @@ public class SsassTest {
         property("0", "0px");
         property("0", "0%");
         property("#fff", "#ffffff");
-        property("-0", "-0px");
+        property("-0px", "-0px");
     }
 
     @Test

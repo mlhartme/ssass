@@ -25,7 +25,7 @@ public class Output {
 
     //--
 
-    private final boolean compress;
+    private boolean compress;
     private final StringBuilder builder;
     private boolean first;
     private int indent;
@@ -42,6 +42,9 @@ public class Output {
 
     public boolean compress() {
         return compress;
+    }
+    public void setCompress(boolean compress) {
+        this.compress = compress;
     }
 
     public void pushSelector(Selector[] context) {
