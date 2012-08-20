@@ -9,7 +9,7 @@
 
   <name>Some SASS</name>
   <description>See ${project.url}.</description>
-  <url>https://github.com/mlhartme/ssass/wiki/ssass</url>
+  <url>https://github.com/mlhartme/ssass</url>
   <inceptionYear>2011</inceptionYear>
   <licenses>
     <license>
@@ -28,13 +28,6 @@
     <developerConnection>scm:git:https://github.com/mlhartme/ssass.git</developerConnection>
     <url>https://github.com/mlhartme/ssass</url>
   </scm>
-
-  <distributionManagement>
-    <site>
-      <id>sourceforge</id>
-      <url>scp://shell.sourceforge.net/home/project-web/beezle/htdocs/ssass/site</url>
-    </site>
-  </distributionManagement>
 
   <dependencies>
     <dependency>
