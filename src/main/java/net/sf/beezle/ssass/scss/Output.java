@@ -2,6 +2,10 @@ package net.sf.beezle.ssass.scss;
 
 import net.sf.beezle.mork.misc.GenericException;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,17 +20,24 @@ public class Output {
     }
 
     public static String toCss(Stylesheet s, boolean compress) throws GenericException {
+        StringWriter sw;
         Output output;
 
-        output = new Output(compress);
+        sw = new StringWriter();
+        output = new Output(sw, compress);
         s.toCss(output);
-        return output.toString();
+        try {
+            output.result().close();
+        } catch (IOException e) {
+            throw new IllegalStateException("unexpected io exception while writing to StringWriter", e);
+        }
+        return sw.toString();
     }
 
     //--
 
+    private final Writer dest;
     private boolean compress;
-    private final StringBuilder builder;
     private boolean first;
     private int indent;
     private final List<Selector[]> selectorContext;
@@ -39,10 +50,38 @@ public class Output {
     private final Map<String, Variable> variables;
     private final List<Map<String, Expr>> mixinContexts;
 
+    private final List<IOException> exceptions;
+
+    public Output(Writer dest, boolean compress) {
+        this.dest = dest;
+        this.compress = compress;
+        this.first = true;
+        this.indent = 0;
+        this.variables = new HashMap<>();
+        this.mixins = new HashMap<>();
+        this.selectorContext = new ArrayList<>();
+        this.propertyContext = new ArrayList<>();
+        this.delayedContexts = new ArrayList<>();
+        this.delayedRulesets = new ArrayList<>();
+        this.mixinContexts = new ArrayList<>();
+        this.exceptions = new ArrayList<>();
+    }
+
+    public Writer result() throws IOException {
+        switch (exceptions.size()) {
+            case 0:
+                return dest;
+            case 1:
+                throw exceptions.get(0);
+            default:
+                throw new IOException(exceptions.size() + " IOExceptions, first is: " + exceptions.get(0).getMessage());
+        }
+    }
 
     public boolean compress() {
         return compress;
     }
+
     public void setCompress(boolean compress) {
         this.compress = compress;
     }
@@ -67,20 +106,6 @@ public class Output {
     }
     public void popProperty() {
         propertyContext.remove(propertyContext.size() - 1);
-    }
-
-    public Output(boolean compress) {
-        this.compress = compress;
-        this.builder = new StringBuilder();
-        this.first = true;
-        this.indent = 0;
-        this.variables = new HashMap<String, Variable>();
-        this.mixins = new HashMap<String, Mixin>();
-        this.selectorContext = new ArrayList<Selector[]>();
-        this.propertyContext = new ArrayList<String>();
-        this.delayedContexts = new ArrayList<Selector[]>();
-        this.delayedRulesets = new ArrayList<Ruleset>();
-        this.mixinContexts = new ArrayList<Map<String, Expr>>();
     }
 
     public void object(Object ... objs) throws GenericException {
@@ -134,12 +159,12 @@ public class Output {
                 indent();
                 first = false;
             }
-            builder.append(str);
+            write(str);
         }
     }
 
     public void open() {
-        builder.append(compress ? "{" : " {\n");
+        write(compress ? "{" : " {\n");
         indent++;
         first = true;
     }
@@ -147,27 +172,27 @@ public class Output {
     public void close() {
         indent--;
         indent();
-        builder.append(compress ? "}" : "}\n");
+        write(compress ? "}" : "}\n");
         first = true;
     }
 
     public void semicolon() {
-        builder.append(compress ? ";" : ";\n");
+        write(compress ? ";" : ";\n");
         first = true;
     }
 
     public void semicolonOpt() {
         if (!compress) {
-            builder.append("\n");
+            write("\n");
         } else {
-            builder.append(';'); // yui always defines this. Nico doesn't know why, but the thinks that's not accidentially.
+            write(';'); // yui always defines this. Nico doesn't know why, but the thinks that's not accidentially.
         }
         first = true;
     }
 
     public void spaceOpt() {
         if (!compress) {
-            builder.append(' ');
+            write(' ');
         }
     }
 
@@ -176,7 +201,7 @@ public class Output {
             return;
         }
         for (int i = 0; i < indent; i++) {
-            builder.append("  ");
+            write("  ");
         }
     }
 
@@ -271,8 +296,20 @@ public class Output {
 
     //--
 
-    @Override
-    public String toString() {
-        return builder.toString();
+    private void write(String str) {
+        try {
+            dest.write(str);
+        } catch (IOException e) {
+            exceptions.add(e);
+        }
     }
+
+    private void write(char c) {
+        try {
+            dest.write(c);
+        } catch (IOException e) {
+            exceptions.add(e);
+        }
+    }
+
 }
