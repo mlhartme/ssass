@@ -1,5 +1,6 @@
 package net.sf.beezle.ssass;
 
+import net.sf.beezle.mork.mapping.ExceptionErrorHandler;
 import net.sf.beezle.mork.mapping.Mapper;
 import net.sf.beezle.mork.misc.GenericException;
 import net.sf.beezle.ssass.scss.Output;
@@ -30,7 +31,7 @@ public class Main extends Cli implements Command {
 
     public Main() {
         this.files = new ArrayList<>();
-        this.mapper = new Mapper("net.sf.beezle.ssass.Mapper");
+        this.mapper = new Mapper("net.sf.beezle.ssass.Mapper", new ExceptionErrorHandler());
     }
 
     public Console getConsole() {
