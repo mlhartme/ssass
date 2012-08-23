@@ -33,7 +33,7 @@
     <dependency>
       <groupId>net.sf.beezle.mork</groupId>
       <artifactId>mork</artifactId>
-      <version>1.0.1</version>
+      <version>1.0.2-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>

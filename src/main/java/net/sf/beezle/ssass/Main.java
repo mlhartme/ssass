@@ -10,6 +10,7 @@ import net.sf.beezle.sushi.cli.Console;
 import net.sf.beezle.sushi.cli.Option;
 import net.sf.beezle.sushi.cli.Remaining;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class Main extends Cli implements Command {
     private final Mapper mapper;
 
     public Main() {
-        this.files = new ArrayList<String>();
+        this.files = new ArrayList<>();
         this.mapper = new Mapper("net.sf.beezle.ssass.Mapper");
     }
 
@@ -41,7 +42,7 @@ public class Main extends Cli implements Command {
         files.add(file);
     }
 
-    public void invoke() throws GenericException {
+    public void invoke() throws GenericException, IOException {
         int ok;
         long tmp;
         Stylesheet s;
@@ -65,7 +66,7 @@ public class Main extends Cli implements Command {
         System.exit(files.size() - ok);
     }
 
-    public Stylesheet parse(String file) {
+    public Stylesheet parse(String file) throws IOException {
         Object[] results;
 
         if (console.getVerbose()) {
