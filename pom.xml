@@ -2,38 +2,51 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>net.sf.beezle.maven.poms</groupId>
-    <artifactId>parent</artifactId>
-    <version>2.0.0-SNAPSHOT</version>
+    <groupId>net.oneandone.maven.poms</groupId>
+    <artifactId>foss-parent</artifactId>
+    <version>1.0-SNAPSHOT</version>
   </parent>
 
   <name>Some SASS</name>
   <description>See ${project.url}.</description>
   <url>https://github.com/mlhartme/ssass</url>
   <inceptionYear>2011</inceptionYear>
-  <licenses>
-    <license>
-      <name>GNU Lesser General Public License, Version 2.1</name>
-      <url>http://www.gnu.org/licenses/lgpl-2.1.txt</url>
-      <distribution>repo</distribution>
-    </license>
-  </licenses>
-  <groupId>net.sf.beezle.ssass</groupId>
+
+  <groupId>net.oneandone</groupId>
   <artifactId>ssass</artifactId>
   <version>1.0.3-SNAPSHOT</version>
   <packaging>jar</packaging>
 
+  <properties>
+    <oneandone.java.source>1.7</oneandone.java.source>
+    <oneandone.java.target>1.7</oneandone.java.target>
+  </properties>
+
+  <developers>
+    <developer>
+      <id>mlhartme</id>
+      <name>Michael Hartmeier</name>
+      <url>http://github.com/mlhartme/</url>
+      <organization>1 &amp; 1 Internet AG</organization>
+      <organizationUrl>https://github.com/1and1</organizationUrl>
+      <roles>
+        <role>developer</role>
+      </roles>
+      <timezone>+1</timezone>
+    </developer>
+  </developers>
+
   <scm>
-    <connection>scm:git:https://github.com/mlhartme/ssass.git</connection>
-    <developerConnection>scm:git:https://github.com/mlhartme/ssass.git</developerConnection>
+    <connection>scm:git:ssh://git@github.com/mlhartme/ssass.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/mlhartme/ssass.git</developerConnection>
     <url>https://github.com/mlhartme/ssass</url>
   </scm>
 
   <dependencies>
     <dependency>
-      <groupId>net.sf.beezle.mork</groupId>
+      <groupId>net.oneandone</groupId>
       <artifactId>mork</artifactId>
-      <version>1.0.2-SNAPSHOT</version>
+      <version>1.1.0-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
@@ -59,7 +72,7 @@
             <phase>process-classes</phase>
             <configuration>
               <target>
-                <java fork="false" classname="net.sf.beezle.mork.compiler.Main" failonerror="true">
+                <java fork="false" classname="net.oneandone.mork.compiler.Main" failonerror="true">
                   <classpath>
                     <pathelement path="${basedir}/target/classes" />
                     <path refid="maven.compile.classpath" />
@@ -86,7 +99,7 @@
         <version>1.3.5</version>
         <configuration>
           <name>ssass</name>
-          <main>net.sf.beezle.ssass.Main</main>
+          <main>net.oneandone.ssass.Main</main>
         </configuration>
         <executions>
           <execution>

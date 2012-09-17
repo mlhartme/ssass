@@ -15,17 +15,17 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-mapper net.sf.beezle.ssass.Mapper;
+mapper net.oneandone.ssass.Mapper;
 
 syntax = "Ssass.syntax";
 
-import net.sf.beezle.ssass.scss:
+import net.oneandone.ssass.scss:
     Attrib, AttribOp, Class, Combinator, Declaration, Expr, Expression, Hash, Import, Include,
     Media, MediaQuery, MediaExpr, MediaOperator, Namespace,
     Mixin, Negation, NestedProperty, Operator, Page, Pseudo, Term, Prio, Reference, Ruleset,
     Selector, SimpleSelectorSequence, Stylesheet, TypeSelector,  UnaryOperator, Variable;
 
-import net.sf.beezle.ssass.scss.term:
+import net.oneandone.ssass.scss.term:
     Angle, Ems, Exs, Freq, Function, Hexcolor, Ident, Length, Number, Percentage, Resolution, Strng, Time, Uri;
 
 stylesheet => Stylesheet;
