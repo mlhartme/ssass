@@ -3,6 +3,9 @@
   <body>
     <release date="2012-09-xx" version="1.0.3">
       <action date="2012-09-17" dev="mhm" type="update">
+        Changed license from LGPL to Apache 2.
+      </action>
+      <action date="2012-09-17" dev="mhm" type="update">
         Renamed net.sf.beezle.ssass to net.oneandone.ssass.
       </action>
     </release>
