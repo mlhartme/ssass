@@ -241,7 +241,7 @@ public class Output {
         }
     }
 
-    public Mixin lookupMixin(String name) {
+    public Mixin lookupMixin(String name, Expr arguments) {
         return mixins.get(name);
     }
 
@@ -255,14 +255,14 @@ public class Output {
         Map<String, Expr> data;
         List<Expr> arguments;
 
-        arguments = new ArrayList<Expr>();
+        arguments = new ArrayList<>();
         if (expr != null) {
             expr.toArguments(arguments);
         }
         if (mixin.variables.length != arguments.size()) {
             throw new GenericException("argument count mismatch: " + mixin.variables.length + " vs " + arguments.size());
         }
-        data = new HashMap<String, Expr>();
+        data = new HashMap<>();
         for (int i = 0; i < arguments.size(); i++) {
             data.put(mixin.variables[i], arguments.get(i));
         }

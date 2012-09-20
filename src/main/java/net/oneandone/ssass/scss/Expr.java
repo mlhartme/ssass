@@ -30,8 +30,8 @@ public class Expr implements Base {
         Object obj;
 
         this.opsOrTerms = opsOrTerms;
-        this.ops = new ArrayList<Operator>();
-        this.terms = new ArrayList<Term>();
+        this.ops = new ArrayList<>();
+        this.terms = new ArrayList<>();
         for (int i = 0; i < opsOrTerms.length; i++) {
             obj = opsOrTerms[i];
             if (obj instanceof Term) {

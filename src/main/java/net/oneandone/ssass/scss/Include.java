@@ -40,7 +40,7 @@ public class Include implements SsassDeclaration {
     public void toCss(Output output) throws GenericException {
         Mixin def;
 
-        def = output.lookupMixin(mixin);
+        def = output.lookupMixin(mixin, expression);
         if (def == null) {
             throw new GenericException("undefined mixin: " + mixin);
         }

@@ -17,6 +17,7 @@ package net.oneandone.ssass;
 
 import com.yahoo.platform.yui.compressor.CssCompressor;
 import net.oneandone.mork.misc.GenericException;
+import net.oneandone.ssass.scss.AutoDefineOutput;
 import net.oneandone.ssass.scss.Output;
 import net.oneandone.ssass.scss.Stylesheet;
 import net.oneandone.sushi.fs.World;
@@ -591,5 +592,28 @@ public class SsassTest {
         } catch (GenericException e) {
             fail(e.getMessage());
         }
+    }
+
+    @Test
+    public void autoDefine() throws Exception {
+        FileNode tmp;
+        Stylesheet s;
+        StringWriter sw;
+        Output output;
+
+        tmp = (FileNode) world.getTemp().createTempFile().writeString(
+                ".content-navigation {\n"
+                + "  border-color: $blue;\n"
+                + "  @include left(10px);\n"
+                + "}\n");
+        s = main.parse(tmp.getAbsolute());
+        if (s == null) {
+            fail("syntax error");
+        }
+        tmp.deleteFile();
+
+        sw = new StringWriter();
+        output = new AutoDefineOutput(sw, false);
+        s.toCss(output);
     }
 }
