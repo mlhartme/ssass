@@ -166,6 +166,14 @@ public class SsassTest {
     }
 
     @Test
+    public void fontFace() throws IOException {
+        css2("@font-face {",
+             "  font-family: Delicious;",
+             "  src: url('Delicious-Roman.otf')",
+             "}");
+    }
+
+    @Test
     public void pseudo() throws IOException {
         css2(
                 ":foo {",

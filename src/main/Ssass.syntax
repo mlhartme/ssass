@@ -24,6 +24,7 @@
  * http://www.w3.org/TR/css3-selectors/#w3cselgrammar
  * http://www.w3.org/TR/css3-mediaqueries/#syntax
  * http://www.w3.org/TR/css3-namespace/#syntax
+ * http://www.w3.org/TR/css3-fonts/  - no explicit syntax :(
 
  Changes:
  * inlined keyword symbols like MEDIA_SYM or CHARSET_SYM
@@ -45,7 +46,7 @@
         stylesheet ::= ( "@charset " STRING ";" )? (Sp|CDO|CDC)*
                        ( imprt (Sp|CDO|CDC)* )*
                        ( namespace (Sp|CDO|CDC)* )*
-                       ( (ruleset | media | page | variable_ | mixin_) (CDO Sp? | CDC Sp?)* )* ;
+                       ( (ruleset | media | page | font_face | variable_ | mixin_) (CDO Sp? | CDC Sp?)* )* ;
              imprt ::= "@import" Sp? (STRING|URI) Sp? media_query_list? ";" ;
          namespace ::= "@namespace" Sp? (IDENT Sp?)? (STRING|URI) Sp? ";" ;
              media ::= "@media" Sp? media_query_list? "{" Sp? ruleset* "}" Sp? ;
@@ -56,6 +57,7 @@
          media_not ::= "not";
         media_expr ::= "(" Sp? IDENT Sp? (":" Sp? expr)? ")" Sp? ;
               page ::= "@page" Sp? pseudo_page? "{" Sp? ssass_declaration_? ( ";" Sp? ssass_declaration_? )* "}" Sp? ;
+         font_face ::= "@font-face" Sp? "{" Sp? ssass_declaration_? ( ";" Sp? ssass_declaration_? )* "}" Sp? ;
        pseudo_page ::= ":" IDENT Sp? ;
          variable_ ::= "$" IDENT Sp? ":" Sp? expr ";" Sp?;
             mixin_ ::= "@mixin" Sp? (IDENT | FUNCTION mixin_args_) Sp? "{" Sp? ssass_declaration_? ( ";" Sp? ssass_declaration_? )* "}" Sp?;

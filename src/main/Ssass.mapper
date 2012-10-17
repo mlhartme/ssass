@@ -20,7 +20,7 @@ mapper net.oneandone.ssass.Mapper;
 syntax = "Ssass.syntax";
 
 import net.oneandone.ssass.scss:
-    Attrib, AttribOp, Class, Combinator, Declaration, Expr, Expression, Hash, Import, Include,
+    Attrib, AttribOp, Class, Combinator, Declaration, Expr, Expression, FontFace, Hash, Import, Include,
     Media, MediaQuery, MediaExpr, MediaOperator, Namespace,
     Mixin, Negation, NestedProperty, Operator, Page, Pseudo, Term, Prio, Reference, Ruleset,
     Selector, SimpleSelectorSequence, Stylesheet, TypeSelector,  UnaryOperator, Variable;
@@ -37,6 +37,7 @@ media_expr => MediaExpr;
 media_not => MediaOperator.NOT;
 media_only => MediaOperator.ONLY;
 page => Page;
+font_face => FontFace;
 _slash => Operator.SLASH;
 _comma => Operator.COMMA;
 _plus => Combinator.PLUS;
