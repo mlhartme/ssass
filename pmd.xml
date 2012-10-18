@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd version="4.3" timestamp="2012-10-18T12:46:26.312">
+<file name="/home/mhm/Projects/github/ssass/src/main/java/net/oneandone/ssass/scss/Output.java">
+<violation beginline="131" endline="133" begincolumn="37" endcolumn="13" rule="EmptyIfStmt" ruleset="Basic Rules" package="net.oneandone.ssass.scss" class="Output" method="object" externalInfoUrl="http://pmd.sourceforge.net/rules/basic.html#EmptyIfStmt" priority="3">
+Avoid empty if statements
+</violation>
+</file>
+<file name="/home/mhm/Projects/github/ssass/src/main/java/net/oneandone/ssass/scss/Ruleset.java">
+<violation beginline="46" endline="48" begincolumn="54" endcolumn="13" rule="EmptyIfStmt" ruleset="Basic Rules" package="net.oneandone.ssass.scss" class="Ruleset" method="isEmpty" externalInfoUrl="http://pmd.sourceforge.net/rules/basic.html#EmptyIfStmt" priority="3">
+Avoid empty if statements
+</violation>
+</file>
+</pmd>
