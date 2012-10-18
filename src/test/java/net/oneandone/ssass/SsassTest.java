@@ -174,6 +174,14 @@ public class SsassTest {
     }
 
     @Test
+    public void fontFaceWithFormat() throws IOException {
+        css2("@font-face {",
+             "  font-family: Headline;",
+             "  src: local(Futura-Medium),url(fonts.svg#MyGeometricModern) format(\"svg\")",
+             "}");
+    }
+
+    @Test
     public void pseudo() throws IOException {
         css2(
                 ":foo {",
