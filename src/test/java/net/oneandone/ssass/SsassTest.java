@@ -320,7 +320,17 @@ public class SsassTest {
                 "}",
                 "[lang|=fr] {",
                 "  background-color: grey",
-                "}");
+                "}",
+                "[href^=\"#\"] {",
+                "  background-color: gold",
+                "}",
+                "[href$=\".cn\"] {",
+                "  background-color: red",
+                "}",
+                "[lang*=\"example\"] {",
+                "  background-color: blue",
+                "}"
+                );
     }
 
     @Test
@@ -405,6 +415,23 @@ public class SsassTest {
                 "table.hl td.ln {\n" +
                 "  text-align: right\n" +
                 "}\n");
+    }
+
+    @Ignore
+    public void twoNestedRuleset() throws IOException {
+        sass(  "#header {\n" +
+                "  border: 1px #333 solid;\n" +
+                "  a {\n" +
+                "    color: #fff;\n" +
+                "    text-decoration: none;\n" +
+                "  }\n" +  // TODO append ";" fixes the syntax error ...
+                "  h1 {\n" +
+                "    float: left;\n" +
+                "    padding-top: 10px;\n" +
+                "  }\n" +
+                "}",
+
+                "TODO");
     }
 
     @Test

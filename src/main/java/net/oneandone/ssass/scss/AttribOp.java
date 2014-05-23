@@ -19,6 +19,9 @@ public class AttribOp {
     public static final AttribOp EQ = new AttribOp("=");
     public static final AttribOp INCLUDES = new AttribOp("~=");
     public static final AttribOp DASHMATCH = new AttribOp("|=");
+    public static final AttribOp PREFIX = new AttribOp("^=");
+    public static final AttribOp SUFFIX = new AttribOp("$=");
+    public static final AttribOp SUBSTRING = new AttribOp("*=");
     private final String op;
 
     private AttribOp(String op) {
