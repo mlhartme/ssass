@@ -19,6 +19,8 @@ import net.oneandone.mork.misc.GenericException;
 
 public class Attrib implements BaseSelector {
     private final TypeSelector typeSelector;
+
+    /** may be null */
     private final AttribOp op;
     private final String value;
 
@@ -30,6 +32,6 @@ public class Attrib implements BaseSelector {
 
     @Override
     public void toCss(Output output) throws GenericException {
-        output.object("[", typeSelector, op.toString(), value, "]");
+        output.object("[", typeSelector, op == null ? null : op.toString(), value, "]");
     }
 }

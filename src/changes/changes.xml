@@ -5,6 +5,9 @@
       <action date="2014-05-23" dev="mhm" type="fix">
         Added support for substring matching attribute selectors: prefix, suffix and substring match.
       </action>
+      <action date="2014-05-23" dev="mhm" type="fix">
+        Fix NPE for attribute selector without operator.
+      </action>
     </release>
     <release date="2013-02-25" version="1.0.5">
       <action date="2013-02-25" dev="mhm" type="update">
