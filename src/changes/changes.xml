@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document xmlns="http://maven.apache.org/changes/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
   <body>
+    <release date="2014-09-22" version="1.0.7">
+      <action date="2014-09-22" dev="mhm" type="fix">
+        Fixed missing colon that starts a negaration.
+      </action>
+    </release>
     <release date="2014-06-11" version="1.0.6">
       <action date="2014-05-23" dev="mhm" type="fix">
         Added support for substring matching attribute selectors: prefix, suffix and substring match.

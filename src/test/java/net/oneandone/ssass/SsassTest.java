@@ -215,6 +215,10 @@ public class SsassTest {
                 "a:b(-\"FOO\") td {",
                 "  background: #C1B49A",
                 "}");
+        css2(
+                "ul.timing-stack li:not(:last-child) {",
+                "  border-right: 0 none",
+                "}");
     }
 
     @Test
@@ -336,10 +340,10 @@ public class SsassTest {
     @Test
     public void negation() throws IOException {
         css3(
-                "not([bar=\"x\"]) {",
+                ":not([bar=\"x\"]) {",
                 "  background-color: yellow",
                 "}",
-                "not(a) {",
+                ":not(a) {",
                 "  background-color: yellow",
                 "}");
     }

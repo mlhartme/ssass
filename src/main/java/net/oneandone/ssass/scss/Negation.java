@@ -26,6 +26,6 @@ public class Negation implements BaseSelector {
 
     @Override
     public void toCss(Output output) throws GenericException {
-        output.object("not(", arg, ")");
+        output.object(":not(", arg, ")");
     }
 }
