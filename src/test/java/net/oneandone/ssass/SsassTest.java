@@ -176,8 +176,33 @@ public class SsassTest {
     @Test
     public void fontFaceWithFormat() throws IOException {
         css2("@font-face {",
-             "  font-family: Headline;",
-             "  src: local(Futura-Medium),url(fonts.svg#MyGeometricModern) format(\"svg\")",
+                "  font-family: Headline;",
+                "  src: local(Futura-Medium),url(fonts.svg#MyGeometricModern) format(\"svg\")",
+                "}");
+    }
+
+    @Test
+    public void keyframes() throws IOException {
+        css2("@keyframes bounce {",
+             "  from {",
+             "    top: 100px;",
+             "    animation-timing-function: ease-out",
+             "  }",
+             "  10%,25% {",
+             "    top: 50px;",
+             "    animation-timing-function: ease-in",
+             "  }",
+             "  50% {",
+             "    top: 100px;",
+             "    animation-timing-function: ease-out",
+             "  }",
+             "  75% {",
+             "    top: 75px;",
+             "    animation-timing-function: ease-in",
+             "  }",
+             "  to {",
+             "    top: 100px",
+             "  }",
              "}");
     }
 

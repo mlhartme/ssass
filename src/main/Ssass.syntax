@@ -47,7 +47,7 @@
         stylesheet ::= ( "@charset " STRING ";" )? (Sp|CDO|CDC)*
                        ( imprt (Sp|CDO|CDC)* )*
                        ( namespace (Sp|CDO|CDC)* )*
-                       ( (ruleset | media | page | font_face | /* keyframes | */ variable_ | mixin_) (CDO Sp? | CDC Sp?)* )* ;
+                       ( (ruleset | media | page | font_face | keyframes | variable_ | mixin_) (CDO Sp? | CDC Sp?)* )* ;
              imprt ::= "@import" Sp? (STRING|URI) Sp? media_query_list? ";" ;
          namespace ::= "@namespace" Sp? (IDENT Sp?)? (STRING|URI) Sp? ";" ;
              media ::= "@media" Sp? media_query_list? "{" Sp? ruleset* "}" Sp? ;
@@ -61,11 +61,9 @@
        pseudo_page ::= ":" IDENT Sp? ;
          font_face ::= "@font-face" Sp? "{" Sp? ssass_declaration_? ( ";" Sp? ssass_declaration_? )* "}" Sp? ;
 
-/*
-         keyframes ::= "@keyframes" Sp IDENT Sp? "{" keyframes_blocks "}" Sp? ;
-  keyframes_blocks ::= ( keyframes_selector "{" Sp? ssass_declaration_? ( ";" Sp? ssass_declaration_? )* "}" Sp? )* ;
-keyframes_selector ::= ( "from" | "to" | PERCENTAGE ) Sp? ( "," Sp? ( "from" | "to" | PERCENTAGE ) Sp? )* ;
-*/
+         keyframes ::= "@keyframes" Sp IDENT Sp? "{" Sp? keyframes_block* "}" Sp? ;
+   keyframes_block ::= keyframes_selector "{" Sp? ssass_declaration_? ( ";" Sp? ssass_declaration_? )* "}" Sp? ;
+keyframes_selector ::= ( IDENT /* "from" | "to" */ | PERCENTAGE ) Sp? ( "," Sp? ( IDENT /* "from" | "to" */ | PERCENTAGE ) Sp? )* ;
 
          variable_ ::= "$" IDENT Sp? ":" Sp? expr ";" Sp?;
             mixin_ ::= "@mixin" Sp? (IDENT | FUNCTION mixin_args_) Sp? "{" Sp? ssass_declaration_? ( ";" Sp? ssass_declaration_? )* "}" Sp?;
