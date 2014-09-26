@@ -14,7 +14,7 @@
 
   <groupId>net.oneandone</groupId>
   <artifactId>ssass</artifactId>
-  <version>1.0.8-SNAPSHOT</version>
+  <version>1.0.8</version>
   <packaging>jar</packaging>
 
   <properties>
@@ -47,7 +47,7 @@
     <connection>scm:git:ssh://git@github.com/mlhartme/ssass.git</connection>
     <developerConnection>scm:git:ssh://git@github.com/mlhartme/ssass.git</developerConnection>
     <url>https://github.com/mlhartme/ssass</url>
-    <tag>HEAD</tag>
+    <tag>ssass-1.0.8</tag>
   </scm>
 
   <dependencies>
