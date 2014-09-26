@@ -33,7 +33,9 @@ public class Declaration implements Base, SsassDeclaration {
         output.propertyPrefix();
         output.object(property, ":");
         output.spaceOpt();
+        output.startDeclaration(property);
         output.object(expr);
+        output.endDeclaration();
         if (prio != null) {
             output.spaceOpt();
             output.base(prio);

@@ -54,6 +54,7 @@ public class Output {
     private boolean compress;
     private boolean first;
     private int indent;
+    private String declaration;
     private final List<Selector[]> selectorContext;
     private final List<String> propertyContext;
     private final List<Selector[]> delayedContexts;
@@ -120,6 +121,24 @@ public class Output {
     }
     public void popProperty() {
         propertyContext.remove(propertyContext.size() - 1);
+    }
+
+    public void startDeclaration(String declaration) {
+        if (this.declaration != null) {
+            throw new IllegalStateException();
+        }
+        this.declaration = declaration;
+    }
+
+    public void endDeclaration() {
+        if (declaration == null) {
+            throw new IllegalStateException();
+        }
+        declaration = null;
+    }
+
+    public String getDeclaration() {
+        return declaration;
     }
 
     public void object(Object ... objs) throws GenericException {

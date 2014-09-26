@@ -60,7 +60,7 @@ public class Expr implements Base {
     public void toCss(Output output) throws GenericException {
         Object last;
 
-        if (output.compress() && fourInOne()) {
+        if (output.compress() && !"background-position".equals(output.getDeclaration()) && intoOne()) {
             ((Term) opsOrTerms[0]).toCss(output);
             return;
         }
@@ -80,7 +80,7 @@ public class Expr implements Base {
         }
     }
 
-    private boolean fourInOne() {
+    private boolean intoOne() {
         int terms;
 
         terms = 0;

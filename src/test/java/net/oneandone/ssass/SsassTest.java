@@ -414,6 +414,18 @@ public class SsassTest {
         property("0", "0px 0 0");
     }
 
+    @Test
+    public void multiPropertyExceptions() throws IOException {
+        cssCmp(new String[] { "foo {",
+                        "background-position: 0 0;",
+                        "}"
+                },
+                new String[] {"foo {",
+                        "background-position: 0 0;",
+                        "}"}, false, true);
+    }
+
+
     //-- ssass
 
     @Test
