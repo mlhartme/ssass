@@ -50,6 +50,7 @@ public class Output {
 
     //--
 
+    private boolean muted;
     private final Writer dest;
     private boolean compress;
     private boolean first;
@@ -68,6 +69,7 @@ public class Output {
     private final List<IOException> exceptions;
 
     public Output(Writer dest, boolean compress) {
+        this.muted = false;
         this.dest = dest;
         this.compress = compress;
         this.first = true;
@@ -80,6 +82,14 @@ public class Output {
         this.delayedRulesets = new ArrayList<>();
         this.mixinContexts = new ArrayList<>();
         this.exceptions = new ArrayList<>();
+    }
+
+    public boolean getMuted() {
+        return muted;
+    }
+
+    public void setMuted(boolean value) {
+        muted = value;
     }
 
     public Writer result() throws IOException {
@@ -330,6 +340,9 @@ public class Output {
     //--
 
     private void write(String str) {
+        if (muted) {
+            return;
+        }
         try {
             dest.write(str);
         } catch (IOException e) {
@@ -338,6 +351,9 @@ public class Output {
     }
 
     private void write(char c) {
+        if (muted) {
+            return;
+        }
         try {
             dest.write(c);
         } catch (IOException e) {
