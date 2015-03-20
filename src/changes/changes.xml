@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document xmlns="http://maven.apache.org/changes/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
   <body>
-    <release date="2015-03-03" version="1.0.9">
+    <release date="2015-03-20" version="1.0.9">
       <action date="2015-03-03" dev="mhm" type="update">
         Mutable output.
       </action>
@@ -16,7 +16,7 @@
         Added support for keyframes.
       </action>
       <action date="2014-09-22" dev="mhm" type="fix">
-        Fixed missing colon that starts a negaration.
+        Fixed missing colon that starts a negation.
       </action>
     </release>
     <release date="2014-06-11" version="1.0.6">
