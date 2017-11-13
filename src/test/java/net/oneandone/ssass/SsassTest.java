@@ -29,14 +29,15 @@ import org.junit.Test;
 import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 public class SsassTest {
-    private static final Main main = new Main();
-    private static final World world = main.getConsole().world;
+    private static final Main main = new Main(false, new ArrayList<>());
+    private static final World world = main.getWorld();
 
     @Test
     public void empty() throws IOException {

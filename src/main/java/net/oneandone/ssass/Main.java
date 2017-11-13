@@ -15,50 +15,50 @@
  */
 package net.oneandone.ssass;
 
+import net.oneandone.inline.Cli;
+import net.oneandone.inline.Console;
 import net.oneandone.mork.mapping.ExceptionErrorHandler;
 import net.oneandone.mork.mapping.Mapper;
 import net.oneandone.mork.misc.GenericException;
 import net.oneandone.ssass.scss.Output;
 import net.oneandone.ssass.scss.Stylesheet;
-import net.oneandone.sushi.cli.Cli;
-import net.oneandone.sushi.cli.Command;
-import net.oneandone.sushi.cli.Console;
-import net.oneandone.sushi.cli.Option;
-import net.oneandone.sushi.cli.Remaining;
+import net.oneandone.sushi.fs.World;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
-public class Main extends Cli implements Command {
+public class Main {
     public static void main(String[] args) {
-        Main main;
+        Cli cli;
 
-        main = new Main();
-        System.exit(main.run(args));
+        cli = new Cli();
+        cli.addDefault(Main.class, "notused -compress file*");
+        cli.run(args);
     }
 
-    @Option("compress")
-    private boolean compress;
-
-    private List<String> files;
+    private final boolean compress;
+    private final List<String> files;
+    private final World world;
+    private final Console console;
     private final Mapper mapper;
 
-    public Main() {
-        this.files = new ArrayList<>();
+    public Main(boolean compress, List<String> files) {
+        this.compress = compress;
+        this.files = files;
+        this.world = World.createMinimal();
+        this.console = Console.create();
         this.mapper = new Mapper("net.oneandone.ssass.Mapper", new ExceptionErrorHandler());
+    }
+
+    public World getWorld() {
+        return world;
     }
 
     public Console getConsole() {
         return console;
     }
 
-    @Remaining
-    public void add(String file) {
-        files.add(file);
-    }
-
-    public void invoke() throws GenericException, IOException {
+    public void run() throws GenericException, IOException {
         int ok;
         long tmp;
         Stylesheet s;

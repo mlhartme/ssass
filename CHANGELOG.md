@@ -4,6 +4,7 @@
 
 * compile for Java 8
 * update parent pom
+* update mork 1.1.2 to 1.1.5 (which implies an update to Sushi 3.1.6 and Inline 1.1.1)
 
 
 ### 1.0.9 (2015-03-20)
